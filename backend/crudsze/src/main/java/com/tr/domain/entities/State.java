@@ -1,0 +1,64 @@
+package com.tr.domain.entities;
+
+import java.util.Objects;
+import java.util.UUID;
+import javax.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Data
+@Table(name = "state")
+public class State {
+
+  @Id
+  @GenericGenerator(name = "UUIDGenerator", strategy = "uuid2")
+  @GeneratedValue(generator = "UUIDGenerator")
+  @Column(name = "state_id", updatable = false, nullable = false)
+  public UUID stateId;
+
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "sigle")
+  private String sigle;
+
+  public UUID getStateId() {
+    return stateId;
+  }
+
+  public void setStateId(UUID stateId) {
+    this.stateId = stateId;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getSigle() {
+    return sigle;
+  }
+
+  public void setSigle(String sigle) {
+    this.sigle = sigle;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (!(o instanceof State))
+      return false;
+    State state = (State) o;
+    return getStateId().equals(state.getStateId());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getStateId());
+  }
+}
