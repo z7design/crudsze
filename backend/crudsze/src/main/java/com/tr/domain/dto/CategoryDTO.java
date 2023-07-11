@@ -17,14 +17,14 @@ public class CategoryDTO {
   private UUID categoryId;
 
   @Column(name = "name_category")
-  private String nameCategory;
+  private String name;
 
   @Column(name = "description")
   private String description;
 
   public CategoryDTO(Category entity){
     this.categoryId = entity.getCategoryId();
-    this.nameCategory = entity.getName();
+    this.name = entity.getName();
     this.description = entity.getDescription();
   }
 }

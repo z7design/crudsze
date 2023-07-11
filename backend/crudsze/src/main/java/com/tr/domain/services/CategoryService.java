@@ -3,19 +3,16 @@ package com.tr.domain.services;
 import com.tr.domain.entities.Category;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
+import com.tr.domain.exception.ResourceNotFoundException;
 import com.tr.domain.repositories.CategoryRepository;
 import java.util.List;
 import java.util.UUID;
-import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -24,27 +21,40 @@ public class CategoryService {
       "There is no category registration with the code %d";
   private static final String MSG_CATEGORY_IN_USE =
       "Code category %d cannot be removed as it is in use";
-  @Autowired 
-  private final CategoryRepository repository;
-  
-  @Autowired
-  private EntityManager manager;
-  
+
+  @Autowired private final CategoryRepository repository;
+
+  @Transactional
   public Category createCategory(Category category) {
     return repository.save(category);
   }
 
+  @Transactional
   public List<Category> findAllByCategories() {
     return repository.findAll();
   }
-  
+
   @Transactional
-  public Category updateCategory(final Category category){
-    return manager.merge(category);
+  public Category findCategoryById(final UUID categoryId) {
+    return repository
+        .findById(categoryId)
+        .orElseThrow(
+            () -> new EntityNotFoundException(String.format(MSG_CATEGORY_NOT_FOUND, categoryId)));
   }
-  
-  @DeleteMapping("/{categoryId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+
+  @Transactional
+  public Category updateCategory(final Category category) {
+    var entity =
+        repository
+            .findById(category.getCategoryId())
+            .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
+
+    entity.setName(entity.getName());
+    entity.setDescription(entity.getDescription());
+
+    return repository.save(category);
+  }
+
   public void deleteCategory(UUID categoryId) {
     try {
       repository.deleteById(categoryId);
@@ -54,12 +64,5 @@ public class CategoryService {
     } catch (DataIntegrityViolationException e) {
       throw new EntityInUseException(String.format(MSG_CATEGORY_IN_USE, categoryId));
     }
-  }
-
-  public Category buscarOuFalhar(UUID categoryId) {
-    return repository
-        .findById(categoryId)
-        .orElseThrow(
-            () -> new EntityNotFoundException(String.format(MSG_CATEGORY_NOT_FOUND, categoryId)));
   }
 }

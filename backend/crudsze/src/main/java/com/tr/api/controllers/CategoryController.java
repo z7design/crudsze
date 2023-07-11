@@ -22,17 +22,18 @@ public class CategoryController {
 
   @GetMapping
   public List<Category> findAllByCategories() {
+
     return service.findAllByCategories();
   }
 
   @GetMapping("/{categoryId}")
   public Category getByCategoryId(@PathVariable UUID categoryId) {
-    return repository.getReferenceById(categoryId);
+    return service.findCategoryById(categoryId);
   }
 
   @PutMapping("/{categoryId}")
   public Category update(@PathVariable UUID categoryId, @RequestBody Category category) {
-    Category categoryCurrent = service.buscarOuFalhar(categoryId);
+    Category categoryCurrent = service.findCategoryById(categoryId);
     BeanUtils.copyProperties(category, categoryCurrent, "categoryId");
     return service.createCategory(categoryCurrent);
   }
@@ -45,6 +46,7 @@ public class CategoryController {
 
   @DeleteMapping("/{categoryId}")
   public void deleteCategory(@PathVariable UUID categoryId) {
+    
     service.deleteCategory(categoryId);
   }
 }

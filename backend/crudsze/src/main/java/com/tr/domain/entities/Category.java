@@ -1,17 +1,17 @@
 package com.tr.domain.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Builder
 @Data
 @Table(name = "category")
-public class Category {
+public class Category implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   @Id
   @GenericGenerator(name = "UUIDGenerator", strategy = "uuid2")
@@ -21,14 +21,28 @@ public class Category {
 
   @Column(name = "name")
   private String name;
-  
-  
-  @Column(name = "description")
-  private String Description;
-  
-  public Category(){}
 
-   public void setCategoryId(UUID categoryId) {
+  @Column(name = "description")
+  private String description;
+
+  public Category() {}
+
+  public Category(String name, String description) {
+    this.name = name;
+    this.description = description;
+  }
+
+  public Category(UUID categoryId, String name, String description) {
+    this.categoryId = categoryId;
+    this.name = name;
+    this.description = description;
+  }
+
+  public UUID getCategoryId() {
+    return categoryId;
+  }
+
+  public void setCategoryId(UUID categoryId) {
     this.categoryId = categoryId;
   }
 
@@ -41,19 +55,17 @@ public class Category {
   }
 
   public String getDescription() {
-    return Description;
+    return description;
   }
 
   public void setDescription(String description) {
-    Description = description;
+    this.description = description;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof Category))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof Category)) return false;
     Category category = (Category) o;
     return getCategoryId().equals(category.getCategoryId());
   }

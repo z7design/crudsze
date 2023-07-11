@@ -1,29 +1,44 @@
 package com.tr.api.controllers;
 
 import com.tr.domain.entities.State;
-import com.tr.domain.repositories.StateRepository;
+import com.tr.domain.services.StateService;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/states")
 public class StateController {
-  @Autowired
-  private StateRepository repository;
+
+  @Autowired private StateService service;
 
   @GetMapping
   public List<State> findAll() {
-    return repository.findAll();
+    return service.findAllByStates();
   }
 
   @PostMapping
-  public State createState(State state){
-    return repository.save(state);
+  @ResponseStatus(HttpStatus.CREATED)
+  public State createState(@RequestBody State state) {
+    return service.createState(state);
+  }
+
+  @ResponseStatus(HttpStatus.OK)
+  @PutMapping("/{stateId}")
+  public State updateState(@PathVariable Long stateId, @RequestBody State state) {
+    State stateCurrent = service.findStateById(stateId);
+    BeanUtils.copyProperties(state, stateCurrent, "stateId");
+    return service.createState(stateCurrent);
+  }
+
+  @DeleteMapping("/{stateId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteState(@PathVariable Long stateId) {
+
+    service.deleteState(stateId);
   }
 }

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryCustomReposity {
-  List<CategoryDTO> findCategoryAll(final UUID categoryID);
+  List<CategoryDTO> findById(final UUID categoryID);
 }

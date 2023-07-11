@@ -2,13 +2,11 @@ package com.tr.api.responses;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryResponse {
@@ -19,11 +17,8 @@ public class CategoryResponse {
       example = "68e917ff-da7e-4863-bad9-cf7ad7c7229a")
   private UUID categoryId;
 
-  @Schema(
-      type = "string",
-      description = "Name Category",
-      example = "Name the One category")
-  private String nameCategory;
+  @Schema(type = "string", description = "Name Category", example = "Name the One category")
+  private String name;
 
   @Schema(
       type = "string",

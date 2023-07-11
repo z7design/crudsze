@@ -1,10 +1,8 @@
 package com.tr.domain.entities;
 
 import java.util.Objects;
-import java.util.UUID;
 import javax.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
@@ -12,22 +10,21 @@ import org.hibernate.annotations.GenericGenerator;
 public class State {
 
   @Id
-  @GenericGenerator(name = "UUIDGenerator", strategy = "uuid2")
-  @GeneratedValue(generator = "UUIDGenerator")
-  @Column(name = "state_id", updatable = false, nullable = false)
-  public UUID stateId;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "state_id")
+  public Long stateId;
 
-  @Column(name = "name")
+  @Column(name = "name", updatable = false, nullable = false)
   private String name;
 
-  @Column(name = "sigle")
+  @Column(name = "sigle", updatable = false, nullable = false)
   private String sigle;
 
-  public UUID getStateId() {
+  public Long getStateId() {
     return stateId;
   }
 
-  public void setStateId(UUID stateId) {
+  public void setStateId(Long stateId) {
     this.stateId = stateId;
   }
 
