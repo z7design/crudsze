@@ -1,8 +1,8 @@
 package com.tr.api.controllers;
 
-import com.tr.domain.entities.City;
+import com.tr.domain.entities.Payment;
 import com.tr.domain.exception.EntityNotFoundException;
-import com.tr.domain.services.CityService;
+import com.tr.domain.services.PaymentService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -13,36 +13,35 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/cities")
+@RequestMapping("/payments")
 public class PaymentController {
 
-  @Autowired private CityService service;
+  @Autowired private PaymentService service;
 
   @GetMapping
-  public List<City> findAllByCity() {
-
-    return service.findAllByCities();
+  public List<Payment> findAllByPayment() {
+    return service.findAllByPayment();
   }
 
   @ResponseStatus(HttpStatus.OK)
-  @GetMapping("/{cityId}")
-  public City getByCityId(@PathVariable Long cityId) {
-    return service.findCityById(cityId);
+  @GetMapping("/{paymentId}")
+  public Payment getByPaymentId(@PathVariable Long paymentId) {
+    return service.findPaymentById(paymentId);
   }
 
   @ResponseStatus(HttpStatus.OK)
-  @PutMapping("/{cityId}")
-  public City update(@PathVariable Long cityId, @RequestBody City city) {
-    City cityCurrent = service.findCityById(cityId);
-    BeanUtils.copyProperties(city, cityCurrent, "cityId");
-    return service.createCity(cityCurrent);
+  @PutMapping("/{paymentId}")
+  public Payment updatePayment(@PathVariable Long paymentId, @RequestBody Payment payment) {
+    Payment paymentCurrent = service.findPaymentById(paymentId);
+    BeanUtils.copyProperties(payment, paymentCurrent, "paymentId");
+    return service.findPaymentById(paymentId);
   }
 
   @PostMapping
-  public ResponseEntity<City> createCity(@RequestBody City city) {
+  public ResponseEntity<Payment> createPayment(@RequestBody Payment payment) {
     try {
-      city = service.createCity(city);
-      return ResponseEntity.status(HttpStatus.CREATED).body(city);
+      payment = service.createPayment(payment);
+      return ResponseEntity.status(HttpStatus.CREATED).body(payment);
 
     } catch (EntityNotFoundException e) {
       return ResponseEntity.badRequest().build();
@@ -50,9 +49,8 @@ public class PaymentController {
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @DeleteMapping("/{cityId}")
-  public void deleteCity(@PathVariable Long cityId) {
-
-    service.deleteCity(cityId);
+  @DeleteMapping("/{paymentId}")
+  public void deletePayment(@PathVariable Long paymentId) {
+    service.deletePayment(paymentId);
   }
 }

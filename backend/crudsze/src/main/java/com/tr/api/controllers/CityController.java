@@ -20,7 +20,6 @@ public class CityController {
 
   @GetMapping
   public List<City> findAllByCity() {
-
     return service.findAllByCities();
   }
 
@@ -38,6 +37,7 @@ public class CityController {
     return service.createCity(cityCurrent);
   }
 
+  @ResponseStatus(HttpStatus.OK)
   @PostMapping
   public ResponseEntity<City> createCity(@RequestBody City city) {
     try {
@@ -52,7 +52,6 @@ public class CityController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/{cityId}")
   public void deleteCity(@PathVariable Long cityId) {
-
     service.deleteCity(cityId);
   }
 }

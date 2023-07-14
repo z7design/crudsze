@@ -1,3 +1,3 @@
 package com.tr.domain.entities;
 
-public class ChartOfAccount {}
+public class TypeVeicle {}

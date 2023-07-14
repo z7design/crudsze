@@ -1,3 +1,3 @@
 package com.tr.domain.entities;
 
-public class EntityToReceive {}
+public class Acessories {}

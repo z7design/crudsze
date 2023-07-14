@@ -2,6 +2,7 @@ package com.tr.domain.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -15,7 +16,7 @@ public class Installment {
   private Long installmentId;
 
   @Column(name = "date_paiment")
-  private Date DatePayment;
+  private Date datePayment;
 
   @Column(name = "value_pay")
   private BigDecimal valuePay;
@@ -35,4 +36,119 @@ public class Installment {
   @ManyToOne
   @JoinColumn(nullable = false)
   private Launch launch;
+
+  public Installment() {}
+
+  public Installment(
+      Long installmentId,
+      Date datePayment,
+      BigDecimal valuePay,
+      BigDecimal discont,
+      BigDecimal interest,
+      BigDecimal additions,
+      BigDecimal fines,
+      Launch launch) {
+    this.installmentId = installmentId;
+    this.datePayment = datePayment;
+    this.valuePay = valuePay;
+    this.discont = discont;
+    this.interest = interest;
+    this.additions = additions;
+    this.fines = fines;
+    this.launch = launch;
+  }
+
+  public Installment(
+      Date datePayment,
+      BigDecimal valuePay,
+      BigDecimal discont,
+      BigDecimal interest,
+      BigDecimal additions,
+      BigDecimal fines,
+      Launch launch) {
+    this.datePayment = datePayment;
+    this.valuePay = valuePay;
+    this.discont = discont;
+    this.interest = interest;
+    this.additions = additions;
+    this.fines = fines;
+    this.launch = launch;
+  }
+
+  public Long getInstallmentId() {
+    return installmentId;
+  }
+
+  public void setInstallmentId(Long installmentId) {
+    this.installmentId = installmentId;
+  }
+
+  public Date getDatePayment() {
+    return datePayment;
+  }
+
+  public void setDatePayment(Date datePayment) {
+    this.datePayment = datePayment;
+  }
+
+  public BigDecimal getValuePay() {
+    return valuePay;
+  }
+
+  public void setValuePay(BigDecimal valuePay) {
+    this.valuePay = valuePay;
+  }
+
+  public BigDecimal getDiscont() {
+    return discont;
+  }
+
+  public void setDiscont(BigDecimal discont) {
+    this.discont = discont;
+  }
+
+  public BigDecimal getInterest() {
+    return interest;
+  }
+
+  public void setInterest(BigDecimal interest) {
+    this.interest = interest;
+  }
+
+  public BigDecimal getAdditions() {
+    return additions;
+  }
+
+  public void setAdditions(BigDecimal additions) {
+    this.additions = additions;
+  }
+
+  public BigDecimal getFines() {
+    return fines;
+  }
+
+  public void setFines(BigDecimal fines) {
+    this.fines = fines;
+  }
+
+  public Launch getLaunch() {
+    return launch;
+  }
+
+  public void setLaunch(Launch launch) {
+    this.launch = launch;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Installment)) return false;
+    Installment that = (Installment) o;
+    return getInstallmentId().equals(that.getInstallmentId());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getInstallmentId());
+  }
 }

@@ -4,7 +4,7 @@ INSERT INTO state (state_id, name, uf) VALUES(3, 'Amazonas', 'AM');
 INSERT INTO state (state_id, name, uf) VALUES(4, 'Amapá', 'AP');
 INSERT INTO state (state_id, name, uf) VALUES(5, 'Bahia', 'BA');
 INSERT INTO state (state_id, name, uf) VALUES(6, 'Ceará', 'CE');
-INSERT INTO state (state_id, name, uf) VALUES(7, 'Distrito Federal', 'DF'),
+INSERT INTO state (state_id, name, uf) VALUES(7, 'Distrito Federal', 'DF');
 INSERT INTO state (state_id, name, uf) VALUES(8, 'Espírito Santo', 'ES');
 INSERT INTO state (state_id, name, uf) VALUES(9, 'Goiás', 'GO');
 INSERT INTO state (state_id, name, uf) VALUES(10, 'Maranhão', 'MA');

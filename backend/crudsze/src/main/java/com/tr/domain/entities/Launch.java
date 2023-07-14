@@ -38,7 +38,7 @@ public class Launch {
     this.accountBank = accountBank;
   }
 
-  public Launch(String typeLaunch, BigDecimal value, BigDecimal tax, AccountBank accountBanky) {
+  public Launch(String typeLaunch, BigDecimal value, BigDecimal tax, AccountBank accountBank) {
     this.typeLaunch = typeLaunch;
     this.value = value;
     this.tax = tax;

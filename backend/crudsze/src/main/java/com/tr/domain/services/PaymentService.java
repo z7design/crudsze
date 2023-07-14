@@ -58,7 +58,7 @@ public class PaymentService {
 
   @DeleteMapping("/{paymentId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteCity(Long paymentId) {
+  public void deletePayment(Long paymentId) {
     try {
       repository.deleteById(paymentId);
     } catch (EmptyResultDataAccessException e) {
@@ -70,7 +70,6 @@ public class PaymentService {
   }
 
   public List<Payment> findAllByPayment() {
-
     return repository.findAll();
   }
 }

@@ -19,20 +19,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Service
 @RequiredArgsConstructor
 public class AccountPaybleService {
-  
-  private static final String MSG_ACCOUNT_PAYBLE_NOT_FOUND = "There is no account registration with the code %d";
-  private static final String MSG_ACCOUNT_PAYBLE_IN_USE = "Code account %d cannot be removed as it is in use";
 
-  @Autowired
-  private AccountPaybleRepository repository;
+  private static final String MSG_ACCOUNT_PAYBLE_NOT_FOUND =
+      "There is no account registration with the code %d";
+  private static final String MSG_ACCOUNT_PAYBLE_IN_USE =
+      "Code account %d cannot be removed as it is in use";
+
+  @Autowired private AccountPaybleRepository repository;
+
+  private SupplierService supplierService;
 
   @Transactional
   public AccountPayble createAccountPayble(final AccountPayble accountPayble) {
-    Long addressId = accountBank.getAddress().getAddressId();
-    Address address = addressService.findAddressById(addressId);
+    Long supplierId = accountPayble.getSupplier().getSupplierId();
+    Supplier supplier = supplierService.findSupplierById(supplierId);
 
-    accountBank.setAddress(address);
-    return repository.save(accountBank);
+    accountPayble.setSupplier(supplier);
+    return repository.save(accountPayble);
   }
 
   @Transactional
@@ -44,11 +47,12 @@ public class AccountPaybleService {
 
   @DeleteMapping("/{accountPaybleId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteAccountBank(Long accountPaybleId) {
+  public void deleteAccountPaybleId(Long accountPaybleId) {
     try {
       repository.deleteById(accountPaybleId);
     } catch (EmptyResultDataAccessException e) {
-      throw new EntityNotFoundException(String.format(MSG_ACCOUNT_PAYBLE_NOT_FOUND, accountPaybleId));
+      throw new EntityNotFoundException(
+          String.format(MSG_ACCOUNT_PAYBLE_NOT_FOUND, accountPaybleId));
 
     } catch (DataIntegrityViolationException e) {
       throw new EntityInUseException(String.format(MSG_ACCOUNT_PAYBLE_IN_USE, accountPaybleId));
@@ -56,21 +60,26 @@ public class AccountPaybleService {
   }
 
   public List<AccountPayble> findAllByAccountPayble() {
-
     return repository.findAll();
   }
-  
-    @Transactional
+
+  @Transactional
   public AccountPayble updateAccountPayble(final AccountPayble accountPayble) {
     var entity =
         repository
             .findById(accountPayble.getAccountPaybleId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
 
-    entity.setAccount(entity.getAccount());
-
+    entity.setNumberDocument(entity.getNumberDocument());
+    entity.setDateDocument(entity.getDateDocument());
+    entity.setDueDate(entity.getDueDate());
+    entity.setDescription(entity.getDescription());
+    entity.setAmountPaid(entity.getAmountPaid());
+    entity.setDiference(entity.getDiference());
+    entity.setStatus(entity.getStatus());
+    entity.setValueOfDocument(entity.getValueOfDocument());
+    entity.setValueAccountPay(entity.getValueAccountPay());
 
     return repository.save(accountPayble);
   }
-
 }
