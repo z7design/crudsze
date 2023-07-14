@@ -19,18 +19,11 @@ public class Bank {
   @Column(name = "agency")
   private String agency;
 
-  @Column(name = "codeAgencty")
-  private Integer codeAgencty;
+  @Column(name = "code")
+  private Integer code;
 
   @Column(name = "cheking_account")
   private String chekingAccount;
-
-  @Column(name = "cnpj")
-  private String cnpj;
-
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private TypeAccount typeAccount;
 
   @ManyToOne
   @JoinColumn(nullable = false)
@@ -38,5 +31,39 @@ public class Bank {
 
   @ManyToOne
   @JoinColumn(nullable = false)
-  private Phone phone;
+  private AccountBank accountBank;
+
+  public Bank() {}
+
+  public Bank(
+      Long banckId,
+      String name,
+      String agency,
+      Integer code,
+      String chekingAccount,
+      Address address,
+      AccountBank accountBank) {
+    this.banckId = banckId;
+    this.name = name;
+    this.agency = agency;
+    this.code = code;
+    this.chekingAccount = chekingAccount;
+    this.address = address;
+    this.accountBank = accountBank;
+  }
+
+  public Bank(
+      String name,
+      String agency,
+      Integer code,
+      String chekingAccount,
+      Address address,
+      AccountBank accountBank) {
+    this.name = name;
+    this.agency = agency;
+    this.code = code;
+    this.chekingAccount = chekingAccount;
+    this.address = address;
+    this.accountBank = accountBank;
+  }
 }

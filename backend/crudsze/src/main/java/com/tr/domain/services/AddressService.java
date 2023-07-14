@@ -17,42 +17,45 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class AddressService {
-    
-    private static final String MSG_ADDRESS_NOT_FOUND =
+
+  private static final String MSG_ADDRESS_NOT_FOUND =
       "There is no address registration with the code %d";
-    private static final String MSG_ADDRESS_IN_USE =
+  private static final String MSG_ADDRESS_IN_USE =
       "Code address %d cannot be removed as it is in use";
-    
-    @Autowired
-    private final AddressRespository respository;
-    private final CityService cityService;
-    
-      @Transactional
-      public Address createAddress(Address address) {
-      
-      Long cityId = address.getCity().getCityId();
-      City city = cityService.findCityById(cityId);
-  
-      address.setCity(city);
-      return respository.save(address);
+
+  @Autowired private final AddressRespository respository;
+
+  @Autowired private final CityService cityService;
+
+  @Transactional
+  public Address createAddress(Address address) {
+
+    Long cityId = address.getCity().getCityId();
+    City city = cityService.findCityById(cityId);
+
+    address.setCity(city);
+    return respository.save(address);
   }
-  
-    @Transactional
-    public List<Address> findAllByAddress() {
-      return respository.findAll();
-    }
-    
-    @Transactional
-    public Address findAddressById(final Long addressId) {
-      return respository.findById(addressId)
-          .orElseThrow(
-              () -> new EntityNotFoundException(String.format(MSG_ADDRESS_NOT_FOUND, addressId)));
-    }
-  
-    @Transactional
-    public Address updateAddress(final Address address) {
-      var entity = respository.findById(address.getAddressId())
-              .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
+
+  @Transactional
+  public List<Address> findAllByAddress() {
+    return respository.findAll();
+  }
+
+  @Transactional
+  public Address findAddressById(final Long addressId) {
+    return respository
+        .findById(addressId)
+        .orElseThrow(
+            () -> new EntityNotFoundException(String.format(MSG_ADDRESS_NOT_FOUND, addressId)));
+  }
+
+  @Transactional
+  public Address updateAddress(final Address address) {
+    var entity =
+        respository
+            .findById(address.getAddressId())
+            .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
 
     entity.setPublicPlace(entity.getPublicPlace());
     entity.setPostalCode(entity.getPostalCode());
@@ -60,8 +63,8 @@ public class AddressService {
     entity.setNeighborhood(entity.getNeighborhood());
     entity.setNumber(entity.getNumber());
 
-      return respository.save(address);
-    }
+    return respository.save(address);
+  }
 
     public void deleteAddress(Long addressId) {
       try {

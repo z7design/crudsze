@@ -17,8 +17,8 @@ public class State {
   @Column(name = "name", updatable = false, nullable = false)
   private String name;
 
-  @Column(name = "sigle", updatable = false, nullable = false)
-  private String sigle;
+  @Column(name = "uf", updatable = false, nullable = false)
+  private String uf;
 
   public Long getStateId() {
     return stateId;
@@ -37,11 +37,11 @@ public class State {
   }
 
   public String getSigle() {
-    return sigle;
+    return uf;
   }
 
   public void setSigle(String sigle) {
-    this.sigle = sigle;
+    this.uf = sigle;
   }
 
   @Override

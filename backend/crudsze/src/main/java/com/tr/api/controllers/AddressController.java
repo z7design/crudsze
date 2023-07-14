@@ -5,6 +5,7 @@ import com.tr.domain.services.AddressService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/address")
 public class AddressController {
-    
-  private AddressService service;
-      
+
+  @Autowired private AddressService service;
+
   @GetMapping
   public List<Address> findAllByAddress() {
 
@@ -39,9 +40,9 @@ public class AddressController {
     return service.createAddress(address);
   }
 
-  @DeleteMapping("/{categoryId}")
-  public void deleteCategory(@PathVariable Long addressId) {
-    
+  @DeleteMapping("/{addressId}")
+  public void deleteByAddress(@PathVariable Long addressId) {
+
     service.deleteAddress(addressId);
   }
 }

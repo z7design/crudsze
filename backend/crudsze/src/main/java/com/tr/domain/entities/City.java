@@ -14,39 +14,56 @@ public class City {
   @Column(name = "city_id")
   private Long cityId;
 
-  @Column(name = "name", nullable = false)
+  @Column(name = "name")
   private String name;
 
   @ManyToOne
   @JoinColumn(nullable = false)
   private State state;
 
+  public City() {}
+
+  public City(Long cityId, String name, State state) {
+    this.cityId = cityId;
+    this.name = name;
+    this.state = state;
+  }
+
+  public City(String name, State state) {
+    this.cityId = cityId;
+    this.name = name;
+    this.state = state;
+  }
+
   public Long getCityId() {
+
     return cityId;
   }
 
   public void setCityId(Long cityId) {
+
     this.cityId = cityId;
   }
 
   public String getName() {
+
     return name;
   }
 
   public void setName(String name) {
+
     this.name = name;
   }
 
   public void setState(State state) {
+
     this.state = state;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof City))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof City)) return false;
     City city = (City) o;
     return getCityId().equals(city.getCityId());
   }

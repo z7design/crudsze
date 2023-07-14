@@ -1,10 +1,8 @@
 package com.tr.api.controllers;
 
 import com.tr.domain.entities.Category;
-import com.tr.domain.repositories.CategoryRepository;
 import com.tr.domain.services.CategoryService;
 import java.util.List;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/categories")
 public class CategoryController {
-
-  @Autowired private CategoryRepository repository;
-
+  
   @Autowired private CategoryService service;
 
   @GetMapping
@@ -27,12 +23,12 @@ public class CategoryController {
   }
 
   @GetMapping("/{categoryId}")
-  public Category getByCategoryId(@PathVariable UUID categoryId) {
+  public Category getByCategoryId(@PathVariable Long categoryId) {
     return service.findCategoryById(categoryId);
   }
 
   @PutMapping("/{categoryId}")
-  public Category update(@PathVariable UUID categoryId, @RequestBody Category category) {
+  public Category update(@PathVariable Long categoryId, @RequestBody Category category) {
     Category categoryCurrent = service.findCategoryById(categoryId);
     BeanUtils.copyProperties(category, categoryCurrent, "categoryId");
     return service.createCategory(categoryCurrent);
@@ -45,8 +41,8 @@ public class CategoryController {
   }
 
   @DeleteMapping("/{categoryId}")
-  public void deleteCategory(@PathVariable UUID categoryId) {
-    
+  public void deleteCategory(@PathVariable Long categoryId) {
+
     service.deleteCategory(categoryId);
   }
 }

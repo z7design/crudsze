@@ -29,8 +29,8 @@ public class Address {
   @Column(name = "neighborhood")
   private String neighborhood;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "city")
+  @ManyToOne
+  @JoinColumn(nullable = false)
   private City city;
 
   public Address() {}
@@ -41,13 +41,15 @@ public class Address {
       String publicPlace,
       Integer number,
       String complement,
-      String neighborhood) {
+      String neighborhood,
+      City city) {
     this.addressId = addressId;
     this.postalCode = postalCode;
     this.publicPlace = publicPlace;
     this.number = number;
     this.complement = complement;
     this.neighborhood = neighborhood;
+    this.city = city;
   }
 
   public Address(
@@ -55,60 +57,82 @@ public class Address {
       String publicPlace,
       Integer number,
       String complement,
-      String neighborhood) {
+      String neighborhood,
+      City city) {
     this.postalCode = postalCode;
     this.publicPlace = publicPlace;
     this.number = number;
     this.complement = complement;
     this.neighborhood = neighborhood;
+    this.city = city;
   }
 
   public Long getAddressId() {
+    
     return addressId;
   }
 
   public void setAddressId(Long addressId) {
+    
     this.addressId = addressId;
   }
 
   public Integer getPostalCode() {
+    
     return postalCode;
   }
 
   public void setPostalCode(Integer postalCode) {
+    
     this.postalCode = postalCode;
   }
 
   public String getPublicPlace() {
+    
     return publicPlace;
   }
 
   public void setPublicPlace(String publicPlace) {
+    
     this.publicPlace = publicPlace;
   }
 
   public Integer getNumber() {
+    
     return number;
   }
 
   public void setNumber(Integer number) {
+    
     this.number = number;
   }
 
   public String getComplement() {
+    
     return complement;
   }
 
   public void setComplement(String complement) {
+    
     this.complement = complement;
   }
 
   public String getNeighborhood() {
+
     return neighborhood;
   }
 
   public void setNeighborhood(String neighborhood) {
+
     this.neighborhood = neighborhood;
+  }
+
+  public City getCity() {
+    return city;
+  }
+
+  public void setCity(City city) {
+    this.city = city;
   }
 
   @Override

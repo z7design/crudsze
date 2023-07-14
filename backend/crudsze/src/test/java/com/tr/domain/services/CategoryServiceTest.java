@@ -8,7 +8,6 @@ import com.tr.domain.repositories.CategoryRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,21 +17,21 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class CategoryServiceTest {
-  private static final UUID categoryId = UUID.randomUUID();
 
   @InjectMocks private CategoryService service;
   @Mock private CategoryRepository repository;
 
+  private Long categoryId;
   private Category category;
 
   @BeforeEach
   public void setup() {
-    Category category = new Category(categoryId, "Name 1", "Description 1");
+    Category category = new Category("Name 1", "Description 1");
   }
 
   @Test
   public void shouldCategoryWhenThenSalveCategories() {
-    category = new Category(categoryId, "Despesasas agragado", "despesas com agregado");
+    category = new Category("Despesasas agragado", "despesas com agregado");
 
     when(repository.save(any(Category.class))).thenReturn(category);
     Category savedCat = service.createCategory(category);
@@ -41,8 +40,8 @@ public class CategoryServiceTest {
 
   @Test
   void shouldFindAllByCategories() {
-    category = new Category(categoryId, "Despesasas agragado", "despesas com agregado");
-    Category category1 = new Category(categoryId, "Despesasas Marketing", "despesas com Marketing");
+    category = new Category("Despesasas agragado", "despesas com agregado");
+    Category category1 = new Category("Despesasas Marketing", "despesas com Marketing");
 
     when(repository.findAll()).thenReturn(List.of(category, category1));
     List<Category> listCategory = service.findAllByCategories();
@@ -68,7 +67,7 @@ public class CategoryServiceTest {
 
   @Test
   void updateCategory() {
-    final var category = new Category(categoryId, "Despesasas agragado", "despesas com agregado");
+    final var category = new Category("Despesasas agragado", "despesas com agregado");
     when(repository.findById(any())).thenReturn(Optional.of(category));
 
     category.setName("Despesas Veiculo");

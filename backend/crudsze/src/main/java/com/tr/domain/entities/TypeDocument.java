@@ -8,24 +8,24 @@ import lombok.Data;
 @Data
 @Table(name = "type_document")
 public class TypeDocument {
-  
-   @Id 
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "type_document_id")
-   private Long typeDocumentId;
-   
-   @Column(name = "description")
-   private String description;
-   
-   public TypeDocument(){}
-  
-  public TypeDocument(Long typeDocumentId, String description){
-     this.typeDocumentId = typeDocumentId;
-     this.description = description;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "type_document_id")
+  private Long typeDocumentId;
+
+  @Column(name = "description")
+  private String description;
+
+  public TypeDocument() {}
+
+  public TypeDocument(Long typeDocumentId, String description) {
+    this.typeDocumentId = typeDocumentId;
+    this.description = description;
   }
-  
-    public TypeDocument(String description){
-     this.description = description;
+
+  public TypeDocument(String description) {
+    this.description = description;
   }
 
   public Long getTypeDocumentId() {
@@ -46,10 +46,8 @@ public class TypeDocument {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof TypeDocument))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof TypeDocument)) return false;
     TypeDocument that = (TypeDocument) o;
     return getTypeDocumentId().equals(that.getTypeDocumentId());
   }

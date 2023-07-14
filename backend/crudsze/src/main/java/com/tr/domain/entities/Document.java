@@ -15,6 +15,9 @@ public class Document {
   @Column(name = "document_id")
   private Long documentId;
 
+  @Column(name = "number")
+  private Integer number;
+
   @Column(name = "description")
   private String description;
 
@@ -35,12 +38,14 @@ public class Document {
 
   public Document(
       Long documentId,
+      Integer number,
       String description,
       String obligororiness,
       String governmentAgency,
       Date dueDate,
       TypeDocument typeDocument) {
     this.documentId = documentId;
+    this.number = number;
     this.description = description;
     this.obligororiness = obligororiness;
     this.governmentAgency = governmentAgency;
@@ -49,11 +54,13 @@ public class Document {
   }
 
   public Document(
+      Integer number,
       String description,
       String obligororiness,
       String governmentAgency,
       Date dueDate,
       TypeDocument typeDocument) {
+    this.number = number;
     this.description = description;
     this.obligororiness = obligororiness;
     this.governmentAgency = governmentAgency;

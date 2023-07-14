@@ -1,7 +1,6 @@
 package com.tr.domain.dto;
 
 import com.tr.domain.entities.Category;
-import java.util.UUID;
 import javax.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CategoryDTO {
   @Column(name = "category_id")
-  private UUID categoryId;
+  private Long categoryId;
 
   @Column(name = "name_category")
   private String name;

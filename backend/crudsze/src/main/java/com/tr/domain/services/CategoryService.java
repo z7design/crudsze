@@ -6,7 +6,6 @@ import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
 import com.tr.domain.repositories.CategoryRepository;
 import java.util.List;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,16 +25,18 @@ public class CategoryService {
 
   @Transactional
   public Category createCategory(Category category) {
+
     return repository.save(category);
   }
 
   @Transactional
   public List<Category> findAllByCategories() {
+
     return repository.findAll();
   }
 
   @Transactional
-  public Category findCategoryById(final UUID categoryId) {
+  public Category findCategoryById(final Long categoryId) {
     return repository
         .findById(categoryId)
         .orElseThrow(
@@ -55,7 +56,7 @@ public class CategoryService {
     return repository.save(category);
   }
 
-  public void deleteCategory(UUID categoryId) {
+  public void deleteCategory(Long categoryId) {
     try {
       repository.deleteById(categoryId);
     } catch (EmptyResultDataAccessException e) {
