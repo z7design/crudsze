@@ -23,26 +23,19 @@ public class Launch {
   @Column(name = "tax")
   private BigDecimal tax;
 
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private AccountBank accountBank;
-
   public Launch() {}
 
-  public Launch(
-      Long launchId, String typeLaunch, BigDecimal value, BigDecimal tax, AccountBank accountBank) {
+  public Launch(Long launchId, String typeLaunch, BigDecimal value, BigDecimal tax) {
     this.launchId = launchId;
     this.typeLaunch = typeLaunch;
     this.value = value;
     this.tax = tax;
-    this.accountBank = accountBank;
   }
 
-  public Launch(String typeLaunch, BigDecimal value, BigDecimal tax, AccountBank accountBank) {
+  public Launch(String typeLaunch, BigDecimal value, BigDecimal tax) {
     this.typeLaunch = typeLaunch;
     this.value = value;
     this.tax = tax;
-    this.accountBank = accountBank;
   }
 
   public Long getLaunchId() {
@@ -75,14 +68,6 @@ public class Launch {
 
   public void setTax(BigDecimal tax) {
     this.tax = tax;
-  }
-
-  public AccountBank getAccountBank() {
-    return accountBank;
-  }
-
-  public void setAccountBank(AccountBank accountBank) {
-    this.accountBank = accountBank;
   }
 
   @Override

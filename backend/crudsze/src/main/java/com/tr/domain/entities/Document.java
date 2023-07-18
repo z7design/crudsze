@@ -11,7 +11,7 @@ import lombok.Data;
 public class Document {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "document_id")
   private Long documentId;
 
@@ -30,10 +30,6 @@ public class Document {
   @Column(name = "due_date")
   private Date dueDate;
 
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private TypeDocument typeDocument;
-
   public Document() {}
 
   public Document(
@@ -42,15 +38,13 @@ public class Document {
       String description,
       String obligororiness,
       String governmentAgency,
-      Date dueDate,
-      TypeDocument typeDocument) {
+      Date dueDate) {
     this.documentId = documentId;
     this.number = number;
     this.description = description;
     this.obligororiness = obligororiness;
     this.governmentAgency = governmentAgency;
     this.dueDate = dueDate;
-    this.typeDocument = typeDocument;
   }
 
   public Document(
@@ -58,14 +52,12 @@ public class Document {
       String description,
       String obligororiness,
       String governmentAgency,
-      Date dueDate,
-      TypeDocument typeDocument) {
+      Date dueDate) {
     this.number = number;
     this.description = description;
     this.obligororiness = obligororiness;
     this.governmentAgency = governmentAgency;
     this.dueDate = dueDate;
-    this.typeDocument = typeDocument;
   }
 
   public Long getDocumentId() {
@@ -107,14 +99,7 @@ public class Document {
   public void setDueDate(Date dueDate) {
     this.dueDate = dueDate;
   }
-
-  public TypeDocument getTypeDocument() {
-    return typeDocument;
-  }
-
-  public void setTypeDocument(TypeDocument typeDocument) {
-    this.typeDocument = typeDocument;
-  }
+  
 
   @Override
   public boolean equals(Object o) {

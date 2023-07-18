@@ -17,21 +17,23 @@ public class AddressController {
   @Autowired private AddressService service;
 
   @GetMapping
+  @ResponseStatus(HttpStatus.OK)
   public List<Address> findAllByAddress() {
-
     return service.findAllByAddress();
   }
 
   @GetMapping("/{addressId}")
+  @ResponseStatus(HttpStatus.OK)
   public Address getByAddressId(@PathVariable Long addressId) {
     return service.findAddressById(addressId);
   }
 
   @PutMapping("/{addressId}")
-  public Address update(@PathVariable Long addressId, @RequestBody Address address) {
+  @ResponseStatus(HttpStatus.OK)
+  public Address updateAddress(@PathVariable Long addressId, @RequestBody Address address) {
     Address addressCurrent = service.findAddressById(addressId);
     BeanUtils.copyProperties(address, addressCurrent, "addressId");
-    return service.createAddress(addressCurrent);
+    return service.updateAddress(addressCurrent);
   }
 
   @PostMapping
@@ -41,8 +43,8 @@ public class AddressController {
   }
 
   @DeleteMapping("/{addressId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteByAddress(@PathVariable Long addressId) {
-
     service.deleteAddress(addressId);
   }
 }

@@ -3,23 +3,35 @@ package com.tr.domain.entities;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @Data
 @Table(name = "type_account")
 public class TypeAccount {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "type_account_id")
   private Long typeAccountId;
 
   @Column(name = "description")
   private String description;
+
+  public Long getTypeAccountId() {
+    return typeAccountId;
+  }
+
+  public void setTypeAccountId(Long typeAccountId) {
+    this.typeAccountId = typeAccountId;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
   @Override
   public boolean equals(Object o) {

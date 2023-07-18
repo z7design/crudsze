@@ -10,7 +10,7 @@ import lombok.Data;
 @Table(name = "checkbook")
 public class Checkbook {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "checkbook_id")
   private Long checkbookId;
 

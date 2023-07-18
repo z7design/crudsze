@@ -25,13 +25,11 @@ public class CategoryService {
 
   @Transactional
   public Category createCategory(Category category) {
-
     return repository.save(category);
   }
 
   @Transactional
   public List<Category> findAllByCategories() {
-
     return repository.findAll();
   }
 

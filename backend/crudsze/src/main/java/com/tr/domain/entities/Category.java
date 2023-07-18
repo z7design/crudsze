@@ -1,14 +1,17 @@
 package com.tr.domain.entities;
 
+
 import java.util.Objects;
 import javax.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "category")
 public class Category {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "category_id")
   private Long categoryId;
 

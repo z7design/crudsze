@@ -1,5 +1,6 @@
 package com.tr.domain.entities;
 
+import com.tr.domain.enums.Nickname;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
@@ -10,7 +11,7 @@ import lombok.Data;
 public class Address {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "address_id")
   private Long addressId;
 
@@ -20,6 +21,9 @@ public class Address {
   @Column(name = "public_place")
   private String publicPlace;
 
+  @Column(name = "new_post_code")
+  private Integer newCodePostal;
+
   @Column(name = "number")
   private Integer number;
 
@@ -27,7 +31,8 @@ public class Address {
   private String complement;
 
   @Column(name = "neighborhood")
-  private String neighborhood;
+  @Enumerated(EnumType.STRING)
+  private Nickname neighborhood;
 
   @ManyToOne
   @JoinColumn(nullable = false)
@@ -38,10 +43,11 @@ public class Address {
   public Address(
       Long addressId,
       Integer postalCode,
+      Integer newCodePostal,
       String publicPlace,
       Integer number,
       String complement,
-      String neighborhood,
+      Nickname neighborhood,
       City city) {
     this.addressId = addressId;
     this.postalCode = postalCode;
@@ -49,6 +55,7 @@ public class Address {
     this.number = number;
     this.complement = complement;
     this.neighborhood = neighborhood;
+    this.newCodePostal = newCodePostal;
     this.city = city;
   }
 
@@ -57,23 +64,37 @@ public class Address {
       String publicPlace,
       Integer number,
       String complement,
-      String neighborhood,
+      Nickname neighborhood,
+      Integer newCodePostal,
       City city) {
     this.postalCode = postalCode;
     this.publicPlace = publicPlace;
     this.number = number;
     this.complement = complement;
     this.neighborhood = neighborhood;
+    this.newCodePostal = newCodePostal;
     this.city = city;
   }
 
+  public Integer getNewCodePostal() {
+    return newCodePostal;
+  }
+
+  public void setNewCodePostal(Integer newCodePostal) {
+    this.newCodePostal = newCodePostal;
+  }
+
+  public Integer getNewPostCode() {
+    return newCodePostal;
+  }
+
   public Long getAddressId() {
-    
+
     return addressId;
   }
 
   public void setAddressId(Long addressId) {
-    
+
     this.addressId = addressId;
   }
 
@@ -117,12 +138,12 @@ public class Address {
     this.complement = complement;
   }
 
-  public String getNeighborhood() {
+  public Nickname getNeighborhood(Nickname home) {
 
     return neighborhood;
   }
 
-  public void setNeighborhood(String neighborhood) {
+  public void setNeighborhood(Nickname neighborhood) {
 
     this.neighborhood = neighborhood;
   }

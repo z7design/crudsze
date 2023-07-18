@@ -1,6 +1,5 @@
 package com.tr.domain.services;
 
-import com.tr.domain.entities.AccountBank;
 import com.tr.domain.entities.Launch;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
@@ -11,11 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +24,6 @@ public class LaunchService {
 
   @Transactional
   public Launch createLaunch(final Launch launch) {
-    Long launchId = launch.getAccountBank().getAccountBankId();
-    AccountBank accountBank = accountService.findAccounById(launchId);
-
-    launch.setAccountBank(accountBank);
     return repository.save(launch);
   }
 
@@ -56,9 +48,7 @@ public class LaunchService {
 
     return repository.save(launch);
   }
-
-  @DeleteMapping("/{launchId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  
   public void deleteLaunch(Long launchId) {
     try {
       repository.deleteById(launchId);

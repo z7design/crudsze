@@ -4,12 +4,16 @@ import com.tr.domain.entities.AccountBank;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.services.AccountBankService;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
+@AllArgsConstructor
+@RequestMapping("/account-bank")
 public class AccountBankController {
   @Autowired private AccountBankService service;
 

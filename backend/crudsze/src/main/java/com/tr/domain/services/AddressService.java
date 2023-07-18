@@ -29,7 +29,6 @@ public class AddressService {
 
   @Transactional
   public Address createAddress(Address address) {
-
     Long cityId = address.getCity().getCityId();
     City city = cityService.findCityById(cityId);
 
@@ -60,6 +59,7 @@ public class AddressService {
     entity.setPublicPlace(entity.getPublicPlace());
     entity.setPostalCode(entity.getPostalCode());
     entity.setComplement(entity.getComplement());
+    entity.setNewCodePostal(entity.getNewPostCode());
     entity.setNeighborhood(entity.getNeighborhood());
     entity.setNumber(entity.getNumber());
 

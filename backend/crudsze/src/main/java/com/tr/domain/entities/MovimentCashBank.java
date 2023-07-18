@@ -11,8 +11,8 @@ import lombok.Data;
 public class MovimentCashBank {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "client_id")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "moviment_cash_bank_id")
   private Long movementCashBankId;
 
   private Integer numberDocument;
@@ -25,8 +25,5 @@ public class MovimentCashBank {
   private String tax;
   private BigDecimal valueOfDocument;
   private BigDecimal valueAccountPay;
-
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private State state;
+  
 }

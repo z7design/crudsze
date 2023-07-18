@@ -11,23 +11,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
 public class ExpensesService {
-  
-  private static final String MSG_EXPENSES_NOT_FOUND = "There is no city registration with the code %d";
-  private static final String MSG_EXPENSES_IN_USE = "Code city %d cannot be removed as it is in use";
 
-  @Autowired
-  private ExpensesRespository repository;
-  @Autowired 
-  private CategoryService categoryService;
+  private static final String MSG_EXPENSES_NOT_FOUND =
+      "There is no expenses registration with the code %d";
+  private static final String MSG_EXPENSES_IN_USE =
+      "Code expenses %d cannot be removed as it is in use";
+
+  @Autowired private ExpensesRespository repository;
+  @Autowired private CategoryService categoryService;
 
   @Transactional
   public Expenses createExpenses(final Expenses expenses) {
@@ -61,9 +58,7 @@ public class ExpensesService {
     entity.setLocality(entity.getLocality());
     return repository.save(expenses);
   }
-
-  @DeleteMapping("/{cityId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  
   public void deleteExpesenses(Long expensesId) {
     try {
       repository.deleteById(expensesId);

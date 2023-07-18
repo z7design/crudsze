@@ -11,7 +11,7 @@ import lombok.Data;
 @Table(name = "check")
 public class Check {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "check_id")
   private Long checkId;
 
@@ -38,11 +38,7 @@ public class Check {
 
   @Column(name = "date_status")
   private Date dateStatus;
-
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private Checkbook checkbook;
-
+  
   public Check() {}
 
   public Check(
@@ -54,9 +50,9 @@ public class Check {
       Date dateStatus,
       String bomPara,
       Date dateCompensation,
-      Date dateEmission,
-      Checkbook checkbook) {
+      Date dateEmission) {
     this.checkId = checkId;
+    this.number = number;
     this.nominalTo = nominalTo;
     this.status = status;
     this.value = value;
@@ -64,7 +60,6 @@ public class Check {
     this.bomPara = bomPara;
     this.dateStatus = dateStatus;
     this.dateCompensation = dateCompensation;
-    this.checkbook = checkbook;
   }
 
   public Check(
@@ -75,9 +70,8 @@ public class Check {
       Date dateStatus,
       String bomPara,
       Date dateCompensation,
-      Date dateEmission,
-      Checkbook checkbook) {
-    this.checkId = checkId;
+      Date dateEmission) {
+    this.number = number;
     this.nominalTo = nominalTo;
     this.status = status;
     this.value = value;
@@ -85,7 +79,6 @@ public class Check {
     this.bomPara = bomPara;
     this.dateStatus = dateStatus;
     this.dateCompensation = dateCompensation;
-    this.checkbook = checkbook;
   }
 
   public Long getCheckId() {
@@ -158,14 +151,6 @@ public class Check {
 
   public void setDateStatus(Date dateStatus) {
     this.dateStatus = dateStatus;
-  }
-
-  public Checkbook getCheckbook() {
-    return checkbook;
-  }
-
-  public void setCheckbook(Checkbook checkbook) {
-    this.checkbook = checkbook;
   }
 
   @Override

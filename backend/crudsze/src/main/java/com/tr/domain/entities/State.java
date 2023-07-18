@@ -10,7 +10,7 @@ import lombok.Data;
 public class State {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "state_id")
   public Long stateId;
 
@@ -46,10 +46,8 @@ public class State {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof State))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof State)) return false;
     State state = (State) o;
     return getStateId().equals(state.getStateId());
   }

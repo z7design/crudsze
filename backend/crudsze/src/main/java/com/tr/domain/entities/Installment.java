@@ -11,7 +11,7 @@ import lombok.Data;
 @Table(name = "installment")
 public class Installment {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "installment_id")
   private Long installmentId;
 
@@ -32,10 +32,7 @@ public class Installment {
 
   @Column(name = "fines")
   private BigDecimal fines;
-
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private Launch launch;
+ 
 
   public Installment() {}
 
@@ -55,7 +52,6 @@ public class Installment {
     this.interest = interest;
     this.additions = additions;
     this.fines = fines;
-    this.launch = launch;
   }
 
   public Installment(
@@ -72,7 +68,6 @@ public class Installment {
     this.interest = interest;
     this.additions = additions;
     this.fines = fines;
-    this.launch = launch;
   }
 
   public Long getInstallmentId() {
@@ -131,13 +126,6 @@ public class Installment {
     this.fines = fines;
   }
 
-  public Launch getLaunch() {
-    return launch;
-  }
-
-  public void setLaunch(Launch launch) {
-    this.launch = launch;
-  }
 
   @Override
   public boolean equals(Object o) {

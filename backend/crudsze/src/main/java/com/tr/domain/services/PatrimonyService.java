@@ -11,23 +11,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
 public class PatrimonyService {
 
-  private static final String MSG_PATROMONY_NOT_FOUND = "There is no city registration with the code %d";
-  private static final String MSG_PATROMONY_IN_USE = "Code city %d cannot be removed as it is in use";
+  private static final String MSG_PATROMONY_NOT_FOUND =
+      "There is no patrimony registration with the code %d";
+  private static final String MSG_PATROMONY_IN_USE =
+      "Code patrimony cannot be removed as it is in use";
 
   @Autowired private PatrimonyRepository repository;
   @Autowired private LedgerAccountService ledgerAccountService;
 
-   @Transactional
+  @Transactional
   public Patrimony createPatrimony(final Patrimony patrimony) {
     Long ledgerAccounId = patrimony.getLedgerAccount().getLedgerAccountId();
     LedgerAccount ledgerAccoun = ledgerAccountService.findByIdLedgerAcount(ledgerAccounId);
@@ -59,9 +58,7 @@ public class PatrimonyService {
     return repository.save(patrimony);
   }
 
-  @DeleteMapping("/{patrimonyId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteLedgerAccount(Long patrimonyId) {
+  public void deletePatrimony(Long patrimonyId) {
     try {
       repository.deleteById(patrimonyId);
     } catch (EmptyResultDataAccessException e) {

@@ -1,7 +1,6 @@
 package com.tr.domain.services;
 
 import com.tr.domain.entities.Installment;
-import com.tr.domain.entities.Launch;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
@@ -11,11 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -31,10 +27,6 @@ public class InstallmentService {
 
   @Transactional
   public Installment createInstallment(final Installment installment) {
-    Long lauchId = installment.getLaunch().getLaunchId();
-    Launch launch = launchService.findLaunchById(lauchId);
-
-    installment.setLaunch(launch);
     return repository.save(installment);
   }
 
@@ -64,9 +56,7 @@ public class InstallmentService {
 
     return repository.save(installment);
   }
-
-  @DeleteMapping("/{installmentId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  
   public void deleteInstallment(Long installmentId) {
     try {
       repository.deleteById(installmentId);

@@ -7,18 +7,13 @@ import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
 import com.tr.domain.repositories.CityRepository;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
-@RequiredArgsConstructor
 public class CityService {
 
   private static final String MSG_CITY_NOT_FOUND = "There is no city registration with the code %d";
@@ -53,9 +48,7 @@ public class CityService {
     entity.setName(entity.getName());
     return repositoryCity.save(city);
   }
-
-  @DeleteMapping("/{cityId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  
   public void deleteCity(Long cityId) {
     try {
       repositoryCity.deleteById(cityId);

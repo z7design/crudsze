@@ -12,7 +12,7 @@ import lombok.Data;
 public class AccountPayble {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "account_payble_id")
   private Long accountPaybleId;
 

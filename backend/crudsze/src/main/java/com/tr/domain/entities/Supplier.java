@@ -10,7 +10,7 @@ import lombok.Data;
 @Table(name = "supplier")
 public class Supplier {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "supllier_id")
   private Long supplierId;
 

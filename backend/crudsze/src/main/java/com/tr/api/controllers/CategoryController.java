@@ -28,7 +28,7 @@ public class CategoryController {
   }
 
   @PutMapping("/{categoryId}")
-  public Category update(@PathVariable Long categoryId, @RequestBody Category category) {
+  public Category updateCategory(@PathVariable Long categoryId, @RequestBody Category category) {
     Category categoryCurrent = service.findCategoryById(categoryId);
     BeanUtils.copyProperties(category, categoryCurrent, "categoryId");
     return service.createCategory(categoryCurrent);

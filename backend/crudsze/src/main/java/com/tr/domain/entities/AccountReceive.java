@@ -7,11 +7,11 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "account_eceive")
+@Table(name = "account_receive")
 public class AccountReceive {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "account_receive_id")
   private Long accountReceiveId;
 
@@ -53,7 +53,109 @@ public class AccountReceive {
   @JoinColumn(nullable = false)
   private Category category;
 
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private CashFlow cashFlow;
+  public AccountReceive() {}
+
+  public Long getAccountReceiveId() {
+    return accountReceiveId;
+  }
+
+  public void setAccountReceiveId(Long accountReceiveId) {
+    this.accountReceiveId = accountReceiveId;
+  }
+
+  public Integer getNumberDocument() {
+    return numberDocument;
+  }
+
+  public void setNumberDocument(Integer numberDocument) {
+    this.numberDocument = numberDocument;
+  }
+
+  public Date getDateDocument() {
+    return dateDocument;
+  }
+
+  public void setDateDocument(Date dateDocument) {
+    this.dateDocument = dateDocument;
+  }
+
+  public Date getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(Date dueDate) {
+    this.dueDate = dueDate;
+  }
+
+  public Date getPayDate() {
+    return payDate;
+  }
+
+  public void setPayDate(Date payDate) {
+    this.payDate = payDate;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public BigDecimal getAmountPaid() {
+    return amountPaid;
+  }
+
+  public void setAmountPaid(BigDecimal amountPaid) {
+    this.amountPaid = amountPaid;
+  }
+
+  public BigDecimal getDiference() {
+    return diference;
+  }
+
+  public void setDiference(BigDecimal diference) {
+    this.diference = diference;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public BigDecimal getValueOfDocument() {
+    return valueOfDocument;
+  }
+
+  public void setValueOfDocument(BigDecimal valueOfDocument) {
+    this.valueOfDocument = valueOfDocument;
+  }
+
+  public BigDecimal getValueAccountReceivable() {
+    return valueAccountReceivable;
+  }
+
+  public void setValueAccountReceivable(BigDecimal valueAccountReceivable) {
+    this.valueAccountReceivable = valueAccountReceivable;
+  }
+
+  public Client getClient() {
+    return client;
+  }
+
+  public void setClient(Client client) {
+    this.client = client;
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
+  }
 }

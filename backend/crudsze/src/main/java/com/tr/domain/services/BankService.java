@@ -10,11 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -42,9 +39,7 @@ public class BankService {
         .findById(bankId)
         .orElseThrow(() -> new EntityNotFoundException(String.format(MSG_BANK_NOT_FOUND, bankId)));
   }
-
-  @DeleteMapping("/{bankId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  
   public void deleteBank(Long bankId) {
     try {
       repository.deleteById(bankId);
@@ -57,7 +52,6 @@ public class BankService {
   }
 
   public List<Bank> findAllByCities() {
-
     return repository.findAll();
   }
 }

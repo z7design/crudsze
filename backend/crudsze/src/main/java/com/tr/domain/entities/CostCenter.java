@@ -9,7 +9,7 @@ import lombok.Data;
 @Table(name = "cost_center")
 public class CostCenter {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "cost_centerId_id")
   private Long costCenterId;
 

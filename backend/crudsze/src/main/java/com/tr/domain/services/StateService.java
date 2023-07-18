@@ -41,7 +41,6 @@ public class StateService {
 
   @Transactional
   public List<State> findAllByStates() {
-
     return stateRepository.findAll();
   }
 

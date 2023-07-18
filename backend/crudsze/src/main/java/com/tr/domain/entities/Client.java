@@ -10,7 +10,7 @@ import lombok.Data;
 @Table(name = "client")
 public class Client {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "client_id")
   private Long clientId;
 
@@ -51,20 +51,12 @@ public class Client {
   @JoinColumn(nullable = false)
   private Address address;
 
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private Phone phone;
-
   @Column(name = "observation")
   private String observation;
 
   @Column(name = "registrarion_date")
   private Date registrarionDate;
-
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private Document document;
-
+  
   public Client() {}
 
   public Client(
@@ -81,10 +73,8 @@ public class Client {
       String stateRegistration,
       String municipalRegistration,
       Address address,
-      Phone phone,
       String observation,
-      Date registrarionDate,
-      Document document) {
+      Date registrarionDate) {
 
     this.clientId = clientId;
     this.name = name;
@@ -99,9 +89,7 @@ public class Client {
     this.stateRegistration = stateRegistration;
     this.municipalRegistration = municipalRegistration;
     this.address = address;
-    this.phone = phone;
     this.observation = observation;
-    this.document = document;
   }
 
   public Client(
@@ -117,10 +105,8 @@ public class Client {
       String stateRegistration,
       String municipalRegistration,
       Address address,
-      Phone phone,
       String observation,
-      Date registrarionDate,
-      Document document) {
+      Date registrarionDate) {
 
     this.name = name;
     this.corporateName = corporateName;
@@ -134,9 +120,8 @@ public class Client {
     this.stateRegistration = stateRegistration;
     this.municipalRegistration = municipalRegistration;
     this.address = address;
-    this.phone = phone;
     this.observation = observation;
-    this.document = document;
+    this.registrarionDate = registrarionDate;
   }
 
   public Long getClientId() {
@@ -242,15 +227,7 @@ public class Client {
   public void setAddress(Address address) {
     this.address = address;
   }
-
-  public Phone getPhone() {
-    return phone;
-  }
-
-  public void setPhone(Phone phone) {
-    this.phone = phone;
-  }
-
+  
   public String getObservation() {
     return observation;
   }
@@ -267,13 +244,6 @@ public class Client {
     this.registrarionDate = registrarionDate;
   }
 
-  public Document getDocument() {
-    return document;
-  }
-
-  public void setDocument(Document document) {
-    this.document = document;
-  }
 
   @Override
   public boolean equals(Object o) {

@@ -10,7 +10,7 @@ import lombok.Data;
 @Table(name = "cash_flow")
 public class CashFlow {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "cash_flow_id")
   private Long cashFlowId;
 
@@ -34,4 +34,6 @@ public class CashFlow {
 
   @Column(name = "total")
   private BigDecimal total;
+  
+  
 }

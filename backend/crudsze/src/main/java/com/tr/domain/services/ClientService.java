@@ -11,11 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -56,9 +53,7 @@ public class ClientService {
     entity.setName(entity.getName());
     return repository.save(client);
   }
-
-  @DeleteMapping("/{clientId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  
   public void deleteClient(Long clientId) {
     try {
       repository.deleteById(clientId);
@@ -71,7 +66,6 @@ public class ClientService {
   }
 
   public List<Client> findAllByClients() {
-
     return repository.findAll();
   }
 }

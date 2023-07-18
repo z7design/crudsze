@@ -11,7 +11,7 @@ import lombok.Data;
 @Table(name = "employees")
 public class Employees {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "employess_id")
   private Long employeesId;
 

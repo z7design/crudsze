@@ -1,14 +1,12 @@
 package com.tr.api.controllers;
 
 import com.tr.domain.entities.Client;
-import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.services.ClientService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,14 +35,9 @@ public class ClientController {
   }
 
   @PostMapping
-  public ResponseEntity<Client> createClient(@RequestBody Client client) {
-    try {
-      client = service.createClient(client);
-      return ResponseEntity.status(HttpStatus.CREATED).body(client);
-
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.badRequest().build();
-    }
+  @ResponseStatus(HttpStatus.CREATED)
+  public Client createClient(@RequestBody Client client) {
+    return service.createClient(client);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -11,11 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -74,9 +71,7 @@ public class EmployeesService {
 
     return repository.save(employees);
   }
-
-  @DeleteMapping("/{employeesId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  
   public void deleteEmployess(Long employeesId) {
     try {
       repository.deleteById(employeesId);

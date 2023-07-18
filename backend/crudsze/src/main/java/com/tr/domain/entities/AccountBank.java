@@ -9,7 +9,7 @@ import lombok.Data;
 @Table(name = "account_bank")
 public class AccountBank {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "account_bank_id")
   private Long accountBankId;
 
@@ -28,10 +28,6 @@ public class AccountBank {
   @ManyToOne
   @JoinColumn(nullable = false)
   private Document document;
-
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private AccountBank accountBank;
 
   @ManyToOne
   @JoinColumn(nullable = false)
@@ -117,14 +113,6 @@ public class AccountBank {
 
   public void setDocument(Document document) {
     this.document = document;
-  }
-
-  public AccountBank getAccountBank() {
-    return accountBank;
-  }
-
-  public void setAccountBank(AccountBank accountBank) {
-    this.accountBank = accountBank;
   }
 
   public Address getAddress() {

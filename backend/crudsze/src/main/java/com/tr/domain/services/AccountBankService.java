@@ -10,23 +10,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
 public class AccountBankService {
-  
-  private static final String MSG_ACCOUNT_BANK_NOT_FOUND = "There is no account registration with the code %d";
-  private static final String MSG_ACCOUNT_BANK_IN_USE = "Code account %d cannot be removed as it is in use";
 
-  @Autowired
-  private AccountBankRepository repository;
-  @Autowired 
-  private AddressService addressService;
+  private static final String MSG_ACCOUNT_BANK_NOT_FOUND =
+      "There is no account registration with the code %d";
+  private static final String MSG_ACCOUNT_BANK_IN_USE =
+      "Code account %d cannot be removed as it is in use";
+
+  @Autowired private AccountBankRepository repository;
+  @Autowired private AddressService addressService;
 
   @Transactional
   public AccountBank createAccountBank(final AccountBank accountBank) {
@@ -41,11 +38,13 @@ public class AccountBankService {
   public AccountBank findAccounById(final Long accountBankId) {
     return repository
         .findById(accountBankId)
-        .orElseThrow(() -> new EntityNotFoundException(String.format(MSG_ACCOUNT_BANK_NOT_FOUND, accountBankId)));
+        .orElseThrow(
+            () ->
+                new EntityNotFoundException(
+                    String.format(MSG_ACCOUNT_BANK_NOT_FOUND, accountBankId)));
   }
 
-  @DeleteMapping("/{cityId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Transactional
   public void deleteAccountBank(Long accountBankId) {
     try {
       repository.deleteById(accountBankId);
@@ -57,12 +56,12 @@ public class AccountBankService {
     }
   }
 
+  @Transactional
   public List<AccountBank> findAllByAccountBanks() {
-
     return repository.findAll();
   }
-  
-    @Transactional
+
+  @Transactional
   public AccountBank updateAccountBank(final AccountBank accountBank) {
     var entity =
         repository
@@ -76,5 +75,4 @@ public class AccountBankService {
 
     return repository.save(accountBank);
   }
-
 }

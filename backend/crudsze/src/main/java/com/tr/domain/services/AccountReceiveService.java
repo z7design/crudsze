@@ -10,26 +10,23 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
 public class AccountReceiveService {
-  
-  private static final String MSG_ACCOUNT_RECEIVE_NOT_FOUND = "There is no account registration with the code %d";
-  private static final String MSG_ACCOUNT_RECEIVE_IN_USE = "Code account %d cannot be removed as it is in use";
 
-  @Autowired
-  private AccountReceiveRepository repository;
-  @Autowired 
-  private ClientService clientService;
+  private static final String MSG_ACCOUNT_RECEIVE_NOT_FOUND =
+      "There is no account registration with the code %d";
+  private static final String MSG_ACCOUNT_RECEIVE_IN_USE =
+      "Code account %d cannot be removed as it is in use";
+
+  @Autowired private AccountReceiveRepository repository;
+  @Autowired private ClientService clientService;
 
   @Transactional
-  public AccountReceive createAccountBank(final AccountReceive accountReceive) {
+  public AccountReceive createAccountReceive(final AccountReceive accountReceive) {
     Long clientId = accountReceive.getClient().getClientId();
     Client client = clientService.findClientById(clientId);
 
@@ -41,16 +38,18 @@ public class AccountReceiveService {
   public AccountReceive findAccounReceiveById(final Long accountReceiveId) {
     return repository
         .findById(accountReceiveId)
-        .orElseThrow(() -> new EntityNotFoundException(String.format(MSG_ACCOUNT_RECEIVE_NOT_FOUND, accountReceiveId)));
+        .orElseThrow(
+            () ->
+                new EntityNotFoundException(
+                    String.format(MSG_ACCOUNT_RECEIVE_NOT_FOUND, accountReceiveId)));
   }
 
-  @DeleteMapping("/{accountReceiveId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteAccountReceive(Long accountReceiveId) {
     try {
       repository.deleteById(accountReceiveId);
     } catch (EmptyResultDataAccessException e) {
-      throw new EntityNotFoundException(String.format(MSG_ACCOUNT_RECEIVE_NOT_FOUND, accountReceiveId));
+      throw new EntityNotFoundException(
+          String.format(MSG_ACCOUNT_RECEIVE_NOT_FOUND, accountReceiveId));
 
     } catch (DataIntegrityViolationException e) {
       throw new EntityInUseException(String.format(MSG_ACCOUNT_RECEIVE_IN_USE, accountReceiveId));
@@ -60,8 +59,8 @@ public class AccountReceiveService {
   public List<AccountReceive> findAllByAccountReceive() {
     return repository.findAll();
   }
-  
-    @Transactional
+
+  @Transactional
   public AccountReceive updateAccountReceive(final AccountReceive accountReceive) {
     var entity =
         repository
@@ -78,7 +77,6 @@ public class AccountReceiveService {
     entity.setStatus(entity.getStatus());
     entity.setValueOfDocument(entity.getValueOfDocument());
     entity.setValueAccountReceivable(entity.getValueAccountReceivable());
-
 
     return repository.save(accountReceive);
   }

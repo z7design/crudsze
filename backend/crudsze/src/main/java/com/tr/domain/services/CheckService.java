@@ -1,7 +1,6 @@
 package com.tr.domain.services;
 
 import com.tr.domain.entities.Check;
-import com.tr.domain.entities.Checkbook;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
@@ -11,11 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -30,10 +26,6 @@ public class CheckService {
 
   @Transactional
   public Check createCheck(final Check check) {
-    Long checkbookId = check.getCheckbook().getCheckbookId();
-    Checkbook checkbook = checkbookService.findCheckbookById(checkbookId);
-
-    check.setCheckbook(checkbook);
     return repository.save(check);
   }
 
@@ -62,9 +54,7 @@ public class CheckService {
     entity.setNominalTo(entity.getNominalTo());
     return repository.save(check);
   }
-
-  @DeleteMapping("/{checkId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  
   public void deleteCheck(Long checkId) {
     try {
       repository.deleteById(checkId);

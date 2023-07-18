@@ -10,7 +10,7 @@ import lombok.Data;
 public class TypeDocument {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "type_document_id")
   private Long typeDocumentId;
 
