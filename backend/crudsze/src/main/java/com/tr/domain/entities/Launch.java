@@ -1,5 +1,7 @@
 package com.tr.domain.entities;
 
+import com.tr.domain.enums.StastusLaunch;
+import com.tr.domain.enums.TypeLaunch;
 import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.*;
@@ -15,7 +17,14 @@ public class Launch {
   private Long launchId;
 
   @Column(name = "type_launch")
-  private String typeLaunch;
+  @Enumerated(EnumType.STRING)
+  // @Convert(converter = TypeLaunch.class)
+  private TypeLaunch typeLaunch;
+
+  @Column(name = "status")
+  @Enumerated(EnumType.STRING)
+  // @Convert(converter = StatusLaunch.class)
+  private StastusLaunch status;
 
   @Column(name = "value")
   private BigDecimal value;
@@ -25,14 +34,14 @@ public class Launch {
 
   public Launch() {}
 
-  public Launch(Long launchId, String typeLaunch, BigDecimal value, BigDecimal tax) {
+  public Launch(Long launchId, TypeLaunch typeLaunch, BigDecimal value, BigDecimal tax) {
     this.launchId = launchId;
     this.typeLaunch = typeLaunch;
     this.value = value;
     this.tax = tax;
   }
 
-  public Launch(String typeLaunch, BigDecimal value, BigDecimal tax) {
+  public Launch(TypeLaunch typeLaunch, BigDecimal value, BigDecimal tax) {
     this.typeLaunch = typeLaunch;
     this.value = value;
     this.tax = tax;
@@ -46,11 +55,11 @@ public class Launch {
     this.launchId = launchId;
   }
 
-  public String getTypeLaunch() {
+  public TypeLaunch getTypeLaunch() {
     return typeLaunch;
   }
 
-  public void setTypeLaunch(String typeLaunch) {
+  public void setTypeLaunch(TypeLaunch typeLaunch) {
     this.typeLaunch = typeLaunch;
   }
 
