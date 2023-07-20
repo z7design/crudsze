@@ -24,7 +24,7 @@ public class VeicleService {
   @Autowired private VeicleRepository repository;
 
   @Transactional
-  public Veicle createVeicle(final Veicle veicle) {
+  public Veicle createVeicle(Veicle veicle) {
     return repository.save(veicle);
   }
 

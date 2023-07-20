@@ -51,6 +51,7 @@ public class CategoryServiceTest {
 
   @Test
   void shouldFindAllThenReturnEmptyCategories() {
+    ;
     when(repository.findAll()).thenReturn(Collections.emptyList());
     List<Category> listCategory = repository.findAll();
     assertTrue(listCategory.isEmpty());
@@ -58,7 +59,8 @@ public class CategoryServiceTest {
   }
 
   @Test
-  void findById() {
+  void shouldCategoryFindById() {
+    final var category = new Category("Despesas", "Despesas geral");
     when(repository.findById(any())).thenReturn(Optional.of(category));
     Category savedCategory = service.findCategoryById(categoryId);
     assertNotNull(savedCategory);

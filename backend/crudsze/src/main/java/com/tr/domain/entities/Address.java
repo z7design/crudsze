@@ -32,6 +32,7 @@ public class Address {
 
   @Column(name = "neighborhood")
   @Enumerated(EnumType.STRING)
+  // @Convert(converter = NicknameConverter.class)
   private Nickname neighborhood;
 
   @ManyToOne

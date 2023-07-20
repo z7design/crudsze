@@ -1,8 +1,8 @@
 DO
 $$
     BEGIN
-        IF NOT EXISTS(SELECT 1 FROM pg_tables WHERE tablename = 'tb_phone') THEN
-            CREATE TABLE tb_phone
+        IF NOT EXISTS(SELECT 1 FROM pg_tables WHERE tablename = 'tb_veicle') THEN
+            CREATE TABLE tb_veicle
             (
               veicle_id         						SERIAL PRIMARY KEY,
 							plate 												VARCHAR(45) NULL,

@@ -2,10 +2,12 @@ package com.tr.domain.entities;
 
 import java.math.BigDecimal;
 import javax.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Data
+@Builder
 @Table(name = "veicles")
 public class Veicle {
 
