@@ -3,6 +3,7 @@ package com.tr.domain.services;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import com.tr.domain.entities.Document;
 import com.tr.domain.entities.Veicle;
 import com.tr.domain.repositories.VeicleRepository;
 import java.math.BigDecimal;
@@ -21,29 +22,30 @@ public class VeicleServiceTest {
 
   @InjectMocks private VeicleService service;
   @Mock private VeicleRepository repository;
+  @Mock private DocumentService documentService;
 
   private Long veicleId = 1L;
   private Veicle veicle;
+  private Document document;
   private BigDecimal value = BigDecimal.valueOf(150.000);
 
   @BeforeEach
   public void setup() {
-    Veicle veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value);
+    Veicle veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value, document);
   }
 
   @Test
   public void shouldVeicleWhenThenSalveVeicles() {
-    veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value);
-
+    veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value, document);
     when(repository.save(any(Veicle.class))).thenReturn(veicle);
-    Veicle savedCat = service.createVeicle(veicle);
-    assertEquals(veicle, savedCat);
+    var savedVeic = service.createVeicle(veicle);
+    assertEquals(veicle, savedVeic);
   }
 
   @Test
   void shouldFindAllByCategories() {
-    veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value);
-    Veicle veicle1 = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value);
+    veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value, document);
+    Veicle veicle1 = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value, document);
 
     when(repository.findAll()).thenReturn(List.of(veicle, veicle1));
     List<Veicle> listVeicle = service.findAllByVeicle();
@@ -61,7 +63,7 @@ public class VeicleServiceTest {
 
   @Test
   void shouldFindByIdViecle() {
-    final var veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value);
+    final var veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value, document);
     when(repository.findById(any())).thenReturn(Optional.ofNullable(veicle));
     Veicle savedVeicle = service.findVeicleById(veicleId);
     assertNotNull(savedVeicle);
@@ -70,7 +72,7 @@ public class VeicleServiceTest {
 
   @Test
   void ShoulUpdateVeicle() {
-    final var veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value);
+    final var veicle = new Veicle(veicleId, "GRT-7898", "Corolla", "Red", value, document);
     when(repository.findById(any())).thenReturn(Optional.of(veicle));
 
     veicle.setModel("Corolla");

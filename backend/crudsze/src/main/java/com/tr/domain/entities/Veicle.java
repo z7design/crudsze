@@ -1,13 +1,12 @@
 package com.tr.domain.entities;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Data
-@Builder
 @Table(name = "veicles")
 public class Veicle {
 
@@ -30,7 +29,13 @@ public class Veicle {
 
   public Veicle() {}
 
-  public Veicle(Long veicleId, String plate, String model, String color, BigDecimal value) {
+  public Veicle(
+      Long veicleId,
+      String plate,
+      String model,
+      String color,
+      BigDecimal value,
+      Document document) {
     this.plate = plate;
     this.color = color;
     this.model = model;
@@ -43,6 +48,7 @@ public class Veicle {
     this.model = model;
     this.value = value;
   }
+  
 
   public Long getVeicleId() {
     return veicleId;
@@ -82,5 +88,18 @@ public class Veicle {
 
   public void setValue(BigDecimal value) {
     this.value = value;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Veicle)) return false;
+    Veicle veicle = (Veicle) o;
+    return getVeicleId().equals(veicle.getVeicleId());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getVeicleId());
   }
 }

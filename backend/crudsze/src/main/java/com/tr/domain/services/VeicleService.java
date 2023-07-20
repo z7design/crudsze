@@ -22,6 +22,7 @@ public class VeicleService {
       "Code veicle %d cannot be removed as it is in use";
 
   @Autowired private VeicleRepository repository;
+  @Autowired private DocumentService documentService;
 
   @Transactional
   public Veicle createVeicle(Veicle veicle) {

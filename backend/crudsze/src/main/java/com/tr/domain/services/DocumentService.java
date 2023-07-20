@@ -64,7 +64,7 @@ public class DocumentService {
     }
   }
 
-  public List<Document> findAllByDocuement() {
+  public List<Document> findAllByDocument() {
     return repository.findAll();
   }
 }
