@@ -1,6 +1,7 @@
 package com.tr.domain.services;
 
 import com.tr.domain.entities.Address;
+import com.tr.domain.entities.Departament;
 import com.tr.domain.entities.Employees;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
@@ -25,13 +26,18 @@ public class EmployeesService {
 
   @Autowired private EmployeesRepository repository;
   @Autowired private AddressService addressService;
+  @Autowired private DepartamentService departamentService;
 
   @Transactional
   public Employees createEmployees(final Employees employees) {
     Long addressId = employees.getAddress().getAddressId();
     Address address = addressService.findAddressById(addressId);
 
+    Long departamentId = employees.getDepartament().getDepartamentId();
+    Departament departament = departamentService.findDepartamentById(departamentId);
+
     employees.setAddress(address);
+    employees.setDepartament(departament);
     return repository.save(employees);
   }
 
@@ -71,7 +77,7 @@ public class EmployeesService {
 
     return repository.save(employees);
   }
-  
+
   public void deleteEmployess(Long employeesId) {
     try {
       repository.deleteById(employeesId);

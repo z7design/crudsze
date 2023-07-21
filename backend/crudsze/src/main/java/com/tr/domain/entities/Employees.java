@@ -2,7 +2,6 @@ package com.tr.domain.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -11,7 +10,7 @@ import lombok.Data;
 @Table(name = "employees")
 public class Employees {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "employess_id")
   private Long employeesId;
 
@@ -26,9 +25,6 @@ public class Employees {
 
   @Column(name = "genereal_register")
   private String generealRegister;
-
-  @Column(name = "departament")
-  private String departament;
 
   @Column(name = "salary")
   private BigDecimal salary;
@@ -76,6 +72,10 @@ public class Employees {
   @JoinColumn(nullable = false)
   private Address address;
 
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private Departament departament;
+
   public Employees() {}
 
   public Employees(
@@ -84,7 +84,6 @@ public class Employees {
       String email,
       String cpf,
       String generealRegister,
-      String departament,
       BigDecimal salary,
       String function,
       String numberLicenceDriver,
@@ -98,13 +97,14 @@ public class Employees {
       String pispasep,
       Date admission,
       Date demission,
-      String exames) {
+      String exames,
+      Address address,
+      Departament departament) {
     this.employeesId = employeesId;
     this.name = name;
     this.email = email;
     this.cpf = cpf;
     this.generealRegister = generealRegister;
-    this.departament = departament;
     this.salary = salary;
     this.function = function;
     this.numberLicenceDriver = numberLicenceDriver;
@@ -119,6 +119,8 @@ public class Employees {
     this.admission = admission;
     this.demission = demission;
     this.exames = exames;
+    this.address = address;
+    this.departament = departament;
   }
 
   public Employees(
@@ -126,7 +128,6 @@ public class Employees {
       String email,
       String cpf,
       String generealRegister,
-      String departament,
       BigDecimal salary,
       String function,
       String numberLicenceDriver,
@@ -140,7 +141,9 @@ public class Employees {
       String pispasep,
       Date admission,
       Date demission,
-      String exames) {
+      String exames,
+      Address address,
+      Departament departament) {
     this.employeesId = employeesId;
     this.name = name;
     this.email = email;
@@ -161,6 +164,7 @@ public class Employees {
     this.admission = admission;
     this.demission = demission;
     this.exames = exames;
+    this.address = address;
   }
 
   public Long getEmployeesId() {
@@ -201,14 +205,6 @@ public class Employees {
 
   public void setGenerealRegister(String generealRegister) {
     this.generealRegister = generealRegister;
-  }
-
-  public String getDepartament() {
-    return departament;
-  }
-
-  public void setDepartament(String departament) {
-    this.departament = departament;
   }
 
   public BigDecimal getSalary() {
@@ -331,18 +327,11 @@ public class Employees {
     this.address = address;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof Employees))
-      return false;
-    Employees employees = (Employees) o;
-    return getEmployeesId().equals(employees.getEmployeesId());
+  public Departament getDepartament() {
+    return departament;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(getEmployeesId());
+  public void setDepartament(Departament departament) {
+    this.departament = departament;
   }
 }

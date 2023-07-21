@@ -31,7 +31,8 @@ public class EmployeesController {
 
   @ResponseStatus(HttpStatus.OK)
   @PutMapping("/{employeesId}")
-  public Employees update(@PathVariable Long employeesId, @RequestBody Employees employees) {
+  public Employees updateEmployees(
+      @PathVariable Long employeesId, @RequestBody Employees employees) {
     Employees employeesCurrent = service.findEmployessById(employeesId);
     BeanUtils.copyProperties(employees, employeesCurrent, "employeesId");
     return service.createEmployees(employeesCurrent);
