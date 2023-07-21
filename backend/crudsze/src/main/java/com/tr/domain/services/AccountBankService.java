@@ -27,10 +27,6 @@ public class AccountBankService {
 
   @Transactional
   public AccountBank createAccountBank(final AccountBank accountBank) {
-    Long addressId = accountBank.getAddress().getAddressId();
-    Address address = addressService.findAddressById(addressId);
-
-    accountBank.setAddress(address);
     return repository.save(accountBank);
   }
 

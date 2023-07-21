@@ -1,14 +1,12 @@
 package com.tr.api.controllers;
 
 import com.tr.domain.entities.Bank;
-import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.services.BankService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,14 +36,10 @@ public class BanckController {
   }
 
   @PostMapping
-  public ResponseEntity<Bank> createBank(@RequestBody Bank bank) {
-    try {
-      bank = service.createBank(bank);
-      return ResponseEntity.status(HttpStatus.CREATED).body(bank);
+  @ResponseStatus(HttpStatus.CREATED)
+  public Bank createBank(@RequestBody Bank bank) {
 
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.badRequest().build();
-    }
+    return service.createBank(bank);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)

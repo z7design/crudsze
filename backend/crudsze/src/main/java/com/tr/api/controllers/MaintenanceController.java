@@ -36,8 +36,7 @@ public class MaintenanceController {
     BeanUtils.copyProperties(maintenance, maintenanceCurrent, "maintenanceId");
     return service.createMaintenance(maintenanceCurrent);
   }
-
-  @ResponseStatus(HttpStatus.OK)
+  
   @PostMapping
   public ResponseEntity<Maintenance> createMaintenance(@RequestBody Maintenance maintenance) {
     try {

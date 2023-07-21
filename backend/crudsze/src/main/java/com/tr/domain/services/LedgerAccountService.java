@@ -27,10 +27,13 @@ public class LedgerAccountService {
   }
 
   @Transactional
-  public LedgerAccount findByIdLedgerAcount(final Long ledgerAccountId) {
+  public LedgerAccount findByLedgerAcountById(final Long ledgerAccountId) {
     return repository
         .findById(ledgerAccountId)
-        .orElseThrow(() -> new EntityNotFoundException(String.format(MSG_LEAGER_ACCOUNT_NOT_FOUND, ledgerAccountId)));
+        .orElseThrow(
+            () ->
+                new EntityNotFoundException(
+                    String.format(MSG_LEAGER_ACCOUNT_NOT_FOUND, ledgerAccountId)));
   }
 
   @Transactional
@@ -55,7 +58,7 @@ public class LedgerAccountService {
     }
   }
 
-  public List<LedgerAccount> findAlLedgerAccountl() {
+  public List<LedgerAccount> findAlLedgerAccount() {
     return repository.findAll();
   }
 }

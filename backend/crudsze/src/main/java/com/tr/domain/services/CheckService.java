@@ -1,6 +1,6 @@
 package com.tr.domain.services;
 
-import com.tr.domain.entities.Check;
+import com.tr.domain.entities.CheckBank;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
@@ -25,12 +25,12 @@ public class CheckService {
   @Autowired private CheckbookService checkbookService;
 
   @Transactional
-  public Check createCheck(final Check check) {
+  public CheckBank createCheck(final CheckBank check) {
     return repository.save(check);
   }
 
   @Transactional
-  public Check findCheckById(final Long checkId) {
+  public CheckBank findCheckById(final Long checkId) {
     return repository
         .findById(checkId)
         .orElseThrow(
@@ -38,7 +38,7 @@ public class CheckService {
   }
 
   @Transactional
-  public Check updateChek(final Check check) {
+  public CheckBank updateChek(final CheckBank check) {
     var entity =
         repository
             .findById(check.getCheckId())
@@ -66,7 +66,7 @@ public class CheckService {
     }
   }
 
-  public List<Check> findAllByCheck() {
+  public List<CheckBank> findAllByCheck() {
     return repository.findAll();
   }
 }

@@ -1,5 +1,6 @@
 package com.tr.domain.services;
 
+import com.tr.domain.entities.AccountBank;
 import com.tr.domain.entities.Address;
 import com.tr.domain.entities.Bank;
 import com.tr.domain.exception.EntityInUseException;
@@ -24,10 +25,15 @@ public class BankService {
 
   @Autowired private AddressService addressService;
 
+  @Autowired private AccountBankService accountBankService;
+
   @Transactional
   public Bank createBank(final Bank bank) {
     Long addressId = bank.getAddress().getAddressId();
     Address address = addressService.findAddressById(addressId);
+
+    Long accountBankId = bank.getAccountBank().getAccountBankId();
+    AccountBank accountBank = accountBankService.findAccounById(accountBankId);
 
     bank.setAddress(address);
     return repository.save(bank);

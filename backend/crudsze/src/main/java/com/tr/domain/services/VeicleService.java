@@ -1,5 +1,6 @@
 package com.tr.domain.services;
 
+import com.tr.domain.entities.Document;
 import com.tr.domain.entities.Veicle;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
@@ -26,6 +27,11 @@ public class VeicleService {
 
   @Transactional
   public Veicle createVeicle(Veicle veicle) {
+
+    Long documentId = veicle.getDocument().getDocumentId();
+    Document document = documentService.findDocumentById(documentId);
+
+    veicle.setDocument(document);
     return repository.save(veicle);
   }
 

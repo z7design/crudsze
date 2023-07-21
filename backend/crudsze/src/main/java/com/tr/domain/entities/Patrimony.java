@@ -31,11 +31,7 @@ public class Patrimony {
 
   @Column(name = "accounting_classification")
   private String accountingClassification;
-
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private LedgerAccount ledgerAccount;
-
+  
   public Patrimony() {}
 
   public Patrimony(
@@ -44,7 +40,6 @@ public class Patrimony {
       String description,
       String purchaseInvoice,
       Date dateOfPurchase,
-      LedgerAccount ledgerAccount,
       String accountingClassification) {
 
     this.patrimonyId = patrimonyId;
@@ -52,7 +47,6 @@ public class Patrimony {
     this.description = description;
     this.purchaseInvoice = purchaseInvoice;
     this.dateOfPurchase = dateOfPurchase;
-    this.ledgerAccount = ledgerAccount;
     this.accountingClassification = accountingClassification;
   }
 
@@ -61,14 +55,12 @@ public class Patrimony {
       String description,
       String purchaseInvoice,
       Date dateOfPurchase,
-      LedgerAccount ledgerAccount,
       String accountingClassification) {
 
     this.code = code;
     this.description = description;
     this.purchaseInvoice = purchaseInvoice;
     this.dateOfPurchase = dateOfPurchase;
-    this.ledgerAccount = ledgerAccount;
     this.accountingClassification = accountingClassification;
   }
 
@@ -127,15 +119,7 @@ public class Patrimony {
   public void setAccountingClassification(String accountingClassification) {
     this.accountingClassification = accountingClassification;
   }
-
-  public LedgerAccount getLedgerAccount() {
-    return ledgerAccount;
-  }
-
-  public void setLedgerAccount(LedgerAccount ledgerAccount) {
-    this.ledgerAccount = ledgerAccount;
-  }
-
+  
   @Override
   public boolean equals(Object o) {
     if (this == o)

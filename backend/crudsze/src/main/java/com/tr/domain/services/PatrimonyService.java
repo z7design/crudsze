@@ -1,6 +1,5 @@
 package com.tr.domain.services;
 
-import com.tr.domain.entities.LedgerAccount;
 import com.tr.domain.entities.Patrimony;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
@@ -28,10 +27,6 @@ public class PatrimonyService {
 
   @Transactional
   public Patrimony createPatrimony(final Patrimony patrimony) {
-    Long ledgerAccounId = patrimony.getLedgerAccount().getLedgerAccountId();
-    LedgerAccount ledgerAccoun = ledgerAccountService.findByIdLedgerAcount(ledgerAccounId);
-
-    patrimony.setLedgerAccount(ledgerAccoun);
     return repository.save(patrimony);
   }
 

@@ -23,7 +23,7 @@ public class LaunchController {
 
   @ResponseStatus(HttpStatus.OK)
   @GetMapping("/{launchId}")
-  public Launch getByLaunch(@PathVariable Long launchId) {
+  public Launch getByLaunchById(@PathVariable Long launchId) {
     return service.findLaunchById(launchId);
   }
 

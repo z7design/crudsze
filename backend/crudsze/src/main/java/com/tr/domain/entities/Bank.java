@@ -66,4 +66,60 @@ public class Bank {
     this.address = address;
     this.accountBank = accountBank;
   }
+
+  public Long getBanckId() {
+    return banckId;
+  }
+
+  public void setBanckId(Long banckId) {
+    this.banckId = banckId;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getAgency() {
+    return agency;
+  }
+
+  public void setAgency(String agency) {
+    this.agency = agency;
+  }
+
+  public Integer getCode() {
+    return code;
+  }
+
+  public void setCode(Integer code) {
+    this.code = code;
+  }
+
+  public String getChekingAccount() {
+    return chekingAccount;
+  }
+
+  public void setChekingAccount(String chekingAccount) {
+    this.chekingAccount = chekingAccount;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
+  public AccountBank getAccountBank() {
+    return accountBank;
+  }
+
+  public void setAccountBank(AccountBank accountBank) {
+    this.accountBank = accountBank;
+  }
 }

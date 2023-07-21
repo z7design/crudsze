@@ -27,6 +27,10 @@ public class Veicle {
   @Column(name = "value")
   private BigDecimal value;
 
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private Document document;
+
   public Veicle() {}
 
   public Veicle(
@@ -42,13 +46,13 @@ public class Veicle {
     this.value = value;
   }
 
-  public Veicle(String plate, String model, String color, BigDecimal value) {
+  public Veicle(String plate, String model, String color, BigDecimal value, Document document) {
     this.plate = plate;
     this.color = color;
     this.model = model;
     this.value = value;
+    this.document = document;
   }
-  
 
   public Long getVeicleId() {
     return veicleId;
@@ -88,6 +92,14 @@ public class Veicle {
 
   public void setValue(BigDecimal value) {
     this.value = value;
+  }
+
+  public Document getDocument() {
+    return document;
+  }
+
+  public void setDocument(Document document) {
+    this.document = document;
   }
 
   @Override

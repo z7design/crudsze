@@ -25,46 +25,22 @@ public class AccountBank {
   @Column(name = "account_dv")
   private String accountDV;
 
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private Document document;
-
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  private Address address;
-
   public AccountBank() {}
 
   public AccountBank(
-      Long accountBankId,
-      String agency,
-      String agencyDV,
-      String account,
-      String accountDV,
-      Address address, 
-      Document document) {
+      Long accountBankId, String agency, String agencyDV, String account, String accountDV) {
     this.accountBankId = accountBankId;
     this.agency = agency;
     this.agencyDV = agencyDV;
     this.account = account;
     this.accountDV = accountDV;
-    this.address = address;
-    this.document = document;
   }
-  
-   public AccountBank(
-      String agency,
-      String agencyDV,
-      String account,
-      String accountDV,
-      Address address, 
-      Document document) {
+
+  public AccountBank(String agency, String agencyDV, String account, String accountDV) {
     this.agency = agency;
     this.agencyDV = agencyDV;
     this.account = account;
     this.accountDV = accountDV;
-    this.address = address;
-    this.document = document;
   }
 
   public Long getAccountBankId() {
@@ -106,23 +82,8 @@ public class AccountBank {
   public void setAccountDV(String accountDV) {
     this.accountDV = accountDV;
   }
-
-  public Document getDocument() {
-    return document;
-  }
-
-  public void setDocument(Document document) {
-    this.document = document;
-  }
-
-  public Address getAddress() {
-    return address;
-  }
-
-  public void setAddress(Address address) {
-    this.address = address;
-  }
-
+  
+  
   @Override
   public boolean equals(Object o) {
     if (this == o)
