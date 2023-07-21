@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "check")
-public class Check {
+@Table(name = "check_bank")
+public class CheckBank {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "check_id")
@@ -38,10 +38,10 @@ public class Check {
 
   @Column(name = "date_status")
   private Date dateStatus;
-  
-  public Check() {}
 
-  public Check(
+  public CheckBank() {}
+
+  public CheckBank(
       Long checkId,
       Integer number,
       String nominalTo,
@@ -62,7 +62,7 @@ public class Check {
     this.dateCompensation = dateCompensation;
   }
 
-  public Check(
+  public CheckBank(
       Integer number,
       String nominalTo,
       BigDecimal value,
@@ -156,8 +156,8 @@ public class Check {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Check)) return false;
-    Check check = (Check) o;
+    if (!(o instanceof CheckBank)) return false;
+    CheckBank check = (CheckBank) o;
     return getCheckId().equals(check.getCheckId());
   }
 
