@@ -18,9 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class DocumentService {
 
   private static final String MSG_DOCUMENT_NOT_FOUND =
-      "There is no city registration with the code %d";
+      "There is no Document registration with the code %d";
   private static final String MSG_DOCUMENT_IN_USE =
-      "Code city %d cannot be removed as it is in use";
+      "Code Document %d cannot be removed as it is in use";
 
   @Autowired private DocumentRepository repository;
 

@@ -61,7 +61,6 @@ public class CityService {
   }
 
   public List<City> findAllByCities() {
-
     return repositoryCity.findAll();
   }
 }
