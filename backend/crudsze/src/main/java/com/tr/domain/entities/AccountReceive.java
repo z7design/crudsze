@@ -2,6 +2,7 @@ package com.tr.domain.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -54,6 +55,62 @@ public class AccountReceive {
   private Category category;
 
   public AccountReceive() {}
+
+  public AccountReceive(
+      Long accountReceiveId,
+      Integer numberDocument,
+      Date dateDocument,
+      Date dueDate,
+      Date payDate,
+      String description,
+      BigDecimal amountPaid,
+      BigDecimal diference,
+      String status,
+      BigDecimal valueOfDocument,
+      BigDecimal valueAccountReceivable,
+      Client client,
+      Category category) {
+    this.accountReceiveId = accountReceiveId;
+    this.numberDocument = numberDocument;
+    this.dateDocument = dateDocument;
+    this.dueDate = dueDate;
+    this.payDate = payDate;
+    this.description = description;
+    this.amountPaid = amountPaid;
+    this.diference = diference;
+    this.status = status;
+    this.valueOfDocument = valueOfDocument;
+    this.valueAccountReceivable = valueAccountReceivable;
+    this.client = client;
+    this.category = category;
+  }
+
+  public AccountReceive(
+      Integer numberDocument,
+      Date dateDocument,
+      Date dueDate,
+      Date payDate,
+      String description,
+      BigDecimal amountPaid,
+      BigDecimal diference,
+      String status,
+      BigDecimal valueOfDocument,
+      BigDecimal valueAccountReceivable,
+      Client client,
+      Category category) {
+    this.numberDocument = numberDocument;
+    this.dateDocument = dateDocument;
+    this.dueDate = dueDate;
+    this.payDate = payDate;
+    this.description = description;
+    this.amountPaid = amountPaid;
+    this.diference = diference;
+    this.status = status;
+    this.valueOfDocument = valueOfDocument;
+    this.valueAccountReceivable = valueAccountReceivable;
+    this.client = client;
+    this.category = category;
+  }
 
   public Long getAccountReceiveId() {
     return accountReceiveId;
@@ -157,5 +214,18 @@ public class AccountReceive {
 
   public void setCategory(Category category) {
     this.category = category;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof AccountReceive)) return false;
+    AccountReceive that = (AccountReceive) o;
+    return getAccountReceiveId().equals(that.getAccountReceiveId());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getAccountReceiveId());
   }
 }

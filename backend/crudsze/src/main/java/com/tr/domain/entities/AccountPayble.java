@@ -12,7 +12,7 @@ import lombok.Data;
 public class AccountPayble {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "account_payble_id")
   private Long accountPaybleId;
 
@@ -55,9 +55,9 @@ public class AccountPayble {
       Date dateDocument,
       Date dueDate,
       String description,
+      String status,
       BigDecimal amountPaid,
       BigDecimal diference,
-      String status,
       BigDecimal valueOfDocument,
       BigDecimal valueAccountPay,
       Supplier supplier) {

@@ -30,8 +30,8 @@ public class AccountBankController {
   }
 
   @ResponseStatus(HttpStatus.OK)
-  @PutMapping("/{cityId}")
-  public AccountBank update(
+  @PutMapping("/{accountBankId}")
+  public AccountBank updateAccountBank(
       @PathVariable Long accountBankId, @RequestBody AccountBank accountBank) {
     AccountBank accountBankCurrent = service.findAccounById(accountBankId);
     BeanUtils.copyProperties(accountBank, accountBankCurrent, "accountBankId");
@@ -50,7 +50,7 @@ public class AccountBankController {
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @DeleteMapping("/{cityId}")
+  @DeleteMapping("/{accountBankId}")
   public void deleteAccountBank(@PathVariable Long accountBankId) {
 
     service.deleteAccountBank(accountBankId);

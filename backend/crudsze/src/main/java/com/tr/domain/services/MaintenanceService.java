@@ -1,7 +1,7 @@
 package com.tr.domain.services;
 
 import com.tr.domain.entities.Maintenance;
-import com.tr.domain.entities.Veicle;
+import com.tr.domain.entities.Vehicle;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
@@ -16,18 +16,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MaintenanceService {
 
-  private static final String MSG_MAINTENACE_NOT_FOUND = "There is no Maintenance registration with the code %d";
-  private static final String MSG_MAINTENACE_IN_USE = "Code Maintenance %d cannot be removed as it is in use";
+  private static final String MSG_MAINTENANCE_NOT_FOUND =
+      "There is no Maintenance registration with the code %d";
+  private static final String MSG_MAINTENANCE_IN_USE =
+      "Code Maintenance %d cannot be removed as it is in use";
 
   @Autowired private MaintenanceRepository repository;
-  @Autowired private VeicleService veicleService;
+  @Autowired private VehicleService vehicleService;
 
   @Transactional
   public Maintenance createMaintenance(final Maintenance maintenance) {
-    Long maintenaceId = maintenance.getVeicle().getVeicleId();
-    Veicle veicle = veicleService.findVeicleById(maintenaceId);
+    Long maintenanceId = maintenance.getVehicle().getVehicleId();
+    Vehicle vehicle = vehicleService.findVehicleById(maintenanceId);
 
-    maintenance.setVeicle(veicle);
+    maintenance.setVehicle(vehicle);
     return repository.save(maintenance);
   }
 
@@ -35,33 +37,37 @@ public class MaintenanceService {
   public Maintenance findMaintenanceById(final Long maintenanceId) {
     return repository
         .findById(maintenanceId)
-        .orElseThrow(() -> new EntityNotFoundException(String.format(MSG_MAINTENACE_NOT_FOUND, maintenanceId)));
+        .orElseThrow(
+            () ->
+                new EntityNotFoundException(
+                    String.format(MSG_MAINTENANCE_NOT_FOUND, maintenanceId)));
   }
 
   @Transactional
   public Maintenance updateMaintenance(final Maintenance maintenance) {
     var entity =
         repository
-            .findById(maintenance.getManutencaoId())
+            .findById(maintenance.getMaintenanceId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
-    
-    entity.setKm(entity.getKm());
+
+    entity.setKmInitial(entity.getKmInitial());
+    entity.setKmFinish(entity.getKmFinish());
     entity.setDescription(entity.getDescription());
     entity.setDateInitial(entity.getDateInitial());
     entity.setDateFinish(entity.getDateFinish());
-    entity.setVeicle(entity.getVeicle());
+    entity.setVehicle(entity.getVehicle());
     entity.setTypeMaintenance(entity.getTypeMaintenance());
     return repository.save(maintenance);
   }
-  
+
   public void deleteMaintenance(Long maintenanceId) {
     try {
       repository.deleteById(maintenanceId);
     } catch (EmptyResultDataAccessException e) {
-      throw new EntityNotFoundException(String.format(MSG_MAINTENACE_NOT_FOUND, maintenanceId));
+      throw new EntityNotFoundException(String.format(MSG_MAINTENANCE_NOT_FOUND, maintenanceId));
 
     } catch (DataIntegrityViolationException e) {
-      throw new EntityInUseException(String.format(MSG_MAINTENACE_IN_USE, maintenanceId));
+      throw new EntityInUseException(String.format(MSG_MAINTENANCE_IN_USE, maintenanceId));
     }
   }
 

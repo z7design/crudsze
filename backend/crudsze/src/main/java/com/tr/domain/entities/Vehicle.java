@@ -7,13 +7,13 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "veicles")
-public class Veicle {
+@Table(name = "vehicles")
+public class Vehicle {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "veicle_id")
-  private Long veicleId;
+  @Column(name = "vehicle_id")
+  private Long vehicleId;
 
   @Column(name = "plate")
   private String plate;
@@ -31,10 +31,10 @@ public class Veicle {
   @JoinColumn(nullable = false)
   private Document document;
 
-  public Veicle() {}
+  public Vehicle() {}
 
-  public Veicle(
-      Long veicleId,
+  public Vehicle(
+      Long vehicleId,
       String plate,
       String model,
       String color,
@@ -46,7 +46,7 @@ public class Veicle {
     this.value = value;
   }
 
-  public Veicle(String plate, String model, String color, BigDecimal value, Document document) {
+  public Vehicle(String plate, String model, String color, BigDecimal value, Document document) {
     this.plate = plate;
     this.color = color;
     this.model = model;
@@ -54,12 +54,12 @@ public class Veicle {
     this.document = document;
   }
 
-  public Long getVeicleId() {
-    return veicleId;
+  public Long getVehicleId() {
+    return vehicleId;
   }
 
-  public void setVeicleId(Long veicleId) {
-    this.veicleId = veicleId;
+  public void setVehicleId(Long vehicleId) {
+    this.vehicleId = vehicleId;
   }
 
   public String getPlate() {
@@ -105,13 +105,13 @@ public class Veicle {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Veicle)) return false;
-    Veicle veicle = (Veicle) o;
-    return getVeicleId().equals(veicle.getVeicleId());
+    if (!(o instanceof Vehicle)) return false;
+    Vehicle vehicle = (Vehicle) o;
+    return getVehicleId().equals(vehicle.getVehicleId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getVeicleId());
+    return Objects.hash(getVehicleId());
   }
 }

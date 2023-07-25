@@ -16,6 +16,12 @@ public class Launch {
   @Column(name = "launch_id")
   private Long launchId;
 
+  @Column(name = "value")
+  private BigDecimal value;
+
+  @Column(name = "tax")
+  private BigDecimal tax;
+
   @Column(name = "type_launch")
   @Enumerated(EnumType.STRING)
   // @Convert(converter = TypeLaunch.class)
@@ -26,25 +32,42 @@ public class Launch {
   // @Convert(converter = StatusLaunch.class)
   private StastusLaunch status;
 
-  @Column(name = "value")
-  private BigDecimal value;
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private AccountPayble accountPayble;
 
-  @Column(name = "tax")
-  private BigDecimal tax;
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private AccountReceive accountReceive;
 
   public Launch() {}
 
-  public Launch(Long launchId, TypeLaunch typeLaunch, BigDecimal value, BigDecimal tax) {
+  public Launch(
+      Long launchId,
+      TypeLaunch typeLaunch,
+      BigDecimal value,
+      BigDecimal tax,
+      AccountPayble accountPayble,
+      AccountReceive accountReceive) {
     this.launchId = launchId;
     this.typeLaunch = typeLaunch;
     this.value = value;
     this.tax = tax;
+    this.accountPayble = accountPayble;
+    this.accountReceive = accountReceive;
   }
 
-  public Launch(TypeLaunch typeLaunch, BigDecimal value, BigDecimal tax) {
+  public Launch(
+      TypeLaunch typeLaunch,
+      BigDecimal value,
+      BigDecimal tax,
+      AccountPayble accountPayble,
+      AccountReceive accountReceive) {
     this.typeLaunch = typeLaunch;
     this.value = value;
     this.tax = tax;
+    this.accountPayble = accountPayble;
+    this.accountReceive = accountReceive;
   }
 
   public Long getLaunchId() {
@@ -53,14 +76,6 @@ public class Launch {
 
   public void setLaunchId(Long launchId) {
     this.launchId = launchId;
-  }
-
-  public TypeLaunch getTypeLaunch() {
-    return typeLaunch;
-  }
-
-  public void setTypeLaunch(TypeLaunch typeLaunch) {
-    this.typeLaunch = typeLaunch;
   }
 
   public BigDecimal getValue() {
@@ -77,6 +92,38 @@ public class Launch {
 
   public void setTax(BigDecimal tax) {
     this.tax = tax;
+  }
+
+  public TypeLaunch getTypeLaunch() {
+    return typeLaunch;
+  }
+
+  public void setTypeLaunch(TypeLaunch typeLaunch) {
+    this.typeLaunch = typeLaunch;
+  }
+
+  public StastusLaunch getStatus() {
+    return status;
+  }
+
+  public void setStatus(StastusLaunch status) {
+    this.status = status;
+  }
+
+  public AccountPayble getAccountPayble() {
+    return accountPayble;
+  }
+
+  public void setAccountPayble(AccountPayble accountPayble) {
+    this.accountPayble = accountPayble;
+  }
+
+  public AccountReceive getAccountReceive() {
+    return accountReceive;
+  }
+
+  public void setAccountReceive(AccountReceive accountReceive) {
+    this.accountReceive = accountReceive;
   }
 
   @Override

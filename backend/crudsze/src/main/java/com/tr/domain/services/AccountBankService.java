@@ -6,7 +6,6 @@ import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
 import com.tr.domain.repositories.AccountBankRepository;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 public class AccountBankService {
 
   private static final String MSG_ACCOUNT_BANK_NOT_FOUND =
@@ -23,7 +21,6 @@ public class AccountBankService {
       "Code account %d cannot be removed as it is in use";
 
   @Autowired private AccountBankRepository repository;
-  @Autowired private AddressService addressService;
 
   @Transactional
   public AccountBank createAccountBank(final AccountBank accountBank) {

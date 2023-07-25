@@ -1,11 +1,11 @@
 package com.tr.domain.services;
 
 import com.tr.domain.entities.Document;
-import com.tr.domain.entities.Veicle;
+import com.tr.domain.entities.Vehicle;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
-import com.tr.domain.repositories.VeicleRepository;
+import com.tr.domain.repositories.VehicleRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,38 +16,38 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class VeicleService {
-  private static final String MSG_VEICLE_NOT_FOUND =
+public class VehicleService {
+  private static final String MSG_VEHICLE_NOT_FOUND =
       "There is no veicle registration with the code %d";
-  private static final String MSG_VEICLE_IN_USE =
+  private static final String MSG_VEHICLE_IN_USE =
       "Code veicle %d cannot be removed as it is in use";
 
-  @Autowired private VeicleRepository repository;
+  @Autowired private VehicleRepository repository;
   @Autowired private DocumentService documentService;
 
   @Transactional
-  public Veicle createVeicle(Veicle veicle) {
+  public Vehicle createVehicle(Vehicle vehicle) {
 
-    Long documentId = veicle.getDocument().getDocumentId();
+    Long documentId = vehicle.getDocument().getDocumentId();
     Document document = documentService.findDocumentById(documentId);
 
-    veicle.setDocument(document);
-    return repository.save(veicle);
+    vehicle.setDocument(document);
+    return repository.save(vehicle);
   }
 
   @Transactional
-  public Veicle findVeicleById(final Long veicleId) {
+  public Vehicle findVehicleById(final Long vehicleId) {
     return repository
-        .findById(veicleId)
+        .findById(vehicleId)
         .orElseThrow(
-            () -> new EntityNotFoundException(String.format(MSG_VEICLE_NOT_FOUND, veicleId)));
+            () -> new EntityNotFoundException(String.format(MSG_VEHICLE_NOT_FOUND, vehicleId)));
   }
 
   @Transactional
-  public Veicle update(final Veicle veicle) {
+  public Vehicle update(final Vehicle vehicle) {
     var entity =
         repository
-            .findById(veicle.getVeicleId())
+            .findById(vehicle.getVehicleId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
 
     entity.setPlate(entity.getPlate());
@@ -55,22 +55,22 @@ public class VeicleService {
     entity.setModel(entity.getModel());
     entity.setValue(entity.getValue());
 
-    return repository.save(veicle);
+    return repository.save(vehicle);
   }
 
-  public void deleteVeicle(Long veicleId) {
+  public void deleteVehicle(Long vehicleId) {
     try {
-      repository.deleteById(veicleId);
+      repository.deleteById(vehicleId);
     } catch (EmptyResultDataAccessException e) {
-      throw new EntityNotFoundException(String.format(MSG_VEICLE_NOT_FOUND, veicleId));
+      throw new EntityNotFoundException(String.format(MSG_VEHICLE_NOT_FOUND, vehicleId));
 
     } catch (DataIntegrityViolationException e) {
-      throw new EntityInUseException(String.format(MSG_VEICLE_IN_USE, veicleId));
+      throw new EntityInUseException(String.format(MSG_VEHICLE_IN_USE, vehicleId));
     }
   }
 
   @Transactional
-  public List<Veicle> findAllByVeicle() {
+  public List<Vehicle> findAllByVehicle() {
     return repository.findAll();
   }
 }

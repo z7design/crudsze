@@ -7,7 +7,6 @@ import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.repositories.BankRepository;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 public class BankService {
 
   private static final String MSG_BANK_NOT_FOUND = "There is no bank registration with the code %d";
@@ -36,6 +34,7 @@ public class BankService {
     AccountBank accountBank = accountBankService.findAccounById(accountBankId);
 
     bank.setAddress(address);
+    bank.setAccountBank(accountBank);
     return repository.save(bank);
   }
 

@@ -14,11 +14,24 @@ public class State {
   @Column(name = "state_id")
   public Long stateId;
 
-  @Column(name = "name", updatable = false, nullable = false)
+  @Column(name = "name")
   private String name;
 
-  @Column(name = "uf", updatable = false, nullable = false)
+  @Column(name = "uf")
   private String uf;
+
+  public State() {}
+
+  public State(Long stateId, String name, String uf) {
+    this.stateId = stateId;
+    this.name = name;
+    this.uf = uf;
+  }
+
+  public State(String name, String uf) {
+    this.name = name;
+    this.uf = uf;
+  }
 
   public Long getStateId() {
     return stateId;
@@ -36,12 +49,12 @@ public class State {
     this.name = name;
   }
 
-  public String getSigle() {
+  public String getUf() {
     return uf;
   }
 
-  public void setSigle(String sigle) {
-    this.uf = sigle;
+  public void setUf(String uf) {
+    this.uf = uf;
   }
 
   @Override

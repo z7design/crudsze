@@ -23,6 +23,7 @@ public class StateService {
   @Autowired private StateRepository stateRepository;
 
   public State createState(State state) {
+
     return stateRepository.save(state);
   }
 
@@ -34,7 +35,7 @@ public class StateService {
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
 
     entity.setName(entity.getName());
-    entity.setSigle(entity.getSigle());
+    entity.setUf(entity.getUf());
 
     return stateRepository.save(state);
   }

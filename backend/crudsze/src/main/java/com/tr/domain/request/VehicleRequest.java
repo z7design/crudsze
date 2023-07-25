@@ -8,8 +8,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VeicleRequest {
-  private Long veicleId;
+public class VehicleRequest {
+  private Long vehicleId;
   private String plate;
   private String color;
   private String model;

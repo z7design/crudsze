@@ -24,13 +24,18 @@ public class AccountReceiveService {
 
   @Autowired private AccountReceiveRepository repository;
   @Autowired private ClientService clientService;
+  @Autowired private CategoryService categoryService;
 
   @Transactional
   public AccountReceive createAccountReceive(final AccountReceive accountReceive) {
     Long clientId = accountReceive.getClient().getClientId();
     Client client = clientService.findClientById(clientId);
 
+    Long categoryId = accountReceive.getCategory().getCategoryId();
+    Category category = categoryService.findCategoryById(categoryId);
+
     accountReceive.setClient(client);
+    accountReceive.setCategory(category);
     return repository.save(accountReceive);
   }
 

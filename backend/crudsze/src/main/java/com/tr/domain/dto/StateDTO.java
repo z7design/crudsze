@@ -13,17 +13,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StateDTO {
-    @Column(name = "state_id", updatable = false, nullable = false)
-    public UUID stateId;
+  @Column(name = "state_id", updatable = false, nullable = false)
+  public UUID stateId;
 
-    @Column(name = "name", updatable = false, nullable = false)
-    private String name;
-  
-    @Column(name = "sigle", updatable = false, nullable = false)
-    private String sigle;
-    
-    public StateDTO(State state){
-      this.name = state.getName();
-      this.sigle = state.getSigle();
-    }
+  @Column(name = "name", updatable = false, nullable = false)
+  private String name;
+
+  @Column(name = "uf", updatable = false, nullable = false)
+  private String uf;
+
+  public StateDTO(State state, String uf) {
+    this.name = state.getName();
+    this.uf = state.getUf();
+  }
 }

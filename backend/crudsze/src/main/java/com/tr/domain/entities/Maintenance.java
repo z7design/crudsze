@@ -15,8 +15,11 @@ public class Maintenance {
   @Column(name = "maintenance_id")
   private Long maintenanceId;
 
-  @Column(name = "km")
-  private String km;
+  @Column(name = "km_initial")
+  private String kmInitial;
+
+  @Column(name = "km_finish")
+  private String kmFinish;
 
   @Column(name = "description")
   private String description;
@@ -29,48 +32,73 @@ public class Maintenance {
 
   @Column(name = "type_maintenance")
   @Enumerated(EnumType.STRING)
-  //@Convert(converter = TypeMaintenance.class)
+  // @Convert(converter = TypeMaintenance.class)
   private TypeMaintenance typeMaintenance;
 
   @ManyToOne
   @JoinColumn(nullable = false)
-  private Veicle veicle;
+  private Vehicle vehicle;
 
   public Maintenance() {}
 
-  public Maintenance(Long manutencaoId, String km, String dateInitial, String dateFinish, TypeMaintenance typeMaintenance, Veicle veicle) {
-    this.maintenanceId = manutencaoId;
-    this.km = km;
+  public Maintenance(
+      Long maintenanceId,
+      String kmInitial,
+      String kmFinish,
+      String dateInitial,
+      String dateFinish,
+      String description,
+      TypeMaintenance typeMaintenance,
+      Vehicle vehicle) {
+    this.maintenanceId = maintenanceId;
+    this.kmInitial = kmInitial;
+    this.kmFinish = kmFinish;
     this.description = description;
     this.dateInitial = dateInitial;
     this.dateFinish = dateFinish;
     this.typeMaintenance = typeMaintenance;
-    this.veicle = veicle;
-  }
-  
-    public Maintenance(String km, String dateInitial, String dateFinish, TypeMaintenance typeMaintenance, Veicle veicle) {
-    this.km = km;
-    this.description = description;
-    this.dateInitial = dateInitial;
-    this.dateFinish = dateFinish;
-    this.typeMaintenance = typeMaintenance;
-    this.veicle = veicle;
+    this.vehicle = vehicle;
   }
 
-  public Long getManutencaoId() {
+  public Maintenance(
+      String kmInitial,
+      String kmFinish,
+      String dateInitial,
+      String dateFinish,
+      String description,
+      TypeMaintenance typeMaintenance,
+      Vehicle vehicle) {
+    this.kmInitial = kmInitial;
+    this.kmFinish = kmFinish;
+    this.description = description;
+    this.dateInitial = dateInitial;
+    this.dateFinish = dateFinish;
+    this.typeMaintenance = typeMaintenance;
+    this.vehicle = vehicle;
+  }
+
+  public Long getMaintenanceId() {
     return maintenanceId;
   }
 
-  public void setManutencaoId(Long manutencaoId) {
-    this.maintenanceId = manutencaoId;
+  public void setMaintenanceId(Long maintenanceId) {
+    this.maintenanceId = maintenanceId;
   }
 
-  public String getKm() {
-    return km;
+  public String getKmInitial() {
+    return kmInitial;
   }
 
-  public void setKm(String km) {
-    this.km = km;
+  public void setKmInitial(String kmInitial) {
+    this.kmInitial = kmInitial;
+  }
+
+  public String getKmFinish() {
+    return kmFinish;
+  }
+
+  public void setKmFinish(String kmFinish) {
+    this.kmFinish = kmFinish;
   }
 
   public String getDescription() {
@@ -105,26 +133,24 @@ public class Maintenance {
     this.typeMaintenance = typeMaintenance;
   }
 
-  public Veicle getVeicle() {
-    return veicle;
+  public Vehicle getVehicle() {
+    return vehicle;
   }
 
-  public void setVeicle(Veicle veicle) {
-    this.veicle = veicle;
+  public void setVehicle(Vehicle vehicle) {
+    this.vehicle = vehicle;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof Maintenance))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof Maintenance)) return false;
     Maintenance that = (Maintenance) o;
-    return getManutencaoId().equals(that.getManutencaoId());
+    return getMaintenanceId().equals(that.getMaintenanceId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getManutencaoId());
+    return Objects.hash(getMaintenanceId());
   }
 }

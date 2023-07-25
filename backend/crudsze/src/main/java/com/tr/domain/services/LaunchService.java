@@ -1,5 +1,7 @@
 package com.tr.domain.services;
 
+import com.tr.domain.entities.AccountPayble;
+import com.tr.domain.entities.AccountReceive;
 import com.tr.domain.entities.Launch;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
@@ -16,14 +18,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class LaunchService {
-  private static final String MSG_LAUNCH_NOT_FOUND = "There is no launch registration with the code %d";
-  private static final String MSG_LAUNCH_IN_USE = "Code launch %d cannot be removed as it is in use";
+  private static final String MSG_LAUNCH_NOT_FOUND =
+      "There is no launch registration with the code %d";
+  private static final String MSG_LAUNCH_IN_USE =
+      "Code launch %d cannot be removed as it is in use";
 
   @Autowired private LaunchRepository repository;
+
   @Autowired private AccountBankService accountService;
+
+  @Autowired private AccountPaybleService accountPaybleService;
+
+  @Autowired private AccountReceiveService accountReceiveService;
 
   @Transactional
   public Launch createLaunch(final Launch launch) {
+    Long accountPaybletId = launch.getAccountPayble().getAccountPaybleId();
+    AccountPayble accountPayble = accountPaybleService.findAccounPaybleById(accountPaybletId);
+
+    Long accountReceiveId = launch.getAccountReceive().getAccountReceiveId();
+    AccountReceive accountReceive = accountReceiveService.findAccounReceiveById(accountReceiveId);
+
+    launch.setAccountPayble(accountPayble);
+    launch.setAccountReceive(accountReceive);
+
     return repository.save(launch);
   }
 
@@ -41,14 +59,14 @@ public class LaunchService {
         repository
             .findById(launch.getLaunchId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
-    
+
     entity.setTypeLaunch(entity.getTypeLaunch());
     entity.setTax(entity.getTax());
     entity.setValue(entity.getValue());
 
     return repository.save(launch);
   }
-  
+
   public void deleteLaunch(Long launchId) {
     try {
       repository.deleteById(launchId);

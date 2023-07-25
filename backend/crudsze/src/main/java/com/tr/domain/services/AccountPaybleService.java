@@ -24,7 +24,9 @@ public class AccountPaybleService {
 
   @Autowired private AccountPaybleRepository repository;
 
-  private SupplierService supplierService;
+  @Autowired private SupplierService supplierService;
+
+  @Autowired private CategoryService categoryService;
 
   @Transactional
   public AccountPayble createAccountPayble(final AccountPayble accountPayble) {
@@ -39,7 +41,10 @@ public class AccountPaybleService {
   public AccountPayble findAccounPaybleById(final Long accountPaybleId) {
     return repository
         .findById(accountPaybleId)
-        .orElseThrow(() -> new EntityNotFoundException(String.format(MSG_ACCOUNT_PAYBLE_NOT_FOUND, accountPaybleId)));
+        .orElseThrow(
+            () ->
+                new EntityNotFoundException(
+                    String.format(MSG_ACCOUNT_PAYBLE_NOT_FOUND, accountPaybleId)));
   }
 
   @Transactional
