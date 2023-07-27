@@ -22,7 +22,7 @@ public class StateService {
 
   @Autowired private StateRepository stateRepository;
 
-  public State createState(State state) {
+  public State createState(final State state) {
 
     return stateRepository.save(state);
   }

@@ -41,4 +41,11 @@ public class StateController {
 
     service.deleteState(stateId);
   }
+
+  @ResponseStatus(HttpStatus.OK)
+  @GetMapping("/{stateId}")
+  public State findByIdStates(@PathVariable Long stateId) {
+
+    return service.findStateById(stateId);
+  }
 }

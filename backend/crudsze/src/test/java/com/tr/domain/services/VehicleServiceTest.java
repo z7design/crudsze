@@ -25,6 +25,7 @@ public class VehicleServiceTest {
   @Mock private DocumentService documentService;
 
   private Long vehicleId = 1L;
+
   private Vehicle vehicle;
   private Document document;
   private BigDecimal value = BigDecimal.valueOf(150.000);
@@ -37,13 +38,14 @@ public class VehicleServiceTest {
   @Test
   public void shouldVeicleWhenThenSalveVeicles() {
     vehicle = new Vehicle(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
+
     when(repository.save(any(Vehicle.class))).thenReturn(vehicle);
     var savedVeic = service.createVehicle(vehicle);
     assertEquals(vehicle, savedVeic);
   }
 
   @Test
-  void shouldFindAllByCategories() {
+  void shouldFindAllByVehicles() {
     vehicle = new Vehicle(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
     Vehicle vehicle1 = new Vehicle(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
 
@@ -54,7 +56,7 @@ public class VehicleServiceTest {
   }
 
   @Test
-  void shouldFindAllThenReturnEmptyCategories() {
+  void shouldFindAllThenReturnEmptyVehicles() {
     when(repository.findAll()).thenReturn(Collections.emptyList());
     List<Vehicle> listVehicle = repository.findAll();
     assertTrue(listVehicle.isEmpty());

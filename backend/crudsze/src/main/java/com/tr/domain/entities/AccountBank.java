@@ -1,5 +1,6 @@
 package com.tr.domain.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
@@ -7,7 +8,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "account_bank")
-public class AccountBank {
+public class AccountBank implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "account_bank_id")

@@ -1,5 +1,6 @@
 package com.tr.domain.entities;
 
+import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -121,5 +122,18 @@ public class Bank {
 
   public void setAccountBank(AccountBank accountBank) {
     this.accountBank = accountBank;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Bank)) return false;
+    Bank bank = (Bank) o;
+    return getBanckId().equals(bank.getBanckId());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getBanckId());
   }
 }

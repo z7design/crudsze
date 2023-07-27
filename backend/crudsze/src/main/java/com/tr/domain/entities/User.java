@@ -1,44 +1,41 @@
 package com.tr.domain.entities;
 
-import java.util.UUID;
 import javax.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
 @Table(name = "users")
 public class User {
   @Id
-  @GenericGenerator(name = "UUIDGenerator", strategy = "uuid2")
-  @GeneratedValue(generator = "UUIDGenerator")
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "user_id")
-  private UUID userId;
-  
+  private Long userId;
+
   @Column(name = "name")
   private String name;
-  
+
   @Column(name = "email")
   private String email;
-  
-  public User(){}
-  
-  public User(String name, String email){
+
+  public User(int userId, String name, String email) {}
+
+  public User(String name, String email) {
     this.name = name;
     this.email = email;
   }
 
-  public User(UUID userId, String name, String email){
+  public User(Long userId, String name, String email) {
     this.userId = userId;
     this.name = name;
     this.email = email;
   }
 
-  public UUID getUserId() {
+  public Long getUserId() {
     return userId;
   }
 
-  public void setUserId(UUID userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
@@ -56,5 +53,19 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  @Override
+  public String toString() {
+    return "User{"
+        + "userId="
+        + userId
+        + ", name='"
+        + name
+        + '\''
+        + ", email='"
+        + email
+        + '\''
+        + '}';
   }
 }

@@ -1,6 +1,6 @@
 package com.tr.domain.services;
 
-import com.tr.domain.entities.*;
+import com.tr.domain.entities.AccountBank;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
