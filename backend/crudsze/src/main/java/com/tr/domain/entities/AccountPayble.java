@@ -47,6 +47,10 @@ public class AccountPayble {
   @JoinColumn(nullable = false)
   private Supplier supplier;
 
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private Installment installment;
+
   public AccountPayble() {}
 
   public AccountPayble(
@@ -60,7 +64,8 @@ public class AccountPayble {
       BigDecimal diference,
       BigDecimal valueOfDocument,
       BigDecimal valueAccountPay,
-      Supplier supplier) {
+      Supplier supplier,
+      Installment installment) {
     this.accountPaybleId = accountPaybleId;
     this.numberDocument = numberDocument;
     this.dateDocument = dateDocument;
@@ -72,6 +77,7 @@ public class AccountPayble {
     this.valueOfDocument = valueOfDocument;
     this.valueAccountPay = valueAccountPay;
     this.supplier = supplier;
+    this.installment = installment;
   }
 
   public AccountPayble(
@@ -84,7 +90,8 @@ public class AccountPayble {
       String status,
       BigDecimal valueOfDocument,
       BigDecimal valueAccountPay,
-      Supplier supplier) {
+      Supplier supplier,
+      Installment installment) {
     this.numberDocument = numberDocument;
     this.dateDocument = dateDocument;
     this.dueDate = dueDate;
@@ -95,6 +102,7 @@ public class AccountPayble {
     this.valueOfDocument = valueOfDocument;
     this.valueAccountPay = valueAccountPay;
     this.supplier = supplier;
+    this.installment = installment;
   }
 
   public Long getAccountPaybleId() {
@@ -183,6 +191,14 @@ public class AccountPayble {
 
   public void setSupplier(Supplier supplier) {
     this.supplier = supplier;
+  }
+
+  public Installment getInstallment() {
+    return installment;
+  }
+
+  public void setInstallment(Installment installment) {
+    this.installment = installment;
   }
 
   @Override

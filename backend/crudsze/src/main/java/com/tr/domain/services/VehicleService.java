@@ -1,5 +1,6 @@
 package com.tr.domain.services;
 
+import com.tr.domain.entities.Document;
 import com.tr.domain.entities.Vehicle;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
@@ -23,9 +24,14 @@ public class VehicleService {
 
   @Autowired private VehicleRepository repository;
   @Autowired private DocumentService documentService;
+  @Autowired private MaintenanceService maintenanceService;
 
   @Transactional
   public Vehicle createVehicle(Vehicle vehicle) {
+    Long documentId = vehicle.getDocument().getDocumentId();
+    Document document = documentService.findDocumentById(documentId);
+
+    vehicle.setDocument(document);
     return repository.save(vehicle);
   }
 

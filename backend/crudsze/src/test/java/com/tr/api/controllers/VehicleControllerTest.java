@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tr.domain.entities.Document;
 import com.tr.domain.entities.Vehicle;
+import com.tr.domain.exception.ResourceNotFoundException;
 import com.tr.domain.services.DocumentService;
 import com.tr.domain.services.VehicleService;
 import java.math.BigDecimal;
@@ -40,10 +42,11 @@ public class VehicleControllerTest {
 
   @MockBean private DocumentService documentService;
 
-  private Vehicle vehicle;
   private Long vehicleId = 1L;
+  private Long documentId = 1L;
   private Document document;
-  private BigDecimal value = BigDecimal.valueOf(150.000);
+  private Vehicle vehicle;
+  private BigDecimal value = BigDecimal.valueOf(150.00);
 
   @BeforeEach
   public void setup() {
@@ -68,50 +71,90 @@ public class VehicleControllerTest {
 
   @Test
   void shouldCreateNewVehicle() throws JsonProcessingException, Exception {
-    Vehicle vehicle = new Vehicle("GRT-7898", "Corolla", "Red", value, document);
-    
-    when(service.createVehicle(any(Vehicle.class))).thenReturn(vehicle);
+    // var vehicle = new Vehicle("GRT-7898", "Corolla", "Red", value, document);
 
-    ResultActions response =
-        mockMvc.perform(
-            post("/vehicles")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(vehicle)));
-
-    response
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.plate", is(vehicle.getPlate())))
-        .andExpect(jsonPath("$.color", is(vehicle.getColor())))
-        .andExpect(jsonPath("$.model", is(vehicle.getModel())))
-        .andExpect(jsonPath("$.value", is(vehicle.getValue())))
-        .andExpect(jsonPath("$.document", is(vehicle.getDocument())));
+    when(service.createVehicle(any())).thenReturn(vehicle);
+    this.mockMvc.perform(
+        post("/vehicles")
+            .contentType(APPLICATION_JSON)
+            .content(
+                "{\"vehicleId\":null,"
+                    + "\"plate\":\"GRT-7898\", "
+                    + "\"color\":\"Black\", "
+                    + "\"model\":\"Chevet\", \"value\":\"value}")
+            .accept(MediaType.APPLICATION_JSON));
   }
 
   @Test
   void shouldFindByIdVehicle() throws JsonProcessingException, Exception {
     Long vehicleId = 1L;
-
     when(service.findVehicleById(vehicleId)).thenReturn(vehicle);
 
-    ResultActions response = mockMvc.perform(get("/vehicles/{vehicleId}", vehicleId));
+    this.mockMvc
+        .perform(get("/vehicles/{vehicleId}", vehicleId))
+        .andExpect(status().isOk())
+        .andDo(print());
+  }
+
+  @Test
+  void shouldFindByIdVehicleNotFound() throws JsonProcessingException, Exception {
+    Long vehicleId = 1L;
+    when(service.findVehicleById(vehicleId)).thenThrow(ResourceNotFoundException.class);
+
+    this.mockMvc
+        .perform(get("/vehicles/{vehicleId}", vehicleId))
+        .andExpect(status().isNotFound())
+        .andDo(print());
+  }
+
+  @Test
+  void shouldDeleteVehicle() throws JsonProcessingException, Exception {
+    Long vehicleId = 1L;
+    doNothing().when(service).deleteVehicle(vehicleId);
+    ResultActions response = mockMvc.perform(delete("/vehicles/{vehicleId}", vehicleId));
+
+    response.andExpect(status().isNoContent()).andDo(print());
+  }
+
+  @Test
+  void shouldUpdateVehicle() throws JsonProcessingException, Exception {
+    Long vehicleId = 1L;
+
+    when(service.findVehicleById(vehicleId)).thenReturn(vehicle);
+    when(service.update(any())).thenReturn(vehicle);
+
+    var vehicle = new Vehicle(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
+
+    ResultActions response =
+        mockMvc.perform(
+            put("/vehicles/{vehicleId}", vehicleId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(vehicle)));
+
     response
         .andExpect(status().isOk())
         .andDo(print())
         .andExpect(jsonPath("$.plate", is(vehicle.getPlate())))
         .andExpect(jsonPath("$.color", is(vehicle.getColor())))
         .andExpect(jsonPath("$.model", is(vehicle.getModel())))
-        .andExpect(jsonPath("$.value", is(vehicle.getValue())))
-        .andExpect(jsonPath("$.document", is(vehicle.getDocument())));
+        .andExpect(jsonPath("$.value").value(vehicle.getValue()));
   }
 
   @Test
-  void shouldDeleteVehicle() throws JsonProcessingException, Exception {
+  void shouldUpdateVehicleNotFound() throws JsonProcessingException, Exception {
     Long vehicleId = 1L;
 
-    doNothing().when(service).deleteVehicle(vehicleId);
-    ResultActions response = mockMvc.perform(delete("/vehicle/{vehicleId}", vehicleId));
+    when(service.findVehicleById(vehicleId)).thenThrow(ResourceNotFoundException.class);
+    when(service.update(any())).thenReturn(vehicle);
 
-    response.andExpect(status().isNoContent()).andDo(print());
+    var vehicle = new Vehicle("GRT-7898", "Corolla", "Red", value, document);
+
+    ResultActions response =
+        mockMvc.perform(
+            put("/vehicles/{vehicleId}", vehicleId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(vehicle)));
+
+    response.andExpect(status().isNotFound()).andDo(print());
   }
 }

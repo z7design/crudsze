@@ -24,15 +24,15 @@ public class Installment {
   @Column(name = "discont")
   private BigDecimal discont;
 
-  @Column(name = "interest")
-  private BigDecimal interest;
-
   @Column(name = "additions")
   private BigDecimal additions;
 
   @Column(name = "fines")
   private BigDecimal fines;
- 
+
+  @ManyToOne
+  @JoinColumn(nullable = true)
+  private Launch launch;
 
   public Installment() {}
 
@@ -41,7 +41,6 @@ public class Installment {
       Date datePayment,
       BigDecimal valuePay,
       BigDecimal discont,
-      BigDecimal interest,
       BigDecimal additions,
       BigDecimal fines,
       Launch launch) {
@@ -49,7 +48,6 @@ public class Installment {
     this.datePayment = datePayment;
     this.valuePay = valuePay;
     this.discont = discont;
-    this.interest = interest;
     this.additions = additions;
     this.fines = fines;
   }
@@ -58,14 +56,12 @@ public class Installment {
       Date datePayment,
       BigDecimal valuePay,
       BigDecimal discont,
-      BigDecimal interest,
       BigDecimal additions,
       BigDecimal fines,
       Launch launch) {
     this.datePayment = datePayment;
     this.valuePay = valuePay;
     this.discont = discont;
-    this.interest = interest;
     this.additions = additions;
     this.fines = fines;
   }
@@ -102,14 +98,6 @@ public class Installment {
     this.discont = discont;
   }
 
-  public BigDecimal getInterest() {
-    return interest;
-  }
-
-  public void setInterest(BigDecimal interest) {
-    this.interest = interest;
-  }
-
   public BigDecimal getAdditions() {
     return additions;
   }
@@ -125,7 +113,7 @@ public class Installment {
   public void setFines(BigDecimal fines) {
     this.fines = fines;
   }
-
+  
 
   @Override
   public boolean equals(Object o) {

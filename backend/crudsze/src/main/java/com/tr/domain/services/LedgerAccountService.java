@@ -17,12 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class LedgerAccountService {
 
-  private static final String MSG_LEAGER_ACCOUNT_NOT_FOUND = "There is no Ledger Account registration with the code %d";
-  private static final String MSG_LEAGER_ACCOUNT_IN_USE = "Code Ledger Account %d cannot be removed as it is in use";
+  private static final String MSG_LEAGER_ACCOUNT_NOT_FOUND =
+      "There is no Ledger Account registration with the code %d";
+  private static final String MSG_LEAGER_ACCOUNT_IN_USE =
+      "Code Ledger Account %d cannot be removed as it is in use";
 
-  @Autowired
-  private LedgerAccountRepository repository;
-   public LedgerAccount createLedgerAccount(LedgerAccount ledgerAccount) {
+  @Autowired private LedgerAccountRepository repository;
+
+  public LedgerAccount createLedgerAccount(LedgerAccount ledgerAccount) {
     return repository.save(ledgerAccount);
   }
 
@@ -37,16 +39,19 @@ public class LedgerAccountService {
   }
 
   @Transactional
-  public LedgerAccount update(final LedgerAccount ledgerAccount) {
+  public LedgerAccount updateLedgerAccount(final LedgerAccount ledgerAccount) {
     var entity =
         repository
             .findById(ledgerAccount.getLedgerAccountId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
 
+    entity.setName(entity.getName());
+    entity.setDescription(entity.getDescription());
+    entity.setCode(entity.getCode());
 
     return repository.save(ledgerAccount);
   }
-  
+
   public void deleteLedgerAccount(Long ledgerAccountId) {
     try {
       repository.deleteById(ledgerAccountId);

@@ -29,11 +29,11 @@ public class SupplierController {
     return service.findSupplierById(supplierId);
   }
 
-  @ResponseStatus(HttpStatus.OK)
   @PutMapping("/{supplierId}")
+  @ResponseStatus(HttpStatus.OK)
   public Supplier updateSupplier(@PathVariable Long supplierId, @RequestBody Supplier supplier) {
     Supplier supplierCurrent = service.findSupplierById(supplierId);
-    BeanUtils.copyProperties(supplierCurrent, supplierCurrent, "supplierId");
+    BeanUtils.copyProperties(supplier, supplierCurrent, "supplierId");
     return service.updateSupplier(supplierCurrent);
   }
 

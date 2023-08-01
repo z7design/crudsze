@@ -1,9 +1,10 @@
 package com.tr.domain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
@@ -16,9 +17,6 @@ public class Supplier {
 
   @Column(name = "name")
   private String name;
-
-  @Column(name = "date_registration")
-  private Date dateRegistration;
 
   @Column(name = "corparete_name")
   private String corpareteName;
@@ -45,7 +43,12 @@ public class Supplier {
   private String celphone;
 
   @Column(name = "date_of_lastPurchase")
-  private Date dateOfLastPurchase;
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
+  private LocalDate dateOfLastPurchase;
+
+  @Column(name = "date_registration")
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
+  private LocalDate dateRegistration;
 
   @ManyToOne
   @JoinColumn(nullable = false)
@@ -55,54 +58,57 @@ public class Supplier {
 
   public Supplier(
       Long supplierId,
-      Date dateRegistration,
-      Date dateOfLastPurchase,
+      String name,
       String cnpj,
       String corpareteName,
       String fantasyName,
       String responsable,
       String email,
-      String municipalRegistration,
       String phone,
       String celphone,
+      String municipalRegistration,
+      LocalDate dateRegistration,
+      LocalDate dateOfLastPurchase,
       Address address) {
-       this.supplierId = supplierId;
-       this.dateRegistration = dateRegistration;
-       this.dateOfLastPurchase = dateOfLastPurchase;
-       this.cnpj = cnpj;
-       this.corpareteName = corpareteName;
-       this.fantasyName = fantasyName;
-       this.responsable = responsable;
-       this.email = email;
-       this.municipalRegistration = municipalRegistration;
-       this.phone = phone;
-       this.celphone = celphone;
-       this.address = address;
+    this.name = name;
+    this.cnpj = cnpj;
+    this.email = email;
+    this.phone = phone;
+    this.celphone = celphone;
+    this.address = address;
+    this.corpareteName = corpareteName;
+    this.fantasyName = fantasyName;
+    this.responsable = responsable;
+    this.dateRegistration = dateRegistration;
+    this.dateOfLastPurchase = dateOfLastPurchase;
+    this.municipalRegistration = municipalRegistration;
   }
-  
-    public Supplier(
-      Date dateRegistration,
-      Date dateOfLastPurchase,
+
+  public Supplier(
+      String name,
       String cnpj,
       String corpareteName,
       String fantasyName,
       String responsable,
       String email,
-      String municipalRegistration,
       String phone,
       String celphone,
+      String municipalRegistration,
+      LocalDate dateRegistration,
+      LocalDate dateOfLastPurchase,
       Address address) {
-       this.dateRegistration = dateRegistration;
-       this.dateOfLastPurchase = dateOfLastPurchase;
-       this.cnpj = cnpj;
-       this.corpareteName = corpareteName;
-       this.fantasyName = fantasyName;
-       this.responsable = responsable;
-       this.email = email;
-       this.municipalRegistration = municipalRegistration;
-       this.phone = phone;
-       this.celphone = celphone;
-       this.address = address;
+    this.name = name;
+    this.cnpj = cnpj;
+    this.email = email;
+    this.phone = phone;
+    this.celphone = celphone;
+    this.address = address;
+    this.corpareteName = corpareteName;
+    this.fantasyName = fantasyName;
+    this.responsable = responsable;
+    this.dateRegistration = dateRegistration;
+    this.dateOfLastPurchase = dateOfLastPurchase;
+    this.municipalRegistration = municipalRegistration;
   }
 
   public Long getSupplierId() {
@@ -119,14 +125,6 @@ public class Supplier {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public Date getDateRegistration() {
-    return dateRegistration;
-  }
-
-  public void setDateRegistration(Date dateRegistration) {
-    this.dateRegistration = dateRegistration;
   }
 
   public String getCorpareteName() {
@@ -193,12 +191,20 @@ public class Supplier {
     this.celphone = celphone;
   }
 
-  public Date getDateOfLastPurchase() {
+  public LocalDate getDateOfLastPurchase() {
     return dateOfLastPurchase;
   }
 
-  public void setDateOfLastPurchase(Date dateOfLastPurchase) {
+  public void setDateOfLastPurchase(LocalDate dateOfLastPurchase) {
     this.dateOfLastPurchase = dateOfLastPurchase;
+  }
+
+  public LocalDate getDateRegistration() {
+    return dateRegistration;
+  }
+
+  public void setDateRegistration(LocalDate dateRegistration) {
+    this.dateRegistration = dateRegistration;
   }
 
   public Address getAddress() {
@@ -211,10 +217,8 @@ public class Supplier {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof Supplier))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof Supplier)) return false;
     Supplier supplier = (Supplier) o;
     return getSupplierId().equals(supplier.getSupplierId());
   }

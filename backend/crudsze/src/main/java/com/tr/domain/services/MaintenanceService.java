@@ -26,8 +26,8 @@ public class MaintenanceService {
 
   @Transactional
   public Maintenance createMaintenance(final Maintenance maintenance) {
-    Long maintenanceId = maintenance.getVehicle().getVehicleId();
-    Vehicle vehicle = vehicleService.findVehicleById(maintenanceId);
+    Long vehicleId = maintenance.getVehicle().getVehicleId();
+    Vehicle vehicle = vehicleService.findVehicleById(vehicleId);
 
     maintenance.setVehicle(vehicle);
     return repository.save(maintenance);
@@ -41,6 +41,10 @@ public class MaintenanceService {
             () ->
                 new EntityNotFoundException(
                     String.format(MSG_MAINTENANCE_NOT_FOUND, maintenanceId)));
+  }
+
+  public List<Maintenance> findAllByMaintenance() {
+    return repository.findAll();
   }
 
   @Transactional
@@ -69,9 +73,5 @@ public class MaintenanceService {
     } catch (DataIntegrityViolationException e) {
       throw new EntityInUseException(String.format(MSG_MAINTENANCE_IN_USE, maintenanceId));
     }
-  }
-
-  public List<Maintenance> findAllByMaintenance() {
-    return repository.findAll();
   }
 }

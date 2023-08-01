@@ -39,6 +39,14 @@ public class Driver {
   @JoinColumn(nullable = false)
   private Address address;
 
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private Document document;
+
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private Departament departament;
+
   public Driver() {}
 
   public Driver(
@@ -50,7 +58,9 @@ public class Driver {
       String phone,
       String celphone,
       String email,
-      Address address) {
+      Address address,
+      Document document,
+      Departament departament) {
     this.driverId = driverId;
     this.name = name;
     this.dateBirthday = dateBirthday;
@@ -60,6 +70,8 @@ public class Driver {
     this.celphone = celphone;
     this.email = email;
     this.address = address;
+    this.document = document;
+    this.departament = departament;
   }
 
   public Driver(
@@ -70,7 +82,9 @@ public class Driver {
       String phone,
       String celphone,
       String email,
-      Address address) {
+      Address address,
+      Document document,
+      Departament departament) {
     this.name = name;
     this.dateBirthday = dateBirthday;
     this.generalRegister = generalRegister;
@@ -79,6 +93,8 @@ public class Driver {
     this.celphone = celphone;
     this.email = email;
     this.address = address;
+    this.document = document;
+    this.departament = departament;
   }
 
   public Long getDriverId() {
@@ -155,6 +171,22 @@ public class Driver {
 
   public void setAddress(Address address) {
     this.address = address;
+  }
+
+  public Document getDocument() {
+    return document;
+  }
+
+  public void setDocument(Document document) {
+    this.document = document;
+  }
+
+  public Departament getDepartament() {
+    return departament;
+  }
+
+  public void setDepartament(Departament departament) {
+    this.departament = departament;
   }
 
   @Override

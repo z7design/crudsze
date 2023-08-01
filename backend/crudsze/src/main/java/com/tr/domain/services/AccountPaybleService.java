@@ -28,12 +28,18 @@ public class AccountPaybleService {
 
   @Autowired private CategoryService categoryService;
 
+  @Autowired private InstallmentService installmentService;
+
   @Transactional
   public AccountPayble createAccountPayble(final AccountPayble accountPayble) {
     Long supplierId = accountPayble.getSupplier().getSupplierId();
     Supplier supplier = supplierService.findSupplierById(supplierId);
 
+    Long installmentId = accountPayble.getInstallment().getInstallmentId();
+    Installment installment = installmentService.findInstallmentById(installmentId);
+
     accountPayble.setSupplier(supplier);
+    accountPayble.setInstallment(installment);
     return repository.save(accountPayble);
   }
 

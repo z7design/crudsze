@@ -54,6 +54,10 @@ public class AccountReceive {
   @JoinColumn(nullable = false)
   private Category category;
 
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private Installment installment;
+
   public AccountReceive() {}
 
   public AccountReceive(
@@ -69,7 +73,8 @@ public class AccountReceive {
       BigDecimal valueOfDocument,
       BigDecimal valueAccountReceivable,
       Client client,
-      Category category) {
+      Category category,
+      Installment installment) {
     this.accountReceiveId = accountReceiveId;
     this.numberDocument = numberDocument;
     this.dateDocument = dateDocument;
@@ -83,6 +88,7 @@ public class AccountReceive {
     this.valueAccountReceivable = valueAccountReceivable;
     this.client = client;
     this.category = category;
+    this.installment = installment;
   }
 
   public AccountReceive(
@@ -97,7 +103,8 @@ public class AccountReceive {
       BigDecimal valueOfDocument,
       BigDecimal valueAccountReceivable,
       Client client,
-      Category category) {
+      Category category,
+      Installment installment) {
     this.numberDocument = numberDocument;
     this.dateDocument = dateDocument;
     this.dueDate = dueDate;
@@ -110,6 +117,7 @@ public class AccountReceive {
     this.valueAccountReceivable = valueAccountReceivable;
     this.client = client;
     this.category = category;
+    this.installment = installment;
   }
 
   public Long getAccountReceiveId() {
@@ -214,6 +222,14 @@ public class AccountReceive {
 
   public void setCategory(Category category) {
     this.category = category;
+  }
+
+  public Installment getInstallment() {
+    return installment;
+  }
+
+  public void setInstallment(Installment installment) {
+    this.installment = installment;
   }
 
   @Override

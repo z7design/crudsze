@@ -44,6 +44,7 @@ public class Vehicle {
     this.color = color;
     this.model = model;
     this.value = value;
+    this.document = document;
   }
 
   public Vehicle(String plate, String model, String color, BigDecimal value, Document document) {

@@ -32,7 +32,7 @@ public class LedgerAccountController {
   public LedgerAccount update(@PathVariable Long ledgerAccountId, @RequestBody LedgerAccount ledgerAccount) {
     LedgerAccount ledgerAccountCurrent = service.findByLedgerAcountById(ledgerAccountId);
     BeanUtils.copyProperties(ledgerAccount, ledgerAccountCurrent, "ledgerAccountId");
-    return service.update(ledgerAccountCurrent);
+    return service.updateLedgerAccount(ledgerAccountCurrent);
   }
 
   @PostMapping

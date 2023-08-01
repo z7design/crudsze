@@ -36,7 +36,7 @@ public class Maintenance {
   private TypeMaintenance typeMaintenance;
 
   @ManyToOne
-  @JoinColumn(nullable = false)
+  @JoinColumn(nullable = true)
   private Vehicle vehicle;
 
   public Maintenance() {}
@@ -66,8 +66,7 @@ public class Maintenance {
       String dateInitial,
       String dateFinish,
       String description,
-      TypeMaintenance typeMaintenance,
-      Vehicle vehicle) {
+      TypeMaintenance typeMaintenance) {
     this.kmInitial = kmInitial;
     this.kmFinish = kmFinish;
     this.description = description;

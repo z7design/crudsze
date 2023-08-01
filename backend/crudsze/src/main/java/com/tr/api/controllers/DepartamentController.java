@@ -14,27 +14,37 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/departament")
 public class DepartamentController {
   @Autowired private DepartamentService service;
+
   @GetMapping
   public List<Departament> findAll() {
-    
+
     return service.findAllByDepartament();
   }
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Departament createDepartament(@RequestBody Departament departament) {
     return service.createDepartament(departament);
   }
+
   @ResponseStatus(HttpStatus.OK)
-  @PutMapping("/{departmentId}")
-  public Departament updateState(@PathVariable Long departamentId, @RequestBody Departament departament) {
-    Departament DepartamentCurrent = service.findDepartamentById(departamentId);
-    BeanUtils.copyProperties(departament, DepartamentCurrent, "departamentId");
-    return service.createDepartament(DepartamentCurrent);
+  @GetMapping("/{departamentId}")
+  public Departament getDepartamentById(@PathVariable Long departamentId) {
+    return service.findDepartamentById(departamentId);
   }
+
+  @ResponseStatus(HttpStatus.OK)
+  @PutMapping("/{departamentId}")
+  public Departament updateState(
+      @PathVariable Long departamentId, @RequestBody Departament departament) {
+    Departament departamentCurrent = service.findDepartamentById(departamentId);
+    BeanUtils.copyProperties(departament, departamentCurrent, "departamentId");
+    return service.updateDepartament(departamentCurrent);
+  }
+
   @DeleteMapping("/{departamentId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteDepartament(@PathVariable Long departamentId) {
-
     service.deleteDepartament(departamentId);
   }
 }

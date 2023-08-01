@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/costcenter")
+@RequestMapping("/cost-center")
 public class CostCenterController {
-  
+
   @Autowired
   private CostCenterService service;
 

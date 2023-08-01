@@ -25,6 +25,7 @@ public class AccountReceiveService {
   @Autowired private AccountReceiveRepository repository;
   @Autowired private ClientService clientService;
   @Autowired private CategoryService categoryService;
+  @Autowired private InstallmentService installmentService;
 
   @Transactional
   public AccountReceive createAccountReceive(final AccountReceive accountReceive) {
@@ -34,8 +35,12 @@ public class AccountReceiveService {
     Long categoryId = accountReceive.getCategory().getCategoryId();
     Category category = categoryService.findCategoryById(categoryId);
 
+    Long installmentId = accountReceive.getInstallment().getInstallmentId();
+    Installment installment = installmentService.findInstallmentById(installmentId);
+
     accountReceive.setClient(client);
     accountReceive.setCategory(category);
+    accountReceive.setInstallment(installment);
     return repository.save(accountReceive);
   }
 

@@ -1,14 +1,12 @@
 package com.tr.api.controllers;
 
 import com.tr.domain.entities.Driver;
-import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.services.DriverService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,14 +36,9 @@ public class DriverController {
   }
 
   @PostMapping
-  public ResponseEntity<Driver> createDriver(@RequestBody Driver driver) {
-    try {
-      driver = service.createDriver(driver);
-      return ResponseEntity.status(HttpStatus.CREATED).body(driver);
-
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.badRequest().build();
-    }
+  @ResponseStatus(HttpStatus.CREATED)
+  public Driver createDriver(@RequestBody Driver driver) {
+    return service.createDriver(driver);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)

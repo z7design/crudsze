@@ -31,7 +31,7 @@ public class Bank {
   private Address address;
 
   @ManyToOne
-  @JoinColumn(nullable = false)
+  @JoinColumn(nullable = true)
   private AccountBank accountBank;
 
   public Bank() {}

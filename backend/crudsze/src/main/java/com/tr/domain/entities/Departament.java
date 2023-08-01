@@ -1,5 +1,6 @@
 package com.tr.domain.entities;
 
+import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -66,5 +67,18 @@ public class Departament {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Departament)) return false;
+    Departament that = (Departament) o;
+    return getDepartamentId().equals(that.getDepartamentId());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getDepartamentId());
   }
 }

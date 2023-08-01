@@ -1,14 +1,12 @@
 package com.tr.api.controllers;
 
 import com.tr.domain.entities.Employees;
-import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.services.EmployeesService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -39,14 +37,9 @@ public class EmployeesController {
   }
 
   @PostMapping
-  public ResponseEntity<Employees> createEployess(@RequestBody Employees employees) {
-    try {
-      employees = service.createEmployees(employees);
-      return ResponseEntity.status(HttpStatus.CREATED).body(employees);
-
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.badRequest().build();
-    }
+  @ResponseStatus(HttpStatus.CREATED)
+  public Employees createEployess(@RequestBody Employees employees) {
+    return service.createEmployees(employees);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
