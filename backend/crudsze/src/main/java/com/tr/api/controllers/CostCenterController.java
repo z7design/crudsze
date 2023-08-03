@@ -1,45 +1,50 @@
 package com.tr.api.controllers;
 
-import com.tr.domain.entities.CostCenter;
+import com.tr.api.responses.CostCenterResponse;
+import com.tr.domain.dto.CostCenterRequestDTO;
 import com.tr.domain.services.CostCenterService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/cost-center")
+@RequestMapping("/api/cost-center")
 public class CostCenterController {
 
-  @Autowired
-  private CostCenterService service;
+  @Autowired private CostCenterService service;
 
   @GetMapping
-  public List<CostCenter> findAll() {
-    return service.findAll();
+  public ResponseEntity<List<CostCenterResponse>> findAll() {
+    return ResponseEntity.ok(service.findAll());
+  }
+
+  @GetMapping("{/costCenterId}")
+  public ResponseEntity<CostCenterResponse> findAllById(@PathVariable Long costCenterId) {
+    return ResponseEntity.ok(service.findById(costCenterId));
   }
 
   @PostMapping
-  @ResponseStatus(HttpStatus.CREATED)
-  public CostCenter create(@RequestBody CostCenter costCenter) {
-    return service.createCostCenter(costCenter);
+  public ResponseEntity<CostCenterResponse> createCostCenter(
+      @RequestBody CostCenterRequestDTO dto) {
+    CostCenterResponse requestDTO = service.save(dto);
+    return new ResponseEntity<>(requestDTO, HttpStatus.CREATED);
   }
 
-  @ResponseStatus(HttpStatus.OK)
-  @PutMapping("/{stateId}")
-  public CostCenter update(@PathVariable Long costCenterId, @RequestBody CostCenter costCenter) {
-    CostCenter costCenterCurrent = service.findById(costCenterId);
-    BeanUtils.copyProperties(costCenter, costCenterCurrent, "costCenterId");
-    return service.createCostCenter(costCenterCurrent);
+  @PutMapping("{/costCenterId}")
+  public ResponseEntity<CostCenterResponse> updateCostCenter(
+      @PathVariable Long costCenterId, @RequestBody CostCenterRequestDTO dto) {
+    CostCenterResponse requestDTO = service.update(costCenterId, dto);
+    return ResponseEntity.ok(requestDTO);
   }
 
-  @DeleteMapping("/{stateId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable Long costCenterId) {
-
+  @DeleteMapping("{/costCenterId}")
+  public ResponseEntity<?> deleteCostCenter(@PathVariable Long costCenterId) {
     service.delete(costCenterId);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }

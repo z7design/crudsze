@@ -1,6 +1,7 @@
 package com.tr.domain.entities;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -13,28 +14,50 @@ public class CostCenter {
   @Column(name = "cost_centerId_id")
   private Long costCenterId;
 
-  @Column(name = "name")
+  @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "description")
+  @Column(name = "description", nullable = false)
   private String description;
+
+  @Column(name = "observation", columnDefinition = "Text")
+  private String observation;
+
+  @ManyToOne()
+  @JoinColumn(name = "user_id")
+  private User user;
 
   @Column(name = "code")
   private Integer code;
 
+  @ManyToMany(mappedBy = "cost_center")
+  @JsonBackReference // apenas para retorno, traz apenas os centros de custos
+  private List<Titles> titles;
+
   public CostCenter() {}
 
-  public CostCenter(Long costCenterId, String name, String description, Integer code) {
+  public CostCenter(
+      Long costCenterId,
+      String name,
+      String description,
+      Integer code,
+      String observation,
+      List titles) {
     this.costCenterId = costCenterId;
     this.name = name;
     this.description = description;
     this.code = code;
+    this.observation = observation;
+    this.titles = titles;
   }
 
-  public CostCenter(String name, String description, Integer code) {
+  public CostCenter(
+      String name, String description, Integer code, String observation, List titles) {
     this.name = name;
     this.description = description;
     this.code = code;
+    this.observation = observation;
+    this.titles = titles;
   }
 
   public Long getCostCenterId() {
@@ -61,6 +84,22 @@ public class CostCenter {
     this.description = description;
   }
 
+  public String getObservation() {
+    return observation;
+  }
+
+  public void setObservation(String observation) {
+    this.observation = observation;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
   public Integer getCode() {
     return code;
   }
@@ -69,16 +108,11 @@ public class CostCenter {
     this.code = code;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof CostCenter)) return false;
-    CostCenter that = (CostCenter) o;
-    return getCostCenterId().equals(that.getCostCenterId());
+  public List<Titles> getTitlesList() {
+    return titles;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(getCostCenterId());
+  public void setTitles(List<Titles> titles) {
+    this.titles = titles;
   }
 }

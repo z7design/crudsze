@@ -1,9 +1,10 @@
 package com.tr.domain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
@@ -24,11 +25,12 @@ public class Document {
   @Column(name = "obligororiness")
   private String obligororiness;
 
-  @Column(name = "governmentAgency")
+  @Column(name = "government_agency")
   private String governmentAgency;
 
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
   @Column(name = "due_date")
-  private Date dueDate;
+  private LocalDate dueDate;
 
   public Document() {}
 
@@ -38,7 +40,7 @@ public class Document {
       String description,
       String obligororiness,
       String governmentAgency,
-      Date dueDate) {
+      LocalDate dueDate) {
     this.documentId = documentId;
     this.number = number;
     this.description = description;
@@ -52,7 +54,7 @@ public class Document {
       String description,
       String obligororiness,
       String governmentAgency,
-      Date dueDate) {
+      LocalDate dueDate) {
     this.number = number;
     this.description = description;
     this.obligororiness = obligororiness;
@@ -92,14 +94,13 @@ public class Document {
     this.governmentAgency = governmentAgency;
   }
 
-  public Date getDueDate() {
+  public LocalDate getDueDate() {
     return dueDate;
   }
 
-  public void setDueDate(Date dueDate) {
+  public void setDueDate(LocalDate dueDate) {
     this.dueDate = dueDate;
   }
-  
 
   @Override
   public boolean equals(Object o) {

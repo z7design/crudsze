@@ -1,14 +1,12 @@
 package com.tr.api.controllers;
 
 import com.tr.domain.entities.Installment;
-import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.services.InstallmentService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,16 +35,10 @@ public class InstallmentController {
     return service.createInstallment(insttallmentCurrent);
   }
 
-  @ResponseStatus(HttpStatus.OK)
+  @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
-  public ResponseEntity<Installment> createInstallment(@RequestBody Installment installment) {
-    try {
-      installment = service.createInstallment(installment);
-      return ResponseEntity.status(HttpStatus.CREATED).body(installment);
-
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.badRequest().build();
-    }
+  public Installment createInstallment(@RequestBody Installment installment) {
+    return service.createInstallment(installment);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)

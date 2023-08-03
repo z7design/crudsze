@@ -1,7 +1,6 @@
 package com.tr.domain.services;
 
 import com.tr.domain.entities.Installment;
-import com.tr.domain.entities.Launch;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
@@ -28,10 +27,6 @@ public class InstallmentService {
 
   @Transactional
   public Installment createInstallment(final Installment installment) {
-    Long launchId = installment.getLaunch().getLaunchId();
-    Launch launch = launchService.findLaunchById(launchId);
-
-    installment.setLaunch(launch);
     return repository.save(installment);
   }
 
@@ -55,7 +50,7 @@ public class InstallmentService {
     entity.setDatePayment(entity.getDatePayment());
     entity.setValuePay(entity.getValuePay());
     entity.setDiscont(entity.getDiscont());
-    entity.setAdditions(entity.getAdditions());
+    entity.setAddtions(entity.getAddtions());
     entity.setFines(entity.getFines());
 
     return repository.save(installment);

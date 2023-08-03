@@ -1,8 +1,8 @@
-INSERT INTO users (user_id, name, email) VALUES(1, 'Teste 01', 'teste01@gmaila.com');
-INSERT INTO users (user_id, name, email) VALUES(2, 'Teste 02', 'teste02@gmaila.com');
-INSERT INTO users (user_id, name, email) VALUES(3, 'Teste 03', 'teste03@gmaila.com');
-INSERT INTO users (user_id, name, email) VALUES(4, 'Teste 04', 'teste04@gmaila.com');
-INSERT INTO users (user_id, name, email) VALUES(5, 'Teste 05', 'teste05@gmaila.com');
+INSERT INTO users (user_id, name, email) VALUES(1, 'Teste 01', 'teste01@gmail.com');
+INSERT INTO users (user_id, name, email) VALUES(2, 'Teste 02', 'teste02@gmail.com');
+INSERT INTO users (user_id, name, email) VALUES(3, 'Teste 03', 'teste03@gmail.com');
+INSERT INTO users (user_id, name, email) VALUES(4, 'Teste 04', 'teste04@gmail.com');
+INSERT INTO users (user_id, name, email) VALUES(5, 'Teste 05', 'teste05@gmail.com');
 
 INSERT INTO state (state_id, name, uf) VALUES(1, 'Acre', 'AC');
 INSERT INTO state (state_id, name, uf) VALUES(2, 'Alagoas', 'AL');

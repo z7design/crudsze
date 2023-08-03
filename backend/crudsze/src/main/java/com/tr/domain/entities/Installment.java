@@ -1,10 +1,11 @@
 package com.tr.domain.entities;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
@@ -15,8 +16,12 @@ public class Installment {
   @Column(name = "installment_id")
   private Long installmentId;
 
+  @Column(name = "installment_number")
+  private Integer installmentNumber;
+
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
   @Column(name = "date_paiment")
-  private Date datePayment;
+  private LocalDate datePayment;
 
   @Column(name = "value_pay")
   private BigDecimal valuePay;
@@ -24,45 +29,43 @@ public class Installment {
   @Column(name = "discont")
   private BigDecimal discont;
 
-  @Column(name = "additions")
-  private BigDecimal additions;
+  @Column(name = "addtions")
+  private BigDecimal addtions;
 
   @Column(name = "fines")
   private BigDecimal fines;
-
-  @ManyToOne
-  @JoinColumn(nullable = true)
-  private Launch launch;
 
   public Installment() {}
 
   public Installment(
       Long installmentId,
-      Date datePayment,
+      Integer installmentNumber,
+      LocalDate datePayment,
       BigDecimal valuePay,
       BigDecimal discont,
-      BigDecimal additions,
-      BigDecimal fines,
-      Launch launch) {
+      BigDecimal addtions,
+      BigDecimal fines) {
     this.installmentId = installmentId;
+    this.installmentNumber = installmentNumber;
     this.datePayment = datePayment;
     this.valuePay = valuePay;
     this.discont = discont;
-    this.additions = additions;
+    this.addtions = addtions;
     this.fines = fines;
   }
 
   public Installment(
-      Date datePayment,
+      LocalDate datePayment,
+      Integer installmentNumber,
       BigDecimal valuePay,
       BigDecimal discont,
-      BigDecimal additions,
-      BigDecimal fines,
-      Launch launch) {
+      BigDecimal addtions,
+      BigDecimal fines) {
     this.datePayment = datePayment;
+    this.installmentNumber = installmentNumber;
     this.valuePay = valuePay;
     this.discont = discont;
-    this.additions = additions;
+    this.addtions = addtions;
     this.fines = fines;
   }
 
@@ -74,11 +77,11 @@ public class Installment {
     this.installmentId = installmentId;
   }
 
-  public Date getDatePayment() {
+  public LocalDate getDatePayment() {
     return datePayment;
   }
 
-  public void setDatePayment(Date datePayment) {
+  public void setDatePayment(LocalDate datePayment) {
     this.datePayment = datePayment;
   }
 
@@ -98,12 +101,12 @@ public class Installment {
     this.discont = discont;
   }
 
-  public BigDecimal getAdditions() {
-    return additions;
+  public BigDecimal getAddtions() {
+    return addtions;
   }
 
-  public void setAdditions(BigDecimal additions) {
-    this.additions = additions;
+  public void setAddtions(BigDecimal additions) {
+    this.addtions = additions;
   }
 
   public BigDecimal getFines() {
@@ -113,7 +116,6 @@ public class Installment {
   public void setFines(BigDecimal fines) {
     this.fines = fines;
   }
-  
 
   @Override
   public boolean equals(Object o) {

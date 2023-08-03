@@ -1,65 +1,69 @@
 package com.tr.domain.services;
 
+import com.tr.api.responses.CostCenterResponse;
+import com.tr.domain.dto.CostCenterRequestDTO;
 import com.tr.domain.entities.CostCenter;
-import com.tr.domain.exception.EntityInUseException;
-import com.tr.domain.exception.EntityNotFoundException;
+import com.tr.domain.entities.User;
 import com.tr.domain.exception.ResourceNotFoundException;
 import com.tr.domain.repositories.CostCenterRespository;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
-public class CostCenterService {
-  private static final String MSG_COST_CENTER_NOT_FOUND =
-      "There is no state registration with the code %d";
-  private static final String MSG_COST_CENTER_IN_USE = "Code state %d cannot be removed as it is in use";
+public class CostCenterService implements ICrudsServices<CostCenterRequestDTO, CostCenterResponse> {
 
-  @Autowired
-  private CostCenterRespository costCenterRespository;
+  @Autowired private CostCenterRespository respository;
 
-  public CostCenter createCostCenter(CostCenter costCenter) {
-    return costCenterRespository.save(costCenter);
+  @Autowired private ModelMapper mapper;
+
+  @Override
+  public List<CostCenterResponse> findAll() {
+    List<CostCenter> list = respository.findAll();
+    return list.stream()
+        .map(costCenter -> mapper.map(costCenter, CostCenterResponse.class))
+        .collect(Collectors.toList());
   }
 
-  @Transactional
-  public CostCenter findById(final Long costCenterId) {
-    return costCenterRespository
-        .findById(costCenterId)
-        .orElseThrow(() -> new EntityNotFoundException(String.format(MSG_COST_CENTER_NOT_FOUND, costCenterId)));
-  }
-
-  @Transactional
-  public CostCenter update(final CostCenter costCenter) {
-    var entity =
-        costCenterRespository
-            .findById(costCenter.getCostCenterId())
-            .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
-
-    entity.setName(entity.getName());
-    entity.setCode(entity.getCode());
-    entity.setDescription(entity.getDescription());
-    
-    return costCenterRespository.save(costCenter);
-  }
-  
-  public void delete(Long costCenterId) {
-    try {
-      costCenterRespository.deleteById(costCenterId);
-    } catch (EmptyResultDataAccessException e) {
-      throw new EntityNotFoundException(String.format(MSG_COST_CENTER_NOT_FOUND, costCenterId));
-
-    } catch (DataIntegrityViolationException e) {
-      throw new EntityInUseException(String.format(MSG_COST_CENTER_IN_USE, costCenterId));
+  @Override
+  public CostCenterResponse findById(Long costCenterId) {
+    Optional<CostCenter> costCenter = respository.findById(costCenterId);
+    if (costCenter.isEmpty()) {
+      throw new ResourceNotFoundException("Cost Center not found " + costCenterId);
     }
+    return mapper.map(costCenter, CostCenterResponse.class);
   }
 
-  public List<CostCenter> findAll() {
-    return costCenterRespository.findAll();
+  @Override
+  public CostCenterResponse save(CostCenterRequestDTO dto) {
+    CostCenter costCenter = mapper.map(dto, CostCenter.class);
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    costCenter.setUser(user);
+    costCenter.setCostCenterId(null);
+    costCenter = respository.save(costCenter);
+    return mapper.map(costCenter, CostCenterResponse.class);
+  }
+
+  @Override
+  public CostCenterResponse update(Long costCenterId, CostCenterRequestDTO dto) {
+    findById(costCenterId);
+    CostCenter costCenter = mapper.map(dto, CostCenter.class);
+
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    costCenter.setUser(user);
+
+    costCenter.setCostCenterId(costCenterId);
+    costCenter = respository.save(costCenter);
+    return mapper.map(costCenter, CostCenterResponse.class);
+  }
+
+  @Override
+  public void delete(Long costCenterId) {
+    findById(costCenterId);
+    respository.deleteById(costCenterId);
   }
 }

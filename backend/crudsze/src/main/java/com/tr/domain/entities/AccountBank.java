@@ -16,7 +16,7 @@ public class AccountBank implements Serializable {
   @Column(name = "account_bank_id")
   private Long accountBankId;
 
-  @Column(name = "agnecy")
+  @Column(name = "agency")
   private String agency;
 
   @Column(name = "agency_dv")
