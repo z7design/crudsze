@@ -43,7 +43,7 @@ public class SupplierService {
 
   @Transactional
   public Supplier updateSupplier(final Supplier supplier) {
-    var entity =
+    Supplier entity =
         repository
             .findById(supplier.getSupplierId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

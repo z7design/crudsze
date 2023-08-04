@@ -1,9 +1,7 @@
 package com.tr.domain.entities;
 
-import com.tr.api.responses.TitlesResponse;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -43,10 +41,6 @@ public class CashFlow {
   @Column(name = "balance")
   private BigDecimal balance;
 
-  private List<TitlesResponse> titleToPay;
-
-  private List<TitlesResponse> titleToReceive;
-
   public CashFlow(
       Long cashFlowId,
       Date duteDate,
@@ -57,9 +51,7 @@ public class CashFlow {
       String intallmentNumber,
       BigDecimal totalPayable,
       BigDecimal totalReceivable,
-      BigDecimal balance,
-      List<TitlesResponse> titleToPay,
-      List<TitlesResponse> titleToReceive) {
+      BigDecimal balance) {
     this.cashFlowId = cashFlowId;
     this.duteDate = duteDate;
     this.paymentDate = paymentDate;
@@ -70,8 +62,6 @@ public class CashFlow {
     this.totalPayable = totalPayable;
     this.totalReceivable = totalReceivable;
     this.balance = balance;
-    this.titleToPay = titleToPay;
-    this.titleToReceive = titleToReceive;
   }
 
   public CashFlow() {}
@@ -155,20 +145,5 @@ public class CashFlow {
   public void setBalance(BigDecimal balance) {
     this.balance = balance;
   }
-
-  public List<TitlesResponse> getTitleToPay() {
-    return titleToPay;
-  }
-
-  public void setTitleToPay(List<TitlesResponse> titleToPay) {
-    this.titleToPay = titleToPay;
-  }
-
-  public List<TitlesResponse> getTitleToReceive() {
-    return titleToReceive;
-  }
-
-  public void setTitleToReceive(List<TitlesResponse> titleToReceive) {
-    this.titleToReceive = titleToReceive;
-  }
+  
 }

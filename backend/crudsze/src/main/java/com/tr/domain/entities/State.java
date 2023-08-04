@@ -3,6 +3,7 @@ package com.tr.domain.entities;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 @Entity
 @Data
@@ -10,7 +11,8 @@ import lombok.Data;
 public class State {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @EmbeddedId
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "state_id")
   public Long stateId;
 

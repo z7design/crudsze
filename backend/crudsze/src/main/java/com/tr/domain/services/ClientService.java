@@ -45,7 +45,7 @@ public class ClientService {
 
   @Transactional
   public Client updateClient(final Client client) {
-    var entity =
+    Client entity =
         repository
             .findById(client.getClientId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

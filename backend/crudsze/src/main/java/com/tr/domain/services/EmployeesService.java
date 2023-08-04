@@ -51,7 +51,7 @@ public class EmployeesService {
 
   @Transactional
   public Employees updateEmployess(final Employees employees) {
-    var entity =
+    Employees entity =
         repository
             .findById(employees.getEmployeesId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

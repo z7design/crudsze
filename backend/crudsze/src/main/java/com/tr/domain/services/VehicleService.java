@@ -45,7 +45,7 @@ public class VehicleService {
 
   @Transactional
   public Vehicle update(final Vehicle vehicle) {
-    var entity =
+    Vehicle entity =
         repository
             .findById(vehicle.getVehicleId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

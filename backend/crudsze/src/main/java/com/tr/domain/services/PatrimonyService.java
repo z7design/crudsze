@@ -39,7 +39,7 @@ public class PatrimonyService {
 
   @Transactional
   public Patrimony updatePatrimony(final Patrimony patrimony) {
-    var entity =
+    Patrimony entity =
         repository
             .findById(patrimony.getPatrimonyId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

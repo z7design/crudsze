@@ -55,7 +55,7 @@ public class LaunchService {
 
   @Transactional
   public Launch updateLaunch(final Launch launch) {
-    var entity =
+    Launch entity =
         repository
             .findById(launch.getLaunchId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

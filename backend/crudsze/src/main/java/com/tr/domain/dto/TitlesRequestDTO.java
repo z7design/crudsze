@@ -1,22 +1,21 @@
 package com.tr.domain.dto;
 
 import com.tr.domain.enums.TypeTitle;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 public class TitlesRequestDTO {
   private Long titlesId;
   private String name;
-   private String description;
+  private String description;
   private TypeTitle typeTitle;
-  private List<CostCenterRequestDTO> costCenterList;
-  private BigDecimal valueTitle;
+  private Double valueTitle;
   private Date dateRegistration;
   private Date dateReference;
   private Date dueDate;
   private Date datePayment;
   private String observation;
+  private List<CostCenterRequestDTO> costCenters;
 
   public Long getTitlesId() {
     return titlesId;
@@ -50,19 +49,11 @@ public class TitlesRequestDTO {
     this.typeTitle = typeTitle;
   }
 
-  public List<CostCenterRequestDTO> getCostCenterList() {
-    return costCenterList;
-  }
-
-  public void setCostCenterList(List<CostCenterRequestDTO> costCenterList) {
-    this.costCenterList = costCenterList;
-  }
-
-  public BigDecimal getValueTitle() {
+  public Double getValueTitle() {
     return valueTitle;
   }
 
-  public void setValueTitle(BigDecimal valueTitle) {
+  public void setValueTitle(Double valueTitle) {
     this.valueTitle = valueTitle;
   }
 
@@ -104,5 +95,13 @@ public class TitlesRequestDTO {
 
   public void setObservation(String observation) {
     this.observation = observation;
+  }
+
+  public List<CostCenterRequestDTO> getCostCenters() {
+    return costCenters;
+  }
+
+  public void setCostCenters(List<CostCenterRequestDTO> costCenters) {
+    this.costCenters = costCenters;
   }
 }

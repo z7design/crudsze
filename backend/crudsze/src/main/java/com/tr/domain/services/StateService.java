@@ -29,7 +29,7 @@ public class StateService {
 
   @Transactional
   public State updateState(final State state) {
-    var entity =
+    State entity =
         stateRepository
             .findById(state.getStateId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

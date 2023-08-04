@@ -4,6 +4,7 @@ import com.tr.domain.enums.Nickname;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 @Entity
 @Data
@@ -11,6 +12,7 @@ import lombok.Data;
 public class Address {
 
   @Id
+  @EmbeddedId
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "address_id")
   private Long addressId;

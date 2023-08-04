@@ -1,18 +1,19 @@
 package com.tr.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tr.domain.enums.TypeTitle;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
-@Entity
+@Entity(name = "titles")
 @Data
 @Table(name = "titles")
 public class Titles {
 
   @Id
+  @EmbeddedId
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "titles_id")
   private Long titlesId;
@@ -23,28 +24,8 @@ public class Titles {
   @Column(nullable = false)
   private String description;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
-
-  private TypeTitle typeTitle;
-
-  /*  @ManyToOne
-  @JoinColumn(name = "cost_centerId_id")
-  private CostCenter costCenter;*/
-
-  @ManyToMany
-  @JoinTable(
-      name = "titles_costCenter",
-      joinColumns = @JoinColumn(name = "titles_id"),
-      inverseJoinColumns = @JoinColumn(name = "cost_centerId_id"))
-  private List<CostCenter> costCenterList;
-
   @Column(nullable = false)
-  private BigDecimal valueTitle;
-
-  @Column(nullable = false)
-  private Double valor;
+  private Double valueTitle;
 
   @Column(name = "date_registration")
   private Date dateRegistration;
@@ -60,6 +41,48 @@ public class Titles {
 
   @Column(name = "observation", columnDefinition = "TEXT")
   private String observation;
+
+  @ManyToOne
+  @JsonIgnore
+  @JoinColumn(name = "user_id")
+  private User user;
+
+  @Enumerated(EnumType.STRING)
+  private TypeTitle typeTitle;
+
+  @ManyToMany
+  @JoinTable(
+      name = "titles_cost_center",
+      joinColumns = @JoinColumn(name = "title_id"),
+      inverseJoinColumns = @JoinColumn(name = "cost_center_id"))
+  private List<CostCenter> costCenters;
+
+  public Titles(
+      Long titlesId,
+      String name,
+      String description,
+      User user,
+      TypeTitle typeTitle,
+      Double valueTitle,
+      Date dateRegistration,
+      Date dateReference,
+      Date dueDate,
+      Date datePayment,
+      String observation) {
+    this.titlesId = titlesId;
+    this.name = name;
+    this.description = description;
+    this.user = user;
+    this.typeTitle = typeTitle;
+    this.valueTitle = valueTitle;
+    this.dateRegistration = dateRegistration;
+    this.dateReference = dateReference;
+    this.dueDate = dueDate;
+    this.datePayment = datePayment;
+    this.observation = observation;
+  }
+
+  public Titles() {}
 
   public Long getTitlesId() {
     return titlesId;
@@ -101,28 +124,12 @@ public class Titles {
     this.typeTitle = typeTitle;
   }
 
-  public List<CostCenter> getCostCenterList() {
-    return costCenterList;
-  }
-
-  public void setCostCenterList(List<CostCenter> costCenterList) {
-    this.costCenterList = costCenterList;
-  }
-
-  public BigDecimal getValueTitle() {
+  public Double getValueTitle() {
     return valueTitle;
   }
 
-  public void setValueTitle(BigDecimal valueTitle) {
+  public void setValueTitle(Double valueTitle) {
     this.valueTitle = valueTitle;
-  }
-
-  public Double getValor() {
-    return valor;
-  }
-
-  public void setValor(Double valor) {
-    this.valor = valor;
   }
 
   public Date getDateRegistration() {

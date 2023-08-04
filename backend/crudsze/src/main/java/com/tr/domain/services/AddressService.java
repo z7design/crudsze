@@ -51,7 +51,7 @@ public class AddressService {
 
   @Transactional
   public Address updateAddress(final Address address) {
-    var entity =
+    Address entity =
         respository
             .findById(address.getAddressId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

@@ -42,7 +42,7 @@ public class InstallmentService {
 
   @Transactional
   public Installment updateInstallment(final Installment installment) {
-    var entity =
+    Installment entity =
         repository
             .findById(installment.getInstallmentId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

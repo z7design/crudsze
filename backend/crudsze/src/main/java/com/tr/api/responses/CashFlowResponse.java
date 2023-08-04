@@ -2,8 +2,7 @@ package com.tr.api.responses;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 public class CashFlowResponse {
 
@@ -36,17 +35,19 @@ public class CashFlowResponse {
   @Column(name = "balance")
   private BigDecimal balance;
 
-  private List<TitlesResponse> titleToPay;
+  public CashFlowResponse() {}
 
-  private List<TitlesResponse> titleToReceive;
-
-  public CashFlowResponse() {
-  }
-
-  public CashFlowResponse(Long cashFlowId, Date duteDate, Date paymentDate, Date monthReference,
-      String description, BigDecimal paymentAmount, String intallmentNumber,
-      BigDecimal totalPayable, BigDecimal totalReceivable, BigDecimal balance,
-      List<TitlesResponse> titleToPay, List<TitlesResponse> titleToReceive) {
+  public CashFlowResponse(
+      Long cashFlowId,
+      Date duteDate,
+      Date paymentDate,
+      Date monthReference,
+      String description,
+      BigDecimal paymentAmount,
+      String intallmentNumber,
+      BigDecimal totalPayable,
+      BigDecimal totalReceivable,
+      BigDecimal balance) {
     this.cashFlowId = cashFlowId;
     this.duteDate = duteDate;
     this.paymentDate = paymentDate;
@@ -57,8 +58,6 @@ public class CashFlowResponse {
     this.totalPayable = totalPayable;
     this.totalReceivable = totalReceivable;
     this.balance = balance;
-    this.titleToPay = titleToPay;
-    this.titleToReceive = titleToReceive;
   }
 
   public Long getCashFlowId() {
@@ -140,20 +139,5 @@ public class CashFlowResponse {
   public void setBalance(BigDecimal balance) {
     this.balance = balance;
   }
-
-  public List<TitlesResponse> getTitleToPay() {
-    return titleToPay;
-  }
-
-  public void setTitleToPay(List<TitlesResponse> titleToPay) {
-    this.titleToPay = titleToPay;
-  }
-
-  public List<TitlesResponse> getTitleToReceive() {
-    return titleToReceive;
-  }
-
-  public void setTitleToReceive(List<TitlesResponse> titleToReceive) {
-    this.titleToReceive = titleToReceive;
-  }
+  
 }

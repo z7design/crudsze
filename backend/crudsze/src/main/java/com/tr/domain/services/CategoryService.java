@@ -43,7 +43,7 @@ public class CategoryService {
 
   @Transactional
   public Category updateCategory(final Category category) {
-    var entity =
+    Category entity =
         repository
             .findById(category.getCategoryId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

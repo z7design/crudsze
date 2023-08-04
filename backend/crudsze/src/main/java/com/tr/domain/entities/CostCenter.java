@@ -1,7 +1,5 @@
 package com.tr.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -10,8 +8,9 @@ import lombok.Data;
 @Table(name = "cost_center")
 public class CostCenter {
   @Id
+  @EmbeddedId
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "cost_centerId_id")
+  @Column(name = "cost_center_id")
   private Long costCenterId;
 
   @Column(name = "name", nullable = false)
@@ -23,41 +22,29 @@ public class CostCenter {
   @Column(name = "observation", columnDefinition = "Text")
   private String observation;
 
+  @Column(name = "code")
+  private Integer code;
+
   @ManyToOne()
   @JoinColumn(name = "user_id")
   private User user;
 
-  @Column(name = "code")
-  private Integer code;
-
-  @ManyToMany(mappedBy = "cost_center")
-  @JsonBackReference // apenas para retorno, traz apenas os centros de custos
-  private List<Titles> titles;
-
   public CostCenter() {}
 
   public CostCenter(
-      Long costCenterId,
-      String name,
-      String description,
-      Integer code,
-      String observation,
-      List titles) {
+      Long costCenterId, String name, String description, Integer code, String observation) {
     this.costCenterId = costCenterId;
     this.name = name;
     this.description = description;
     this.code = code;
     this.observation = observation;
-    this.titles = titles;
   }
 
-  public CostCenter(
-      String name, String description, Integer code, String observation, List titles) {
+  public CostCenter(String name, String description, Integer code, String observation) {
     this.name = name;
     this.description = description;
     this.code = code;
     this.observation = observation;
-    this.titles = titles;
   }
 
   public Long getCostCenterId() {
@@ -106,13 +93,5 @@ public class CostCenter {
 
   public void setCode(Integer code) {
     this.code = code;
-  }
-
-  public List<Titles> getTitlesList() {
-    return titles;
-  }
-
-  public void setTitles(List<Titles> titles) {
-    this.titles = titles;
   }
 }

@@ -11,8 +11,8 @@ import lombok.Data;
 @Table(name = "account_payble")
 public class AccountPayble {
 
-  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @EmbeddedId
   @Column(name = "account_payble_id")
   private Long accountPaybleId;
 
@@ -50,6 +50,7 @@ public class AccountPayble {
   @ManyToOne
   @JoinColumn(nullable = false)
   private Installment installment;
+  
 
   public AccountPayble() {}
 
@@ -200,6 +201,7 @@ public class AccountPayble {
   public void setInstallment(Installment installment) {
     this.installment = installment;
   }
+  
 
   @Override
   public boolean equals(Object o) {

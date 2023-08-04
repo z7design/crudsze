@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 @Entity
 @Data
@@ -12,6 +13,7 @@ public class AccountBank implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
+  @EmbeddedId
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "account_bank_id")
   private Long accountBankId;

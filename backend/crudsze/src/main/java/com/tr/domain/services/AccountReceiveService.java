@@ -72,7 +72,7 @@ public class AccountReceiveService {
 
   @Transactional
   public AccountReceive updateAccountReceive(final AccountReceive accountReceive) {
-    var entity =
+    AccountReceive entity =
         repository
             .findById(accountReceive.getAccountReceiveId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

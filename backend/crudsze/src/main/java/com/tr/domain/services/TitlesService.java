@@ -37,7 +37,7 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, TitlesRes
     Optional<Titles> optionalTitles = repository.findById(titlesId);
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    if (optionalTitles.isEmpty()
+    if (optionalTitles.isPresent()
         || optionalTitles.get().getUser().getUserId() != user.getUserId()) {
       throw new ResourceNotFoundException("Could not find title with id " + titlesId);
     }
@@ -80,12 +80,14 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, TitlesRes
     findById(titlesId);
     repository.deleteById(titlesId);
   }
-  
-  public List<TitlesResponse> obterPorDataDeVenciment(String firstPeriod, String finishPeriod){
-    List<Titles> titles = repository.obterFluxoCaixaPorDataVencimento(firstPeriod, finishPeriod);
-    
+
+  // obterPorDataDeVenciment
+  public List<TitlesResponse> getByDueDate(String firstPeriod, String finishPeriod) {
+    List<Titles> titles = repository.getCashFlowByDueDate(firstPeriod, finishPeriod);
+
     return titles.stream()
-        .map(title -> mapper.map(title, TitlesResponse.class)).collect(Collectors.toList());
+        .map(title -> mapper.map(title, TitlesResponse.class))
+        .collect(Collectors.toList());
   }
 
   private void validateTitle(TitlesRequestDTO dto) {

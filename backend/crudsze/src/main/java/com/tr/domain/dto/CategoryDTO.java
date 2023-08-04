@@ -1,7 +1,7 @@
 package com.tr.domain.dto;
 
 import com.tr.domain.entities.Category;
-import javax.persistence.Column;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

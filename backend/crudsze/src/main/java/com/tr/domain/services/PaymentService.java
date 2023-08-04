@@ -37,7 +37,7 @@ public class PaymentService {
 
   @Transactional
   public Payment updatePayment(final Payment payment) {
-    var entity =
+    Payment entity =
         repository
             .findById(payment.getPaymentId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

@@ -40,7 +40,7 @@ public class CityService {
 
   @Transactional
   public City updateCity(final City city) {
-    var entity =
+    City entity =
         repositoryCity
             .findById(city.getCityId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

@@ -1,6 +1,5 @@
 package com.tr.domain.entities;
 
-
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;

@@ -56,7 +56,7 @@ public class AccountBankService {
 
   @Transactional
   public AccountBank updateAccountBank(final AccountBank accountBank) {
-    var entity =
+    AccountBank entity =
         repository
             .findById(accountBank.getAccountBankId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

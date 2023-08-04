@@ -28,7 +28,7 @@ public class DepartamentService {
 
   @Transactional
   public Departament updateDepartament(final Departament departament) {
-    var entity =
+    Departament entity =
         departamentRepository
             .findById(departament.getDepartamentId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

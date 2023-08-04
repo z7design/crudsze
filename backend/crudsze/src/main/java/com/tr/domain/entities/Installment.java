@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -12,7 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "installment")
 public class Installment {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @EmbeddedId
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "installment_id")
   private Long installmentId;
 

@@ -28,7 +28,7 @@ public class PhoneService {
 
   @Transactional
   public Phone updatePhone(final Phone phone) {
-    var entity =
+    Phone entity =
         phoneRepository
             .findById(phone.getPhoneId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

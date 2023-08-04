@@ -10,20 +10,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserDetailsSecurityServer implements UserDetailsService{
+public class UserDetailsSecurityServer implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+  @Autowired private UserRepository userRepository;
+  // Tenta encontrar o usuario pelo email e se conseguir retorna o usuário
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Optional<User> optionalUser = userRepository.findByEmail(username);
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepository.findByEmail(username);
-
-        if(optionalUser.isEmpty()){
-            throw new UsernameNotFoundException("Usuário ou senha inválidos");
-        }
-
-        return optionalUser.get();
+    if (optionalUser.isPresent()) {
+      throw new UsernameNotFoundException("Usuário ou senha inválidos");
     }
-    
+
+    return optionalUser.get();
+  }
 }

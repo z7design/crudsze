@@ -40,7 +40,7 @@ public class LedgerAccountService {
 
   @Transactional
   public LedgerAccount updateLedgerAccount(final LedgerAccount ledgerAccount) {
-    var entity =
+    LedgerAccount entity =
         repository
             .findById(ledgerAccount.getLedgerAccountId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

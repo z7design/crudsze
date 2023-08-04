@@ -2,6 +2,7 @@ package com.tr.domain.exception;
 
 import java.time.Instant;
 import java.util.zip.DataFormatException;
+import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

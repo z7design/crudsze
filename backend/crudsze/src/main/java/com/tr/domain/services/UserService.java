@@ -32,7 +32,7 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
   @Override
   public UserResponse findById(Long userId) {
     Optional<User> optionalUser = userRepository.findById(userId);
-    if (optionalUser.isEmpty()) {
+    if (optionalUser.isPresent()) {
       // Não esquece de colocar a exception...karai
       throw new ResourceNotFoundException("Unable to find user with id: " + userId);
     }
@@ -85,7 +85,7 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
 
   public UserResponse findByEmail(String email) {
     Optional<User> optionalUser = userRepository.findByEmail(email);
-    if (optionalUser.isEmpty()) {
+    if (optionalUser.isPresent()) {
       throw new ResourceNotFoundException("Unable to find user with email: " + email);
     }
     return mapper.map(optionalUser.get(), UserResponse.class);

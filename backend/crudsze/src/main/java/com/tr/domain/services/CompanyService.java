@@ -39,7 +39,7 @@ public class CompanyService {
 
   @Transactional
   public Company updateCompany(final Company company) {
-    var entity =
+    Company entity =
         companyRepository
             .findById(company.getCompanyId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

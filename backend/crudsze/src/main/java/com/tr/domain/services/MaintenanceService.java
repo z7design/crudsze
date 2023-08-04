@@ -49,7 +49,7 @@ public class MaintenanceService {
 
   @Transactional
   public Maintenance updateMaintenance(final Maintenance maintenance) {
-    var entity =
+    Maintenance entity =
         repository
             .findById(maintenance.getMaintenanceId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

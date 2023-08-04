@@ -39,7 +39,7 @@ public class CheckService {
 
   @Transactional
   public CheckBank updateChek(final CheckBank check) {
-    var entity =
+    CheckBank entity =
         repository
             .findById(check.getCheckId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

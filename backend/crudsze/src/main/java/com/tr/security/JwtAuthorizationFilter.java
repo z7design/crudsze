@@ -1,15 +1,11 @@
 package com.tr.security;
 
-import com.tr.api.responses.UserResponse;
 import com.tr.domain.entities.User;
-import com.tr.domain.services.UserService;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,8 +14,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
   private JwtUltils jwtUtil;
-  @Autowired private UserService service;
-  @Autowired private ModelMapper mapper;
   private UserDetailsSecurityServer userDetailsSecurityServer;
 
   public JwtAuthorizationFilter(
@@ -53,9 +47,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     // valida o token
     if (jwtUtil.isValidToken(token)) {
       String email = jwtUtil.getUserName(token);
-      UserResponse userResponse = service.findByEmail(email);
-      User user = mapper.map(userResponse, User.class);
-
+      User user = (User) userDetailsSecurityServer.loadUserByUsername(email);
       return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
     }
 

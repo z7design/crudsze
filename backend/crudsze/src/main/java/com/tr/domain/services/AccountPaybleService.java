@@ -72,7 +72,7 @@ public class AccountPaybleService {
 
   @Transactional
   public AccountPayble updateAccountPayble(final AccountPayble accountPayble) {
-    var entity =
+    AccountPayble entity =
         repository
             .findById(accountPayble.getAccountPaybleId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

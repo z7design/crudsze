@@ -32,7 +32,7 @@ public class CostCenterService implements ICrudsServices<CostCenterRequestDTO, C
   @Override
   public CostCenterResponse findById(Long costCenterId) {
     Optional<CostCenter> costCenter = respository.findById(costCenterId);
-    if (costCenter.isEmpty()) {
+    if (costCenter.isPresent()) {
       throw new ResourceNotFoundException("Cost Center not found " + costCenterId);
     }
     return mapper.map(costCenter, CostCenterResponse.class);

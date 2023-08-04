@@ -41,7 +41,7 @@ public class DriverService {
 
   @Transactional
   public Driver updateDriver(final Driver driver) {
-    var entity =
+    Driver entity =
         driverRepository
             .findById(driver.getDriverId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

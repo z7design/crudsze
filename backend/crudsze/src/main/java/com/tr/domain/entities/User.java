@@ -2,7 +2,6 @@ package com.tr.domain.entities;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,8 +31,9 @@ public class User implements UserDetails {
   @Column(name = "date_inativation")
   private Date dateInativation;
 
-  @OneToMany(mappedBy = "user")
-  private List<Titles> titles;
+  @ManyToOne
+  @JoinColumn(nullable = true)
+  private AccountPayble accountPayble;
 
   @Column(name = "password", nullable = false)
   private String password;
@@ -127,13 +127,7 @@ public class User implements UserDetails {
     this.dateInativation = dateInativation;
   }
 
-  public List<Titles> getTitles() {
-    return titles;
-  }
 
-  public void setTitles(List<Titles> titles) {
-    this.titles = titles;
-  }
 
   @Override
   public String toString() {

@@ -44,11 +44,11 @@ public class ExpensesService {
 
   @Transactional
   public Expenses updateExpenses(final Expenses expenses) {
-    var entity =
+    Expenses entity =
         repository
             .findById(expenses.getExpensesId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));
-    
+
     entity.setDueDate(entity.getDueDate());
     entity.setDescription(entity.getDescription());
     entity.setValueExpenses(expenses.getValueExpenses());

@@ -36,7 +36,7 @@ public class CheckbookService {
 
   @Transactional
   public Checkbook updateChebook(final Checkbook checkbook) {
-    var entity =
+    Checkbook entity =
         repository
             .findById(checkbook.getCheckbookId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

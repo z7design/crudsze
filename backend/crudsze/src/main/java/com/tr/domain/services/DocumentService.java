@@ -39,7 +39,7 @@ public class DocumentService {
 
   @Transactional
   public Document updateDocument(final Document document) {
-    var entity =
+    Document entity =
         repository
             .findById(document.getDocumentId())
             .orElseThrow(() -> new ResourceNotFoundException("Not fond"));

@@ -1,47 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>pocze</artifactId>
   <description>api pocze</description>
   <groupId>com.tr</groupId>
+  <modelVersion>4.0.0</modelVersion>
   <name>pocze</name>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <relativePath/>
+    <version>2.7.14-SNAPSHOT</version> <!-- lookup parent from repository -->
+  </parent>
+    <build>
+    <plugins>
+      <plugin>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.springframework.boot</groupId>
+      </plugin>
+    </plugins>
+  </build>
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
     <dependency>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
       <groupId>org.springframework.boot</groupId>
-      <version>3.0.4</version>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
     <dependency>
       <artifactId>spring-boot-starter-web</artifactId>
       <groupId>org.springframework.boot</groupId>
-      <version>3.1.0</version>
     </dependency>
     <dependency>
       <artifactId>flyway-core</artifactId>
       <groupId>org.flywaydb</groupId>
-      <version>9.16.0</version>
     </dependency>
     <dependency>
       <artifactId>postgresql</artifactId>
       <groupId>org.postgresql</groupId>
-      <version>42.5.4</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <artifactId>spring-boot-starter-test</artifactId>
       <groupId>org.springframework.boot</groupId>
-      <version>3.1.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>reactor-test</artifactId>
+      <groupId>io.projectreactor</groupId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -67,86 +76,84 @@
     <dependency>
       <artifactId>spring-boot-configuration-processor</artifactId>
       <groupId>org.springframework.boot</groupId>
-      <version>3.0.4</version>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-devtools</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <artifactId>h2</artifactId>
       <groupId>com.h2database</groupId>
       <scope>runtime</scope>
     </dependency>
+    <!-- jwt dependências atuais-->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <version>3.0.4</version>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+      <version>0.11.5</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <version>0.11.5</version>
       <scope>runtime</scope>
     </dependency>
+
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-gson</artifactId>
+      <version>0.11.5</version>
     </dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
-
-		<!--NOVAS DEPENDENCIAS -->
-				<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.3.8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-api</artifactId>
-			<version>0.11.5</version>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-impl</artifactId>
-			<version>0.11.5</version>
-			<scope>runtime</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-gson -->
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-gson</artifactId>
-			<version>0.11.5</version>
-		</dependency>
+    <!-- Model Mapper -->
+    <dependency>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>2.3.8</version>
+    </dependency>
+    <!-- Spring Security -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
   </dependencies>
-   <build>
-    <plugins>
-      <plugin>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <groupId>org.springframework.boot</groupId>
-      </plugin>
-    </plugins>
-  </build>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <url>https://repo.spring.io/milestone</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <url>https://repo.spring.io/snapshot</url>
+    </pluginRepository>
+  </pluginRepositories>
 
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+    <repository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <url>https://repo.spring.io/snapshot</url>
+    </repository>
+  </repositories>
+  <version>0.0.1-SNAPSHOT</version>
 </project>
