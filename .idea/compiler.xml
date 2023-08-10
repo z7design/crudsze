@@ -7,16 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="pocze" />
+        <module name="crudeze" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="pocze" target="1.8" />
+      <module name="crudeze" target="1.8" />
+      <module name="meusgastos" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="pocze" options="-parameters" />
+      <module name="crudeze" options="-parameters" />
+      <module name="meusgastos" options="" />
     </option>
   </component>
 </project>

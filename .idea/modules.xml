@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/backend/crudsze/pocze.iml" filepath="$PROJECT_DIR$/backend/crudsze/pocze.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crudeze/crudeze.iml" filepath="$PROJECT_DIR$/crudeze/crudeze.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/crudezemario.iml" filepath="$PROJECT_DIR$/.idea/crudezemario.iml" />
     </modules>
   </component>
 </project>
