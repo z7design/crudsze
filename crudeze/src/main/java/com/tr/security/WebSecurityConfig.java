@@ -29,11 +29,17 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http
-				.headers().frameOptions().disable().and()
-				.cors().and()
+				.headers()
+				.frameOptions()
+				.disable()
+				.and()
+				.cors()
+				.and()
 				.csrf().disable()
 				.authorizeHttpRequests((auth) -> auth
 						.antMatchers(HttpMethod.POST, "/api/users").permitAll()
+						.antMatchers(HttpMethod.POST, "/api/tiltes").permitAll()
+						.antMatchers(HttpMethod.POST, "/api/address").permitAll()
 						.anyRequest().authenticated())
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -53,5 +59,4 @@ public class WebSecurityConfig {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 }

@@ -1,12 +1,11 @@
 package com.tr.domain.State;
 
 import javax.persistence.*;
+import com.tr.domain.User.UserEntity;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -14,7 +13,6 @@ import org.springframework.data.annotation.Id;
 public class StateEntity {
 
   @Id
-  @EmbeddedId
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "state_id")
   public Long stateId;
@@ -24,4 +22,8 @@ public class StateEntity {
 
   @Column(name = "uf")
   private String uf;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private UserEntity userEntity;
 }

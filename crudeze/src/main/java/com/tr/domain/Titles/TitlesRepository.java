@@ -18,7 +18,8 @@ public interface TitlesRepository extends JpaRepository<TitlesEntity, Long> {
               + "TO_TIMESTAMP(:finishPeriod, 'YYYY-MM-DD hh24:MI:SS')")
   // obter Fluxo Caixa por data Vencimento
   List<TitlesEntity> getCashFlowByDueDate(
-      @Param("firstPeriod") String firstPeriod, @Param("finishPeriod") String finishPeriod);
+      @Param("firstPeriod") String firstPeriod,
+      @Param("finishPeriod") String finishPeriod);
 
   List<TitlesEntity> findByUserEntity(UserEntity user);
 }

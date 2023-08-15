@@ -1,6 +1,7 @@
 package com.tr.domain.City;
 
 import com.tr.domain.State.StateEntity;
+import com.tr.domain.State.StateResponse;
 import com.tr.domain.State.StateService;
 import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
@@ -24,9 +25,6 @@ public class CityService {
   @Transactional
   public CityEntity createCity(final CityEntity city) {
     Long stateId = city.getState().getStateId();
-    StateEntity state = stateService.findStateById(stateId);
-
-    city.setState(state);
     return repositoryCity.save(city);
   }
 

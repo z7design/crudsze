@@ -1,100 +1,109 @@
 package com.tr.domain.Titles;
 
-import com.tr.domain.CostCenter.CostCenterRequestDTO;
+import com.tr.domain.CostCenter.CostCenterEntity;
 import com.tr.domain.Enums.TypeTitle;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 public class TitlesRequestDTO {
 
-    private Long titleId;
+  private Long titleId;
+  private String name;
+  private TypeTitle typeTitle;
+  private List<CostCenterEntity> costCenters;
+  private String description;
+  private Double valueTitle;
+  private Date dateRegistration;
+  private Date dateReference;
+  private Date dueDate;
+  private Date datePayment;
+  private String observation;
 
-    private String description;
-    
-    private TypeTitle typeTitle;
+  public Long getTitleId() {
+    return titleId;
+  }
 
-    private List<CostCenterRequestDTO> costCenter;
+  public void setTitleId(Long titleId) {
+    this.titleId = titleId;
+  }
 
-    private BigDecimal value;
+  public String getName() {
+    return name;
+  }
 
-    private Date regsitrationDate;
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    private Date referenceDate;
+  public TypeTitle getTypeTitle() {
+    return typeTitle;
+  }
 
-    private Date dueDate;
+  public void setTypeTitle(TypeTitle typeTitle) {
+    this.typeTitle = typeTitle;
+  }
 
-    private Date paymentDate;
+  public List<CostCenterEntity> getCostCenters() {
+    return costCenters;
+  }
 
-    public Long getTitleId() {
-        return titleId;
-    }
+  public void setCostCenters(List<CostCenterEntity> costCenters) {
+    this.costCenters = costCenters;
+  }
 
-    public void setTitleId(Long titleId) {
-        this.titleId = titleId;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public Double getValueTitle() {
+    return valueTitle;
+  }
 
-    public TypeTitle getTypeTitle() {
-        return typeTitle;
-    }
+  public void setValueTitle(Double valueTitle) {
+    this.valueTitle = valueTitle;
+  }
 
-    public void setTypeTitle(TypeTitle typeTitle) {
-        this.typeTitle = typeTitle;
-    }
+  public Date getDateRegistration() {
+    return dateRegistration;
+  }
 
-    public List<CostCenterRequestDTO> getCostCenter() {
-        return costCenter;
-    }
+  public void setDateRegistration(Date dateRegistration) {
+    this.dateRegistration = dateRegistration;
+  }
 
-    public void setCostCenter(List<CostCenterRequestDTO> costCenter) {
-        this.costCenter = costCenter;
-    }
+  public Date getDateReference() {
+    return dateReference;
+  }
 
-    public BigDecimal getValue() {
-        return value;
-    }
+  public void setDateReference(Date dateReference) {
+    this.dateReference = dateReference;
+  }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
+  public Date getDueDate() {
+    return dueDate;
+  }
 
-    public Date getRegsitrationDate() {
-        return regsitrationDate;
-    }
+  public void setDueDate(Date dueDate) {
+    this.dueDate = dueDate;
+  }
 
-    public void setRegsitrationDate(Date regsitrationDate) {
-        this.regsitrationDate = regsitrationDate;
-    }
+  public Date getDatePayment() {
+    return datePayment;
+  }
 
-    public Date getReferenceDate() {
-        return referenceDate;
-    }
+  public void setDatePayment(Date datePayment) {
+    this.datePayment = datePayment;
+  }
 
-    public void setReferenceDate(Date referenceDate) {
-        this.referenceDate = referenceDate;
-    }
+  public String getObservation() {
+    return observation;
+  }
 
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
+  public void setObservation(String observation) {
+    this.observation = observation;
+  }
 }

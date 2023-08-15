@@ -17,7 +17,7 @@ public class DashboardController {
   @GetMapping
   public ResponseEntity<DashboardResponseDTO> getCashFlowInDashboard(
       @RequestParam(name = "firstPeriod") String firstPeriod,
-      @RequestParam(name = "finishPeriod") String finishPeriod) {
+      @RequestParam(name = "finishPeriod") String finishPeriod, @RequestParam("userId") Long userId) {
     return ResponseEntity.ok(dashboardService.getCashFlow(firstPeriod, finishPeriod));
   }
 }

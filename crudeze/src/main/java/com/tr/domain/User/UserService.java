@@ -30,7 +30,7 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
   @Override
   public UserResponse findById(Long userId) {
     Optional<UserEntity> optionalUser = userRepository.findById(userId);
-    if (optionalUser.isPresent()) {
+    if (optionalUser == null) {
       // se o usuario existe
       throw new ResourceNotFoundException("Unable to find user with id: " + userId);
     }
@@ -42,9 +42,9 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
 
     userValidate(dto);
 
-    Optional<UserEntity> optionalUser = userRepository.findByEmail(dto.getEmail());
+   Optional<UserEntity> optionalUser = userRepository.findByEmail(dto.getEmail());
 
-    if (optionalUser.isPresent()) {
+    if (optionalUser == null) {
       //Se já existe um usuário cadastro com o e-mail
       throw new ResourceBadRequestException(
           "There is already a registered user with the email: " + dto.getEmail());
@@ -60,7 +60,6 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
 
     userEntity.setUserId(null);
     userEntity.setDateRegistration(new Date());
-    userEntity.setFoto(userEntity.getFoto());
     userEntity = userRepository.save(userEntity);
 
     return mapper.map(userEntity, UserResponse.class);
@@ -81,7 +80,6 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
     userEntity.setUserId(userId);
     userEntity.setDateInativation(userResponsebd.getDateInativation());
     userEntity.setDateRegistration(userResponsebd.getDateRegistration());
-    userEntity.setFoto(userResponsebd.getFoto());
     userEntity = userRepository.save(userEntity);
 
     return mapper.map(userEntity, UserResponse.class);
@@ -91,7 +89,7 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
   public void delete(Long userId) {
 
     Optional<UserEntity> optionalUser = userRepository.findById(userId);
-    if (optionalUser.isPresent()) {
+    if (optionalUser == null) {
       throw new ResourceNotFoundException("Unable to find user with id: " + userId);
     }
     UserEntity userEntity = optionalUser.get();

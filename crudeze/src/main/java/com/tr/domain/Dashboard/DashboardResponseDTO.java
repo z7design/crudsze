@@ -11,7 +11,7 @@ public class DashboardResponseDTO {
    private List<TitlesResponse> titlesToPay;
    private List<TitlesResponse> titlesToReceive;
 
-  public DashboardResponseDTO(Double totalAccountsPayable, Double totalAccountsReceive,
+  public DashboardResponseDTO(Double totalPayable , Double totalReceive ,
       Double balance, List<TitlesResponse> titlesToPay, List<TitlesResponse> titlesToReceive) {
     this.totalPayable = totalPayable;
     this.totalReceive = totalReceive;

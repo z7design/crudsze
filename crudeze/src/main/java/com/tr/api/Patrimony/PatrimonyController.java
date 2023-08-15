@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/patrimony")
+@RequestMapping("/api/patrimony")
 public class PatrimonyController {
 
   @Autowired private PatrimonyService service;

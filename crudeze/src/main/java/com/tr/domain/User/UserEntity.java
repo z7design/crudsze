@@ -3,7 +3,9 @@ package com.tr.domain.User;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
+import com.tr.domain.Titles.TitlesEntity;
 import lombok.*;
+import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -37,6 +39,9 @@ public class UserEntity implements UserDetails {
 
   @Column(name = "password", nullable = false)
   private String password;
+
+  @OneToMany(mappedBy = "userEntity")
+  private List<TitlesEntity> titlesEntities;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

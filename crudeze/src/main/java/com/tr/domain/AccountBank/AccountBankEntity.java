@@ -7,11 +7,9 @@ import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Data
 @Table(name = "account_bank")
 public class AccountBankEntity implements Serializable {
   private static final long serialVersionUID = 1L;

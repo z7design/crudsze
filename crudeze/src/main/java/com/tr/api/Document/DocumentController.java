@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/documents")
+@RequestMapping("/api/documents")
 public class DocumentController {
 
   @Autowired private DocumentService service;

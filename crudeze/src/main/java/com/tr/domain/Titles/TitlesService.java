@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TitlesService implements ICrudsServices<TitlesRequestDTO, com.tr.domain.Titles.TitlesResponse> {
+public class TitlesService implements ICrudsServices<TitlesRequestDTO, TitlesResponse> {
   @Autowired private TitlesRepository repository;
 
   @Autowired private ModelMapper mapper;
@@ -25,26 +25,26 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, com.tr.do
     List<TitlesEntity> titles = repository.findByUserEntity(user);
 
     return titles.stream()
-        .map(title -> mapper.map(title, com.tr.domain.Titles.TitlesResponse.class))
+        .map(title -> mapper.map(title, TitlesResponse.class))
         .collect(Collectors.toList());
   }
 
   @Override
-  public com.tr.domain.Titles.TitlesResponse findById(Long titlesId) {
+  public TitlesResponse findById(Long titlesId) {
     Optional<TitlesEntity> optionalTitles = repository.findById(titlesId);
     UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    if (optionalTitles.isPresent()
+    if (optionalTitles == null
         || optionalTitles.get().getUserEntity().getUserId() != user.getUserId()) {
       throw new ResourceNotFoundException("Could not find title with id " + titlesId);
     }
-    return mapper.map(optionalTitles.get(), com.tr.domain.Titles.TitlesResponse.class);
+    return mapper.map(optionalTitles.get(), TitlesResponse.class);
   }
 
   @Override
-  public com.tr.domain.Titles.TitlesResponse save(TitlesRequestDTO dto) {
-    validateTitle(dto);
+  public TitlesResponse save(TitlesRequestDTO dto) {
 
+    validateTitle(dto);
     TitlesEntity title = mapper.map(dto, TitlesEntity.class);
 
     UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,11 +53,11 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, com.tr.do
     title.setDateRegistration(new Date());
     title = repository.save(title);
 
-    return mapper.map(title, com.tr.domain.Titles.TitlesResponse.class);
+    return mapper.map(title, TitlesResponse.class);
   }
 
   @Override
-  public com.tr.domain.Titles.TitlesResponse update(Long titlesId, TitlesRequestDTO dto) {
+  public TitlesResponse update(Long titlesId, TitlesRequestDTO dto) {
     findById(titlesId);
     validateTitle(dto);
 
@@ -69,7 +69,7 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, com.tr.do
     title.setDateRegistration(new Date());
     title = repository.save(title);
 
-    return mapper.map(title, com.tr.domain.Titles.TitlesResponse.class);
+    return mapper.map(title, TitlesResponse.class);
   }
 
   @Override
@@ -79,7 +79,8 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, com.tr.do
   }
 
   // obterPorDataDeVenciment
-  public List<com.tr.domain.Titles.TitlesResponse> getCashFlowByDueDate(String firstPeriod, String finishPeriod) {
+  public List<TitlesResponse> getCashFlowByDueDate(String firstPeriod, String finishPeriod,
+      UserEntity user) {
     List<TitlesEntity> titles = repository.getCashFlowByDueDate(firstPeriod, finishPeriod);
 
     return titles.stream()
@@ -90,7 +91,7 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, com.tr.do
   private void validateTitle(TitlesRequestDTO dto) {
     if (dto.getTypeTitle() == null
         || dto.getDueDate() == null
-        || dto.getValue() == null
+        || dto.getValueTitle() == null
         || dto.getDescription() == null) {
       throw new ResourceBadRequestException(
           "The Type, Expiration Date, Value and Description fields are mandatory.");

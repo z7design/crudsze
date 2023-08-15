@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import com.tr.domain.ICrudsServices;
+import com.tr.domain.Titles.TitlesRequestDTO;
 import com.tr.domain.User.UserEntity;
+import com.tr.domain.exception.ResourceBadRequestException;
 import com.tr.domain.exception.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CostCenterService implements ICrudsServices<CostCenterRequestDTO, CostCenterResponse>{
-
 
   @Autowired
   private CostCenterRepository respository;
@@ -33,7 +34,9 @@ public class CostCenterService implements ICrudsServices<CostCenterRequestDTO, C
   @Override
   public CostCenterResponse findById(Long costCenterId) {
     Optional<CostCenterEntity> costCenterEntity = respository.findById(costCenterId);
-    if (costCenterEntity.isPresent()) {
+     UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    if (costCenterEntity == null || costCenterEntity.get().getUserEntity().getUserId() != user.getUserId()) {
       throw new ResourceNotFoundException("Cost Center not found " + costCenterId);
     }
     return mapper.map(costCenterEntity, CostCenterResponse.class);
@@ -41,11 +44,14 @@ public class CostCenterService implements ICrudsServices<CostCenterRequestDTO, C
 
   @Override
   public CostCenterResponse save(CostCenterRequestDTO dto) {
+
     CostCenterEntity costCenter = mapper.map(dto, CostCenterEntity.class);
+
     UserEntity userEntity = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     costCenter.setUserEntity(userEntity);
     costCenter.setCostCenterId(null);
     costCenter = respository.save(costCenter);
+
     return mapper.map(costCenter, CostCenterResponse.class);
   }
 

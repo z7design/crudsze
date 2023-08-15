@@ -10,8 +10,8 @@ import org.springframework.data.annotation.Id;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "address")
 @Entity
+@Table(name = "address")
 public class AddressEntity {
 
   @Id

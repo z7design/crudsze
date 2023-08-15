@@ -18,13 +18,12 @@ public class UserDetailsSecurityServer implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> optionalUser = userRepository.findByEmail(username);
+        Optional<UserEntity> user = userRepository.findByEmail(username);
 
-        if(optionalUser.isPresent()){
+        if(user == null){
             throw new UsernameNotFoundException("Username or password is invalid");
         }
 
-        return optionalUser.get();
+        return user.get();
     }
-    
 }

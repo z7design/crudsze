@@ -31,7 +31,7 @@ public class TitlesController {
     }
 
     @GetMapping("/{titleId}")
-    public ResponseEntity<TitlesResponse> obterPorId(@PathVariable Long titleId){
+    public ResponseEntity<TitlesResponse> findTitleById(@PathVariable Long titleId){
         return ResponseEntity.ok(titleService.findById(titleId));
     }
 
@@ -42,7 +42,7 @@ public class TitlesController {
     }
 
     @PutMapping("/{titleId}")
-    public ResponseEntity<TitlesResponse> atualizar(@PathVariable Long titleId, @RequestBody TitlesRequestDTO dto){
+    public ResponseEntity<TitlesResponse> updateTitle(@PathVariable Long titleId, @RequestBody TitlesRequestDTO dto){
         return ResponseEntity.ok(titleService.update(titleId, dto));
     }
 

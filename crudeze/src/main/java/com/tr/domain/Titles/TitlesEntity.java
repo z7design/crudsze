@@ -1,26 +1,23 @@
 package com.tr.domain.Titles;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tr.domain.CostCenter.CostCenterEntity;
 import com.tr.domain.Enums.TypeTitle;
 import com.tr.domain.User.UserEntity;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
 
-
-@Entity
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "titles")
 public class TitlesEntity {
 
   @Id
-  @EmbeddedId
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "titles_id")
   private Long titlesId;
@@ -50,7 +47,6 @@ public class TitlesEntity {
   private String observation;
 
   @ManyToOne
-  @JsonIgnore
   @JoinColumn(name = "user_id")
   private UserEntity userEntity;
 
@@ -59,16 +55,9 @@ public class TitlesEntity {
 
   @ManyToMany
   @JoinTable(
-      name = "titles_cost_center",
-      joinColumns = @JoinColumn(name = "title_id"),
-      inverseJoinColumns = @JoinColumn(name = "cost_center_id"))
+      name = "titles_costcenter",
+      joinColumns = @JoinColumn(name = "titles_id"),
+      inverseJoinColumns = @JoinColumn(name = "costcenter_id"))
   private List<CostCenterEntity> costCenters;
 
-  public UserEntity getUserEntity() {
-    return userEntity;
-  }
-
-  public void setUserEntity(UserEntity userEntity) {
-    this.userEntity = userEntity;
-  }
 }

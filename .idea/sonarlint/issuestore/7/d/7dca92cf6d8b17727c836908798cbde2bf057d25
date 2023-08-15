@@ -1,8 +1,2 @@
 
-v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ªó˜¸8¦ó›û1
-w
-java:S1172"URemove these unused method parameters "totalAccountsPayable", "totalAccountsReceive".(ÓÊªëûÿÿÿÿ8¯ó›û1
-L
-java:S1656"/Remove or correct this useless self-assignment.(ºÌıÉ8³ó›û1
-L
-java:S1656"/Remove or correct this useless self-assignment.(©Á‰“8³ó›û1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ªó˜¸8Üîè£Ÿ1

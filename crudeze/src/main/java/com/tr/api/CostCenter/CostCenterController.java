@@ -26,7 +26,7 @@ public class CostCenterController {
     private CostCenterService costCenterService;
 
     @GetMapping
-    public ResponseEntity<List<CostCenterResponse>> obterTodos(){
+    public ResponseEntity<List<CostCenterResponse>> findAllCostCenter(){
         return ResponseEntity.ok(costCenterService.findAll());
     }
 
