@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequiredArgsConstructor
-@RequestMapping("/drivers")
+@RequestMapping("/api/drivers")
 public class DriverController {
   @Autowired private DriverService service;
 

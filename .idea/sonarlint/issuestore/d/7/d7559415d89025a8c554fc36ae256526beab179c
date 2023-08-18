@@ -1,0 +1,14 @@
+
+h
+java:S2789)"FEnsure this "Optional" could never be null and remove this null-check.(ÓŞøúÿÿÿÿ8é›˜Ÿ 1
+X
+java:S4973*"<Strings and Boxed types should be compared using "equals()".(«Á’e8ê›˜Ÿ 1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(İãÀÎøÿÿÿÿ8ê›˜Ÿ 1
+x
+java:S3655*"\Call "optionalTitles.isPresent()" or "!optionalTitles.isEmpty()" before accessing the value.(«Á’e8ù›˜Ÿ 1
+Z
+java:S2589)"8Remove this expression which always evaluates to "false"(ÓŞøúÿÿÿÿ8ù›˜Ÿ 1
+M
+java:S1172\"+Remove this unused method parameter "user".(¹ô½Åûÿÿÿÿ8‚œ˜Ÿ 1
+f
+java:S1128"DRemove this unused import 'com.tr.domain.Patrimony.PatrimonyEntity'.(ÿ²ú˜øÿÿÿÿ8ë¬¥ 1

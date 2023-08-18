@@ -12,8 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequiredArgsConstructor
-@RequestMapping("/company")
+@RequestMapping("/api/company")
 public class CompanyController {
   @Autowired private CompanyService service;
 

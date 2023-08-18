@@ -1,6 +1,5 @@
 package com.tr.api.Employees;
 
-
 import com.tr.domain.Employees.EmployeesEntity;
 import com.tr.domain.Employees.EmployeesService;
 import java.util.List;
@@ -11,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @AllArgsConstructor
-@RequestMapping("/employees")
+@RequestMapping("/api/employees")
 public class EmployeesController {
 
   @Autowired private EmployeesService service;

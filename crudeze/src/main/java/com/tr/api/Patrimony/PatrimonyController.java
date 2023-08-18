@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @AllArgsConstructor
 @RequestMapping("/api/patrimony")
 public class PatrimonyController {
@@ -18,6 +19,7 @@ public class PatrimonyController {
 
   @GetMapping
   public List<PatrimonyEntity> findAllByPatrimony() {
+
     return service.findAllByPatrimony();
   }
 

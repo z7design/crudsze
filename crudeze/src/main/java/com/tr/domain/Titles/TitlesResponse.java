@@ -2,21 +2,26 @@ package com.tr.domain.Titles;
 
 import com.tr.domain.CostCenter.CostCenterResponse;
 import com.tr.domain.Enums.TypeTitle;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
 
 public class TitlesResponse {
   private Long titlesId;
   private String name;
   private String description;
-  private Double valueTitle;
+  private BigDecimal valueTitle = new BigDecimal(0.0);
   private Date dateRegistration;
   private Date dateReference;
   private Date dueDate;
   private Date datePayment;
   private String observation;
   private TypeTitle typeTitle;
-  private List<CostCenterResponse> centerResponseList;
+
+  private List<CostCenterResponse> costCenter;
+
+
 
   public Long getTitlesId() {
     return titlesId;
@@ -42,11 +47,11 @@ public class TitlesResponse {
     this.description = description;
   }
 
-  public Double getValueTitle() {
+  public BigDecimal getValueTitle() {
     return valueTitle;
   }
 
-  public void setValueTitle(Double valueTitle) {
+  public void setValueTitle(BigDecimal valueTitle) {
     this.valueTitle = valueTitle;
   }
 
@@ -98,11 +103,5 @@ public class TitlesResponse {
     this.typeTitle = typeTitle;
   }
 
-  public List<CostCenterResponse> getCenterResponseList() {
-    return centerResponseList;
-  }
 
-  public void setCenterResponseList(List<CostCenterResponse> centerResponseList) {
-    this.centerResponseList = centerResponseList;
-  }
 }

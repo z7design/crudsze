@@ -22,8 +22,5 @@ public class StateEntity {
 
   @Column(name = "uf")
   private String uf;
-
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private UserEntity userEntity;
+  
 }

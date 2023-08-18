@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequiredArgsConstructor
-@RequestMapping("/departament")
+@RequestMapping("/api/departament")
 public class DepartamentController {
   @Autowired private DepartamentService service;
 

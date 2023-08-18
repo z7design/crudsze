@@ -5,7 +5,6 @@ import com.tr.domain.Titles.TitlesEntity;
 import com.tr.domain.User.UserEntity;
 import javax.persistence.*;
 import java.util.List;
-import lombok.*;
 
 @Entity
 @Table(name = "costcenter")
@@ -31,9 +30,12 @@ public class CostCenterEntity {
   @JoinColumn(name = "user_id")
   private UserEntity userEntity;
 
-  @ManyToMany(mappedBy = "costCenters")
+  @ManyToMany(mappedBy = "costCenter")
   @JsonBackReference
   private List<TitlesEntity> titlesEntity;
+
+  public CostCenterEntity() {
+  }
 
   public Long getCostCenterId() {
     return costCenterId;

@@ -1,20 +1,34 @@
 package com.tr.domain.CostCenter;
 
 import java.util.List;
-import com.tr.domain.Titles.TitlesEntity;
 import com.tr.domain.Titles.TitlesResponse;
 
 public class CostCenterRequestDTO {
 
+  private Long costCenterId;
   private Long userId;
   private String name;
   private String description;
   private String observation;
   private Integer code;
-  private List<TitlesResponse> titlesEntityList;
+
+  public CostCenterRequestDTO() {
+  }
+
+  public Long getCostCenterId() {
+    return costCenterId;
+  }
+
+  public void setCostCenterId(Long costCenterId) {
+    this.costCenterId = costCenterId;
+  }
 
   public Long getUserId() {
     return userId;
+  }
+
+  public void setUserId(Long userId) {
+    this.userId = userId;
   }
 
   public String getName() {
@@ -23,10 +37,6 @@ public class CostCenterRequestDTO {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public void setUserId(Long userId) {
-    this.userId = userId;
   }
 
   public String getDescription() {

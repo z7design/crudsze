@@ -45,17 +45,14 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
    Optional<UserEntity> optionalUser = userRepository.findByEmail(dto.getEmail());
 
     if (optionalUser == null) {
-      //Se já existe um usuário cadastro com o e-mail
+      //Se já existe um usuário cadastrado com esse e-mail
       throw new ResourceBadRequestException(
           "There is already a registered user with the email: " + dto.getEmail());
     }
 
     // Criptografando a senha do usuáiro...pego a senha publica criptografo e depois... salvo
     UserEntity userEntity = mapper.map(dto, UserEntity.class);
-
-    // Criptografando a senha do usuáiro...pego a senha publica criptografo e depois...
     String password = bCryptPasswordEncoder.encode(userEntity.getPassword());
-    // eu salvo
     userEntity.setPassword(password);
 
     userEntity.setUserId(null);

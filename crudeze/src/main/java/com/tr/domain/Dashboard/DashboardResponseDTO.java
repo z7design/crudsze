@@ -1,18 +1,22 @@
 package com.tr.domain.Dashboard;
 
+import java.math.BigDecimal;
 import java.util.List;
 import com.tr.domain.Titles.TitlesResponse;
 
 public class DashboardResponseDTO {
-   private Double totalPayable;
-   private Double totalReceive;
-   private Double balance;
+  private BigDecimal totalPayable = new BigDecimal(0.0);
+  private BigDecimal totalReceive = new BigDecimal(0.0);;
+  private BigDecimal balance;
+  private List<TitlesResponse> titlesToPay;
+  private List<TitlesResponse> titlesToReceive;
 
-   private List<TitlesResponse> titlesToPay;
-   private List<TitlesResponse> titlesToReceive;
-
-  public DashboardResponseDTO(Double totalPayable , Double totalReceive ,
-      Double balance, List<TitlesResponse> titlesToPay, List<TitlesResponse> titlesToReceive) {
+  public DashboardResponseDTO(
+      BigDecimal totalPayable,
+      BigDecimal totalReceive,
+      BigDecimal balance,
+      List<TitlesResponse> titlesToPay,
+      List<TitlesResponse> titlesToReceive) {
     this.totalPayable = totalPayable;
     this.totalReceive = totalReceive;
     this.balance = balance;
@@ -20,27 +24,27 @@ public class DashboardResponseDTO {
     this.titlesToReceive = titlesToReceive;
   }
 
-  public Double getTotalPayable() {
+  public BigDecimal getTotalPayable() {
     return totalPayable;
   }
 
-  public void setTotalPayable(Double totalPayable) {
+  public void setTotalPayable(BigDecimal totalPayable) {
     this.totalPayable = totalPayable;
   }
 
-  public Double getTotalReceive() {
+  public BigDecimal getTotalReceive() {
     return totalReceive;
   }
 
-  public void setTotalReceive(Double totalReceive) {
+  public void setTotalReceive(BigDecimal totalReceive) {
     this.totalReceive = totalReceive;
   }
 
-  public Double getBalance() {
+  public BigDecimal getBalance() {
     return balance;
   }
 
-  public void setBalance(Double balance) {
+  public void setBalance(BigDecimal balance) {
     this.balance = balance;
   }
 

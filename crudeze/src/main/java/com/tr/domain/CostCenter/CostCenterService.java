@@ -19,7 +19,8 @@ public class CostCenterService implements ICrudsServices<CostCenterRequestDTO, C
   @Autowired
   private CostCenterRepository respository;
 
-  @Autowired private ModelMapper mapper;
+  @Autowired
+  private ModelMapper mapper;
 
   @Override
   public List<CostCenterResponse> findAll() {

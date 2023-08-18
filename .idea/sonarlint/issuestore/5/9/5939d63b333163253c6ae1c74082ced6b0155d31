@@ -1,4 +1,9 @@
 
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÆôÃğıÿÿÿÿ
+]	java:S125"<This block of commented-out lines of code should be removed.(Ñúí©ıÿÿÿÿ8²ñÓõŸ1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8²ñÓõŸ1
 T
 java:S1128">Remove this unused import 'com.tr.domain.Titles.TitlesEntity'.(Ç¡Ó€
+\
+java:S1128":Remove this unused import 'com.tr.domain.User.UserEntity'.(æÕÌÌÿÿÿÿÿ8²ñÓõŸ1

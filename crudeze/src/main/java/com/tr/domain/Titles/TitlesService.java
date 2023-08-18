@@ -1,6 +1,7 @@
 package com.tr.domain.Titles;
 
 import com.tr.domain.ICrudsServices;
+import com.tr.domain.Patrimony.PatrimonyEntity;
 import com.tr.domain.User.UserEntity;
 import com.tr.domain.exception.ResourceBadRequestException;
 import com.tr.domain.exception.ResourceNotFoundException;
@@ -21,7 +22,8 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, TitlesRes
 
   @Override
   public List<TitlesResponse> findAll() {
-    UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    UserEntity user =
+        (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     List<TitlesEntity> titles = repository.findByUserEntity(user);
 
     return titles.stream()
@@ -29,10 +31,12 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, TitlesRes
         .collect(Collectors.toList());
   }
 
+
   @Override
   public TitlesResponse findById(Long titlesId) {
     Optional<TitlesEntity> optionalTitles = repository.findById(titlesId);
-    UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    UserEntity user =
+        (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     if (optionalTitles == null
         || optionalTitles.get().getUserEntity().getUserId() != user.getUserId()) {
@@ -47,10 +51,14 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, TitlesRes
     validateTitle(dto);
     TitlesEntity title = mapper.map(dto, TitlesEntity.class);
 
-    UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    UserEntity user =
+        (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     title.setUserEntity(user);
     title.setTitlesId(null);
     title.setDateRegistration(new Date());
+    title.setCostCenter(title.getCostCenter());
+    title.setUserEntity(title.getUserEntity());
+    title.setName(title.getName());
     title = repository.save(title);
 
     return mapper.map(title, TitlesResponse.class);
@@ -63,7 +71,8 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, TitlesRes
 
     TitlesEntity title = mapper.map(dto, TitlesEntity.class);
 
-    UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    UserEntity user =
+        (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     title.setUserEntity(user);
     title.setTitlesId(null);
     title.setDateRegistration(new Date());
@@ -79,8 +88,8 @@ public class TitlesService implements ICrudsServices<TitlesRequestDTO, TitlesRes
   }
 
   // obterPorDataDeVenciment
-  public List<TitlesResponse> getCashFlowByDueDate(String firstPeriod, String finishPeriod,
-      UserEntity user) {
+  public List<TitlesResponse> getCashFlowByDueDate(
+      String firstPeriod, String finishPeriod, UserEntity user) {
     List<TitlesEntity> titles = repository.getCashFlowByDueDate(firstPeriod, finishPeriod);
 
     return titles.stream()

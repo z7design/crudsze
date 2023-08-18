@@ -1,17 +1,16 @@
 package com.tr.api.State;
 
-import com.tr.domain.State.StateRequestDTO;
-import com.tr.domain.State.StateResponse;
+import com.tr.domain.State.StateEntity;
 import com.tr.domain.State.StateService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("*")
 @RestController
+@CrossOrigin("*")
 @RequiredArgsConstructor
 @RequestMapping("/api/states")
 public class StateController {
@@ -19,31 +18,35 @@ public class StateController {
   @Autowired private StateService service;
 
   @GetMapping
-  public ResponseEntity<List<StateResponse>> findAllStates() {
-    return ResponseEntity.ok(service.findAllByStates());
+  public List<StateEntity> findAll() {
+    return service.findAllByStates();
   }
 
   @PostMapping
-  public ResponseEntity<StateResponse> createState(@RequestBody StateRequestDTO dto) {
-    StateResponse stateResponse = service.save(dto);
-    return new ResponseEntity<>(stateResponse, HttpStatus.CREATED);
+  @ResponseStatus(HttpStatus.CREATED)
+  public StateEntity createState(@RequestBody StateEntity state) {
+    return service.createState(state);
   }
 
+  @ResponseStatus(HttpStatus.OK)
   @PutMapping("/{stateId}")
-  public ResponseEntity<StateResponse> updateState(@PathVariable Long stateId, @RequestBody StateRequestDTO dto) {
-    return ResponseEntity.ok(service.update(stateId, dto));
+  public StateEntity updateState(@PathVariable Long stateId, @RequestBody StateEntity state) {
+    StateEntity stateCurrent = service.findStateById(stateId);
+    BeanUtils.copyProperties(state, stateCurrent, "stateId");
+    return service.createState(stateCurrent);
   }
 
   @DeleteMapping("/{stateId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public ResponseEntity<?>deleteState(@PathVariable Long stateId) {
+  public void deleteState(@PathVariable Long stateId) {
+
     service.deleteState(stateId);
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
   @ResponseStatus(HttpStatus.OK)
   @GetMapping("/{stateId}")
-  public ResponseEntity<StateResponse> findByIdStates(@PathVariable Long stateId) {
-    return ResponseEntity.ok(service.findStateById(stateId));
+  public StateEntity findByIdStates(@PathVariable Long stateId) {
+
+    return service.findStateById(stateId);
   }
 }

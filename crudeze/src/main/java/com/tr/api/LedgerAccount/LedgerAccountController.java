@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @AllArgsConstructor
-@RequestMapping("/ledger-account")
+@RequestMapping("/api/ledger-account")
 public class LedgerAccountController {
 
   @Autowired private LedgerAccountService service;

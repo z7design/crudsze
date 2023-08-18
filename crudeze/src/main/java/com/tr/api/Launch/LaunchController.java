@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @AllArgsConstructor
-@RequestMapping("/launch")
+@RequestMapping("/api/launch")
 public class LaunchController {
 
   @Autowired private LaunchService service;

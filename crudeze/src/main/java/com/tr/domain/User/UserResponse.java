@@ -1,7 +1,13 @@
 package com.tr.domain.User;
 
 import java.util.Date;
+import lombok.*;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserResponse {
   private Long userId;
   private String name;

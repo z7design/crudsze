@@ -12,8 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @AllArgsConstructor
-@RequestMapping("/phones")
+@RequestMapping("/api/phones")
 public class PhoneController {
    @Autowired
    private PhoneService service;

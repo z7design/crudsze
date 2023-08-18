@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequiredArgsConstructor
-@RequestMapping("/expenses")
+@RequestMapping("/api/expenses")
 public class ExpensesController {
 
   @Autowired private ExpensesService service;
