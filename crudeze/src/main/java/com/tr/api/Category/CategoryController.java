@@ -10,8 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/categories")
+@CrossOrigin("*")
+@RequestMapping("/api/categories")
 public class CategoryController {
   
   @Autowired private CategoryService service;

@@ -1,6 +1,5 @@
 package com.tr.domain.Titles;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tr.domain.CostCenter.CostCenterEntity;
 import com.tr.domain.Enums.TypeTitle;
 import com.tr.domain.User.UserEntity;

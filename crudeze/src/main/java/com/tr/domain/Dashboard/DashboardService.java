@@ -22,7 +22,7 @@ public class DashboardService {
     UserEntity user =
         (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    // lista de titles por data de vencimento
+    // lista de titulos por data de vencimento
     List<TitlesResponse> titles = titleService.getCashFlowByDueDate(firstPeriod, finishPeriod, user);
     BigDecimal totalPayable = new BigDecimal(0.2).setScale(4, RoundingMode.CEILING);
     BigDecimal totalReceive = new BigDecimal(0.2).setScale(4, RoundingMode.CEILING);;

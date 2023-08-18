@@ -4,19 +4,18 @@ import com.tr.domain.City.CityEntity;
 import com.tr.domain.Enums.Nickname;
 import javax.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
+@Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "address")
 public class AddressEntity {
 
   @Id
-  @EmbeddedId
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "address_id")
   private Long addressId;
 

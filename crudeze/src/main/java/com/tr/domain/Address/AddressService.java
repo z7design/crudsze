@@ -22,9 +22,11 @@ public class AddressService {
   private static final String MSG_ADDRESS_IN_USE =
       "Code address %d cannot be removed as it is in use";
 
-  @Autowired private final AddressRespository respository;
+  @Autowired
+  private final AddressRespository respository;
 
-  @Autowired private final CityService cityService;
+  @Autowired
+  private final CityService cityService;
 
   @Transactional
   public AddressEntity createAddress(AddressEntity address) {

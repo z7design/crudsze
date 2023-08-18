@@ -1,7 +1,6 @@
 package com.tr.domain.Titles;
 
 import com.tr.domain.ICrudsServices;
-import com.tr.domain.Patrimony.PatrimonyEntity;
 import com.tr.domain.User.UserEntity;
 import com.tr.domain.exception.ResourceBadRequestException;
 import com.tr.domain.exception.ResourceNotFoundException;

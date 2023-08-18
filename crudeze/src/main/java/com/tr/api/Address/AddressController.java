@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/address")
+@RequestMapping("/api/address")
 public class AddressController {
 
   @Autowired private AddressService service;

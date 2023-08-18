@@ -4,20 +4,18 @@ import com.tr.domain.Address.AddressEntity;
 import java.time.LocalDate;
 import javax.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "supplier")
 public class SupplierEntity {
   @Id
-  @EmbeddedId
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "supllier_id")
   private Long supplierId;
 

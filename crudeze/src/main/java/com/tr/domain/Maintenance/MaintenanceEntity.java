@@ -5,12 +5,12 @@ import com.tr.domain.Vehicle.VehicleEntity;
 import javax.persistence.*;
 import lombok.*;
 
+@Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "maintenance")
 public class MaintenanceEntity {
 

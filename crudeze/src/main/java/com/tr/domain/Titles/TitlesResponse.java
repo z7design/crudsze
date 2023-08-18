@@ -21,7 +21,13 @@ public class TitlesResponse {
 
   private List<CostCenterResponse> costCenter;
 
+  public List<CostCenterResponse> getCostCenter() {
+    return costCenter;
+  }
 
+  public void setCostCenter(List<CostCenterResponse> costCenter) {
+    this.costCenter = costCenter;
+  }
 
   public Long getTitlesId() {
     return titlesId;
