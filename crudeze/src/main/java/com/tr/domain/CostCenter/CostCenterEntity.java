@@ -3,8 +3,9 @@ package com.tr.domain.CostCenter;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tr.domain.Titles.TitlesEntity;
 import com.tr.domain.User.UserEntity;
-import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "costcenter")
@@ -27,7 +28,7 @@ public class CostCenterEntity {
   private Integer code;
 
   @ManyToOne()
-  @JoinColumn(name = "user_id")
+  @JoinColumn(name = "userEntity")
   private UserEntity userEntity;
 
   @ManyToMany(mappedBy = "costCenter")
@@ -91,5 +92,20 @@ public class CostCenterEntity {
 
   public void setTitlesEntity(List<TitlesEntity> titlesEntity) {
     this.titlesEntity = titlesEntity;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (!(o instanceof CostCenterEntity))
+      return false;
+    CostCenterEntity that = (CostCenterEntity) o;
+    return getCostCenterId().equals(that.getCostCenterId());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getCostCenterId());
   }
 }

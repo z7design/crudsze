@@ -1,18 +1,18 @@
 
-[
-java:S2789!"FEnsure this "Optional" could never be null and remove this null-check.(é´¿
-[
-java:S2789/"FEnsure this "Optional" could never be null and remove this null-check.(é´¿
-[
-java:S2789Y"FEnsure this "Optional" could never be null and remove this null-check.(é´¿
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‘¢¬ƒùÿÿÿÿ
-s
-java:S3655\"XCall "optionalUser.isPresent()" or "!optionalUser.isEmpty()" before accessing the value.(íÇÙÊÿÿÿÿÿ
-s
-java:S3655l"XCall "optionalUser.isPresent()" or "!optionalUser.isEmpty()" before accessing the value.(²©çµşÿÿÿÿ
-s
-java:S3655%"XCall "optionalUser.isPresent()" or "!optionalUser.isEmpty()" before accessing the value.(²©çµşÿÿÿÿ
-Y
-java:S2583Y"DChange this condition so that it does not always evaluate to "false"(é´¿
-Y
-java:S2583!"DChange this condition so that it does not always evaluate to "false"(é´¿
+b
+java:S2789!"FEnsure this "Optional" could never be null and remove this null-check.(é´¿8ÿÀ®ä¢1
+b
+java:S2789-"FEnsure this "Optional" could never be null and remove this null-check.(é´¿8ÁĞÍå¢1
+b
+java:S2789W"FEnsure this "Optional" could never be null and remove this null-check.(é´¿8ÁĞÍå¢1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‘¢¬ƒùÿÿÿÿ8Á®ä¢1
+z
+java:S3655%"XCall "optionalUser.isPresent()" or "!optionalUser.isEmpty()" before accessing the value.(²©çµşÿÿÿÿ8ƒñ’å¢1
+z
+java:S3655j"XCall "optionalUser.isPresent()" or "!optionalUser.isEmpty()" before accessing the value.(²©çµşÿÿÿÿ8ƒñ’å¢1
+z
+java:S3655Z"XCall "optionalUser.isPresent()" or "!optionalUser.isEmpty()" before accessing the value.(íÇÙÊÿÿÿÿÿ8ÓĞÍå¢1
+`
+java:S2583W"DChange this condition so that it does not always evaluate to "false"(é´¿8ƒñ’å¢1
+`
+java:S2583!"DChange this condition so that it does not always evaluate to "false"(é´¿8ÓĞÍå¢1

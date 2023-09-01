@@ -3,8 +3,6 @@ package com.tr.api.Address;
 import com.tr.domain.Address.AddressEntity;
 import com.tr.domain.Address.AddressService;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

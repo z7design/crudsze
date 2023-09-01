@@ -36,4 +36,10 @@ INSERT INTO city (city_id, name, state_state_id) VALUES(7, 'Montes Claros', 11);
 INSERT INTO city (city_id, name, state_state_id) VALUES(8, 'Salinas', 11);
 INSERT INTO city (city_id, name, state_state_id) VALUES(9, 'Esmeraldas', 11);
 INSERT INTO city (city_id, name, state_state_id) VALUES(10, 'Rio Acima', 11);
-INSERT INTO city (city_id, name, state_state_id) VALUES(11, 'Betim', 11);
+INSERT INTO city (city_id, name, state_state_id) VALUES(11, 'Sorocaba', 26);
+INSERT INTO city (city_id, name, state_state_id) VALUES(12, 'Marilia', 26);
+INSERT INTO city (city_id, name, state_state_id) VALUES(13, 'Aparecida', 26);
+INSERT INTO city (city_id, name, state_state_id) VALUES(14, 'Cachoiera Paulista', 26);
+INSERT INTO city (city_id, name, state_state_id) VALUES(15, 'Indaiatuba', 26);
+INSERT INTO city (city_id, name, state_state_id) VALUES(16, 'Atibaia', 26);
+

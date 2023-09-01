@@ -1,9 +1,9 @@
 package com.tr.api.Titles;
 
-import java.util.List;
 import com.tr.domain.Titles.TitlesRequestDTO;
 import com.tr.domain.Titles.TitlesResponse;
 import com.tr.domain.Titles.TitlesService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

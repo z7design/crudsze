@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tr.domain.Document.DocumentEntity;
 import com.tr.domain.Document.DocumentService;
 import com.tr.domain.Vehicle.VehicleEntity;
+import com.tr.domain.Vehicle.VehicleService;
 import com.tr.domain.exception.ResourceNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -125,7 +126,7 @@ public class VehicleControllerTest {
     when(service.findVehicleById(vehicleId)).thenReturn(vehicle);
     when(service.update(any())).thenReturn(vehicle);
 
-    var vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
+    vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
 
     ResultActions response =
         mockMvc.perform(
@@ -149,7 +150,7 @@ public class VehicleControllerTest {
     when(service.findVehicleById(vehicleId)).thenThrow(ResourceNotFoundException.class);
     when(service.update(any())).thenReturn(vehicle);
 
-    var vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
+    vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
 
     ResultActions response =
         mockMvc.perform(

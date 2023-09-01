@@ -19,26 +19,28 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class VehicleServiceTest {
 
-  @InjectMocks private VehicleService service;
-  @Mock private VehicleRepository repository;
-  @Mock private DocumentService documentService;
+  @InjectMocks
+  private VehicleService service;
+  @Mock
+  private VehicleRepository repository;
+  @Mock
+  private DocumentService documentService;
 
   private Long vehicleId = 1L;
-
   private VehicleEntity vehicle;
   private DocumentEntity document;
   private BigDecimal value = BigDecimal.valueOf(150.000);
 
   @BeforeEach
   public void setup() {
-    VehicleEntity vehicle =
-        new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
+   vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
+   document = new DocumentEntity();
   }
 
   @Test
   public void shouldVeicleWhenThenSalveVeicles() {
     vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
-    
+
     when(repository.save(any(VehicleEntity.class))).thenReturn(vehicle);
     VehicleEntity savedVeic = service.createVehicle(vehicle);
     
@@ -51,7 +53,10 @@ public class VehicleServiceTest {
     VehicleEntity vehicle1 =
         new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
 
-    when(repository.findAll()).thenReturn(List.of(vehicle, vehicle1));
+    List<VehicleEntity> value1 = new java.util.ArrayList<>();
+    value1.add(vehicle);
+    value1.add(vehicle1);
+    when(repository.findAll()).thenReturn(value1);
     List<VehicleEntity> listVehicle = service.findAllByVehicle();
     assertNotNull(listVehicle);
     assertEquals(2, listVehicle.size());
@@ -67,7 +72,7 @@ public class VehicleServiceTest {
 
   @Test
   void shouldFindByIdViecle() {
-    final var vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
+    vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
     when(repository.findById(any())).thenReturn(Optional.ofNullable(vehicle));
     VehicleEntity savedVehicle = service.findVehicleById(vehicleId);
     assertNotNull(savedVehicle);
@@ -76,7 +81,7 @@ public class VehicleServiceTest {
 
   @Test
   void ShoulUpdateVeicle() {
-    final var vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
+    vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
     when(repository.findById(any())).thenReturn(Optional.of(vehicle));
 
     vehicle.setModel("Corolla");

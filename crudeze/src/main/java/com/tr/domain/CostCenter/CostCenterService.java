@@ -1,13 +1,11 @@
 package com.tr.domain.CostCenter;
 
+import com.tr.domain.ICrudsServices;
+import com.tr.domain.User.UserEntity;
+import com.tr.domain.exception.ResourceNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import com.tr.domain.ICrudsServices;
-import com.tr.domain.Titles.TitlesRequestDTO;
-import com.tr.domain.User.UserEntity;
-import com.tr.domain.exception.ResourceBadRequestException;
-import com.tr.domain.exception.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

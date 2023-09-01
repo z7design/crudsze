@@ -1,6 +1,12 @@
 package com.tr.domain.Client;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.tr.domain.Address.AddressEntity;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.*;
@@ -43,7 +49,10 @@ public class ClientEntity {
   private String entiyRegistration;
 
   @Column(name = "date_of_birth")
-  private Date dateOfBirth;
+  @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
+  private LocalDate dateOfBirth;
 
   @Column(name = "state_registration")
   private String stateRegistration;

@@ -1,5 +1,6 @@
 package com.tr.api.Category;
 
+import static java.util.List.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -43,11 +44,12 @@ public class CategoryControllerTest {
   @Test
   void shouldFindAllCategory() throws JsonProcessingException, Exception {
 
-    var category = new CategoryEntity(categoryId, "Name 1", "Description 1");
+    category = new CategoryEntity(categoryId, "Name 1", "Description 1");
     category.setName("Nova Categoria");
     category.setDescription("Descrição de Categoria");
 
-    when(service.findAllByCategories()).thenReturn(List.of(category));
+    List<CategoryEntity> value = new java.util.ArrayList<>();
+    value.add(category);    when(service.findAllByCategories()).thenReturn(value);
     this.mockMvc
         .perform(get("/categories"))
         .andDo(print())
@@ -58,11 +60,13 @@ public class CategoryControllerTest {
   @Test
   void shouldCreateNewCategory() throws JsonProcessingException, Exception {
 
-   var category = new CategoryEntity(categoryId, "Name 1", "Description 1");
+    category = new CategoryEntity(categoryId, "Name 1", "Description 1");
     category.setName("Nova Categoria");
     category.setDescription("Descrição de Categoria");
 
-     when(service.findAllByCategories()).thenReturn(List.of(category));
+    List<CategoryEntity> value = new java.util.ArrayList<>();
+    value.add(category);
+    when(service.findAllByCategories()).thenReturn(value);
     this.mockMvc
         .perform(post("/categories"))
         .andDo(print())
@@ -73,7 +77,7 @@ public class CategoryControllerTest {
   @Test
   void shouldFindByIdCategory() throws JsonProcessingException, Exception {
     Long categoryId = 1L;
-   var category = new CategoryEntity(categoryId, "Name 1", "Description 1");
+    category = new CategoryEntity(categoryId, "Name 1", "Description 1");
 
     when(service.findCategoryById(categoryId)).thenReturn(category);
 

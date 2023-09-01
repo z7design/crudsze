@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/account-bank")
+@CrossOrigin("*")
+@RequestMapping("/api/account-bank")
 public class AccountBankController {
 
   @Autowired private AccountBankService service;

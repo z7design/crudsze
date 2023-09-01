@@ -1,8 +1,8 @@
 package com.tr.domain.Dashboard;
 
+import com.tr.domain.Titles.TitlesResponse;
 import java.math.BigDecimal;
 import java.util.List;
-import com.tr.domain.Titles.TitlesResponse;
 
 public class DashboardResponseDTO {
   private BigDecimal totalPayable = new BigDecimal(0.0);

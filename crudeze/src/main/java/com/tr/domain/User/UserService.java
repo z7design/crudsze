@@ -39,13 +39,11 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
 
   @Override
   public UserResponse save(UserRequestDTO dto) {
-
     userValidate(dto);
-
-   Optional<UserEntity> optionalUser = userRepository.findByEmail(dto.getEmail());
+    Optional<UserEntity> optionalUser = userRepository.findByEmail(dto.getEmail());
 
     if (optionalUser == null) {
-      //Se já existe um usuário cadastrado com esse e-mail
+      // Se já existe um usuário cadastrado com esse e-mail
       throw new ResourceBadRequestException(
           "There is already a registered user with the email: " + dto.getEmail());
     }
@@ -93,13 +91,13 @@ public class UserService implements ICrudsServices<UserRequestDTO, UserResponse>
     userEntity.setDateInativation(new Date());
     userRepository.save(userEntity);
   }
-//Validação do email e senha, ou seja, são obirgatorios..
+  // Validação do email e senha, ou seja, são obirgatorios..
   private void userValidate(UserRequestDTO dto) {
     if (dto.getEmail() == null || dto.getPassword() == null) {
       throw new ResourceBadRequestException("Email and password are required");
     }
   }
-//Busca de usuario por email
+  // Busca de usuario por email
   public UserResponse findByEmail(String email) {
     Optional<UserEntity> optionalUser = userRepository.findByEmail(email);
     if (optionalUser.isPresent()) {

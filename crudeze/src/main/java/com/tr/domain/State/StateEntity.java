@@ -1,7 +1,6 @@
 package com.tr.domain.State;
 
 import javax.persistence.*;
-import com.tr.domain.User.UserEntity;
 import lombok.*;
 
 @Getter

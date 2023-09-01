@@ -49,7 +49,7 @@ public class SupplierControllerTest {
     LocalDate dateRegistration = LocalDate.of(2023, 07, 20);
     LocalDate dateOfLastPurchase = LocalDate.of(2023, 07, 21);
 
-    var supplier =
+    supplier =
         new SupplierEntity(
             supplierId,
             "Clear Industria e comercia Ltda",
@@ -214,7 +214,7 @@ public class SupplierControllerTest {
 
     when(service.findSupplierById(supplierId)).thenReturn(supplier);
 
-    var supplier =
+    supplier =
         new SupplierEntity(
             supplierId,
             "Clear Industria e comercia Ltda",

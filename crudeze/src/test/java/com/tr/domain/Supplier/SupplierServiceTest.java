@@ -20,9 +20,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class SupplierServiceTest {
 
-  @InjectMocks private SupplierService service;
-  @Mock private SupplierRepository repository;
-  @Mock private DocumentService documentService;
+  @InjectMocks
+  private SupplierService service;
+  @Mock
+  private SupplierRepository repository;
 
   private Long supplierId = 1L;
   @InjectMocks
@@ -35,8 +36,7 @@ public class SupplierServiceTest {
     LocalDate dateRegistration = LocalDate.of(2023, 07, 20);
     LocalDate dateOfLastPurchase = LocalDate.of(2023, 07, 21);
 
-    SupplierEntity supplier =
-        new SupplierEntity(supplierId,
+  supplier = new SupplierEntity(supplierId,
             "Clear Industria e comercia Ltda",
             "31873559000150",
             "Olympus Turismo Ltda",
@@ -57,7 +57,7 @@ public class SupplierServiceTest {
     LocalDate dateRegistration = LocalDate.of(2023, 07, 20);
     LocalDate dateOfLastPurchase = LocalDate.of(2023, 07, 21);
     
-    SupplierEntity supplier =
+    supplier =
         new SupplierEntity(supplierId,
             "Clear Industria e comercia Ltda",
             "31873559000150",
@@ -73,8 +73,8 @@ public class SupplierServiceTest {
             address);
 
     when(repository.save(any(SupplierEntity.class))).thenReturn(supplier);
-    var savedSupplier = service.createSupplier(supplier);
-    assertEquals(savedSupplier, savedSupplier);
+    SupplierEntity savedSupplier = service.createSupplier(supplier);
+    assertEquals(supplier, savedSupplier);
   }
 
   @Test
@@ -83,7 +83,7 @@ public class SupplierServiceTest {
     LocalDate dateRegistration = LocalDate.of(2023, 07, 20);
     LocalDate dateOfLastPurchase = LocalDate.of(2023, 07, 21);
     
-    SupplierEntity supplier1 =
+   supplier =
         new SupplierEntity(supplierId,
             "Clear Industria e comercia Ltda",
             "31873559000150",
@@ -97,11 +97,13 @@ public class SupplierServiceTest {
             dateRegistration,
             dateOfLastPurchase,
             address);
-    
-    when(repository.findAll()).thenReturn(List.of(supplier, supplier1));
+
+    List<SupplierEntity> value1 = new java.util.ArrayList<>();
+    value1.add(supplier);
+      when(repository.findAll()).thenReturn(value1);
     List<SupplierEntity> listSupplier = service.findAllBySupplier();
     assertNotNull(listSupplier);
-    assertEquals(2, listSupplier.size());
+    assertEquals(1, listSupplier.size());
   }
 
   @Test
@@ -118,7 +120,7 @@ public class SupplierServiceTest {
     LocalDate dateRegistration = LocalDate.of(2023, 07, 20);
     LocalDate dateOfLastPurchase = LocalDate.of(2023, 07, 21);
 
-   SupplierEntity supplier =
+  supplier =
         new SupplierEntity(supplierId,
             "Clear Industria e comercia Ltda",
             "31873559000150",
@@ -144,7 +146,7 @@ public class SupplierServiceTest {
     LocalDate dateRegistration = LocalDate.of(2023, 07, 20);
     LocalDate dateOfLastPurchase = LocalDate.of(2023, 07, 21);
 
-       SupplierEntity supplier =
+       supplier =
         new SupplierEntity(supplierId,
             "Clear Industria e comercia Ltda",
             "31873559000150",

@@ -1,11 +1,11 @@
 package com.tr.domain.User;
 
+import com.tr.domain.Titles.TitlesEntity;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.*;
-import com.tr.domain.Titles.TitlesEntity;
-import lombok.*;
 import java.util.List;
+import javax.persistence.*;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Table(name = "users")
 public class UserEntity implements UserDetails {
   @Id

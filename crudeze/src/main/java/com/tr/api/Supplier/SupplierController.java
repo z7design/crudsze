@@ -3,7 +3,6 @@ package com.tr.api.Supplier;
 import com.tr.domain.Supplier.SupplierEntity;
 import com.tr.domain.Supplier.SupplierService;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

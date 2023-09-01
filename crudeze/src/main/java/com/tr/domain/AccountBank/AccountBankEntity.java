@@ -1,22 +1,19 @@
 package com.tr.domain.AccountBank;
 
-import java.io.Serializable;
 import javax.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
+@Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "account_bank")
-public class AccountBankEntity implements Serializable {
-  private static final long serialVersionUID = 1L;
+public class AccountBankEntity {
 
   @Id
-  @EmbeddedId
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "account_bank_id")
   private Long accountBankId;
 

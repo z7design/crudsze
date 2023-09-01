@@ -3,15 +3,14 @@ package com.tr.api.AccountPayble;
 import com.tr.domain.AccountPayble.AccountPaybleEntity;
 import com.tr.domain.AccountPayble.AccountPaybleService;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
-@AllArgsConstructor
-@RequestMapping("/account-payble")
+@RequestMapping("/api/account-payble")
 public class AccountPaybleController {
 
   @Autowired private AccountPaybleService service;

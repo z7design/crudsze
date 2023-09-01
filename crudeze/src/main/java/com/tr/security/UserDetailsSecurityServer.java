@@ -1,9 +1,8 @@
 package com.tr.security;
 
-import java.util.Optional;
-
 import com.tr.domain.User.UserEntity;
 import com.tr.domain.User.UserRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

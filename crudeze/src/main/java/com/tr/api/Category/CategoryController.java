@@ -3,7 +3,6 @@ package com.tr.api.Category;
 import com.tr.domain.Category.CategoryEntity;
 import com.tr.domain.Category.CategoryService;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

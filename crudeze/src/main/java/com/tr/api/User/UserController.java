@@ -1,8 +1,8 @@
 package com.tr.api.User;
 
 import com.tr.domain.User.UserRequestDTO;
-import com.tr.domain.User.UserService;
 import com.tr.domain.User.UserResponse;
+import com.tr.domain.User.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

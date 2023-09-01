@@ -1,8 +1,5 @@
 package com.tr.domain.CostCenter;
 
-import java.util.List;
-import com.tr.domain.Titles.TitlesResponse;
-
 public class CostCenterRequestDTO {
 
   private Long costCenterId;

@@ -1,8 +1,8 @@
 package com.tr.domain.exception;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.util.zip.DataFormatException;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -41,7 +41,9 @@ public class CategoryServiceTest {
     category = new CategoryEntity(categoryId, "Despesasas agragado", "despesas com agregado");
     CategoryEntity category1 = new CategoryEntity(categoryId, "Despesasas Marketing", "despesas com Marketing");
 
-    when(repository.findAll()).thenReturn(List.of(category, category1));
+    List<CategoryEntity> value = new java.util.ArrayList<>();
+    value.add(category);
+    value.add(category1);    when(repository.findAll()).thenReturn(value);
     List<CategoryEntity> listCategory = service.findAllByCategories();
     assertNotNull(listCategory);
     assertEquals(2, listCategory.size());
@@ -58,7 +60,7 @@ public class CategoryServiceTest {
 
   @Test
   void shouldCategoryFindById() {
-    final var category = new CategoryEntity(categoryId, "Despesas", "Despesas geral");
+    category = new CategoryEntity(categoryId, "Despesas", "Despesas geral");
     when(repository.findById(any())).thenReturn(Optional.of(category));
     CategoryEntity savedCategory = service.findCategoryById(categoryId);
     assertNotNull(savedCategory);
@@ -67,7 +69,7 @@ public class CategoryServiceTest {
 
   @Test
   void updateCategory() {
-    final var category = new CategoryEntity(categoryId, "Despesasas agragado", "despesas com agregado");
+    category = new CategoryEntity(categoryId, "Despesasas agragado", "despesas com agregado");
     when(repository.findById(any())).thenReturn(Optional.of(category));
 
     category.setName("Despesas Veiculo");
