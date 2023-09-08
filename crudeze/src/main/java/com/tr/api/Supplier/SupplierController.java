@@ -18,8 +18,7 @@ public class SupplierController {
 
   @GetMapping
   public List<SupplierEntity> findAllBySupplier() {
-
-    return service.findAllBySupplier();
+    return service.getAllBySupplier(1, 1000);
   }
 
   @ResponseStatus(HttpStatus.OK)

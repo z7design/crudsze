@@ -24,7 +24,7 @@ public class MaintenanceService {
   @Autowired private VehicleService vehicleService;
 
   @Transactional
-  public MaintenanceEntity createMaintenance(final MaintenanceEntity maintenance) {
+  public MaintenanceEntity createMaintenance(MaintenanceEntity maintenance) {
     Long vehicleId = maintenance.getVehicle().getVehicleId();
     VehicleEntity vehicle = vehicleService.findVehicleById(vehicleId);
 

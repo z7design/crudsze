@@ -1,0 +1,10 @@
+
+\
+java:S2789&"FEnsure this "Optional" could never be null and remove this null-check.(ρ“°
+R
+java:S4973&"<Strings and Boxed types should be compared using "equals()".(ρ“°
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(χ¶ιλωÿÿÿÿ
+v
+java:S3655&"`Call "costCenterEntity.isPresent()" or "!costCenterEntity.isEmpty()" before accessing the value.(ρ“°
+N
+java:S2589&"8Remove this expression which always evaluates to "false"(ρ“°

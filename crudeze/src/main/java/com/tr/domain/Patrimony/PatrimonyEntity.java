@@ -1,5 +1,6 @@
 package com.tr.domain.Patrimony;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.*;
@@ -30,7 +31,7 @@ public class PatrimonyEntity {
   private String purchaseInvoice;
 
   @Column(name = "date_of_purchase")
-  private Date dateOfPurchase;
+  private LocalDate dateOfPurchase;
 
   @Column(name = "accounting_classification")
   private String accountingClassification;

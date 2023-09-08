@@ -90,7 +90,7 @@ public class SupplierControllerTest {
             dateOfLastPurchase,
             address));
 
-    when(service.findAllBySupplier()).thenReturn(suppliers);
+    when(service.getAllBySupplier(1, 100)).thenReturn(suppliers);
 
     ResultActions response = mockMvc.perform(get("/suppliers"));
     response

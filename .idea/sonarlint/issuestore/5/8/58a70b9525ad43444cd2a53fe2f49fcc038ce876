@@ -1,0 +1,5 @@
+
+\
+java:S2789"FEnsure this "Optional" could never be null and remove this null-check.(Ία
+c
+java:S3655"HCall "user.isPresent()" or "!user.isEmpty()" before accessing the value.(΄ρμώÿÿÿÿ

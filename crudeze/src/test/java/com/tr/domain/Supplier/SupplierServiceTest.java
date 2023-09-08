@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.tr.domain.Address.AddressEntity;
-import com.tr.domain.Document.DocumentService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -56,21 +55,8 @@ public class SupplierServiceTest {
 
     LocalDate dateRegistration = LocalDate.of(2023, 07, 20);
     LocalDate dateOfLastPurchase = LocalDate.of(2023, 07, 21);
-    
-    supplier =
-        new SupplierEntity(supplierId,
-            "Clear Industria e comercia Ltda",
-            "31873559000150",
-            "Olympus Turismo Ltda",
-            "Wanderson",
-            "OlympusTur",
-            "3095442146449",
-            "3095442146449",
-            "3135117899",
-            "31998555677",
-            dateRegistration,
-            dateOfLastPurchase,
-            address);
+
+    supplier = new SupplierEntity();
 
     when(repository.save(any(SupplierEntity.class))).thenReturn(supplier);
     SupplierEntity savedSupplier = service.createSupplier(supplier);
@@ -101,7 +87,7 @@ public class SupplierServiceTest {
     List<SupplierEntity> value1 = new java.util.ArrayList<>();
     value1.add(supplier);
       when(repository.findAll()).thenReturn(value1);
-    List<SupplierEntity> listSupplier = service.findAllBySupplier();
+    List<SupplierEntity> listSupplier = service.getAllBySupplier(1, 1000);
     assertNotNull(listSupplier);
     assertEquals(1, listSupplier.size());
   }

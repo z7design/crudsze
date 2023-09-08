@@ -25,7 +25,7 @@ public class PatrimonyService {
   @Autowired private LedgerAccountService ledgerAccountService;
 
   @Transactional
-  public PatrimonyEntity createPatrimony(final PatrimonyEntity patrimony) {
+  public PatrimonyEntity createPatrimony(PatrimonyEntity patrimony) {
     return repository.save(patrimony);
   }
 
@@ -64,6 +64,7 @@ public class PatrimonyService {
   }
 
   public List<PatrimonyEntity> findAllByPatrimony() {
+    
     return repository.findAll();
   }
 }

@@ -38,12 +38,12 @@ public class VehicleServiceTest {
   }
 
   @Test
-  public void shouldVeicleWhenThenSalveVeicles() {
+  public void shouldVeicleWhenThenSalve() {
     vehicle = new VehicleEntity(vehicleId, "GRT-7898", "Corolla", "Red", value, document);
 
     when(repository.save(any(VehicleEntity.class))).thenReturn(vehicle);
     VehicleEntity savedVeic = service.createVehicle(vehicle);
-    
+
     assertEquals(vehicle, savedVeic);
   }
 
@@ -56,6 +56,7 @@ public class VehicleServiceTest {
     List<VehicleEntity> value1 = new java.util.ArrayList<>();
     value1.add(vehicle);
     value1.add(vehicle1);
+
     when(repository.findAll()).thenReturn(value1);
     List<VehicleEntity> listVehicle = service.findAllByVehicle();
     assertNotNull(listVehicle);

@@ -2,6 +2,7 @@ package com.tr.domain.Maintenance;
 
 import com.tr.domain.Enums.TypeMaintenance;
 import com.tr.domain.Vehicle.VehicleEntity;
+import java.time.LocalDate;
 import javax.persistence.*;
 import lombok.*;
 
@@ -29,19 +30,17 @@ public class MaintenanceEntity {
   private String description;
 
   @Column(name = "date_initial")
-  private String dateInitial;
+  private LocalDate dateInitial;
 
   @Column(name = "date_finish")
-  private String dateFinish;
+  private LocalDate dateFinish;
 
   @Column(name = "type_maintenance")
   @Enumerated(EnumType.STRING)
   private TypeMaintenance typeMaintenance;
-
+  
   @ManyToOne
   @JoinColumn(nullable = true)
   private VehicleEntity vehicle;
-  
-
 }
 

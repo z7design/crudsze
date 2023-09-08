@@ -6,22 +6,27 @@ import com.tr.domain.exception.EntityInUseException;
 import com.tr.domain.exception.EntityNotFoundException;
 import com.tr.domain.exception.ResourceNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class SupplierService {
-  
-  private static final String MSG_SUPPLIER_NOT_FOUND = "There is no supplier registration with the code %d";
-  private static final String MSG_SUPPLIER_IN_USE = "Code supplier %d cannot be removed as it is in use";
 
-  @Autowired
-  private SupplierRepository repository;
+  private static final String MSG_SUPPLIER_NOT_FOUND =
+      "There is no supplier registration with the code %d";
+  private static final String MSG_SUPPLIER_IN_USE =
+      "Code supplier %d cannot be removed as it is in use";
+
+  @Autowired private SupplierRepository repository;
   @Autowired private AddressService addressService;
 
   @Transactional
@@ -37,8 +42,20 @@ public class SupplierService {
   public SupplierEntity findSupplierById(final Long supplierId) {
     return repository
         .findById(supplierId)
-        .orElseThrow(() -> new EntityNotFoundException(String.format(MSG_SUPPLIER_NOT_FOUND, supplierId)));
+        .orElseThrow(
+            () -> new EntityNotFoundException(String.format(MSG_SUPPLIER_NOT_FOUND, supplierId)));
   }
+
+  public List<SupplierEntity> getAllBySupplier(Integer numberPage, Integer numberRecords) {
+    Pageable pageable = PageRequest.of(numberPage, numberRecords);
+    Page<SupplierEntity> result = repository.findAll(pageable);
+    return result.stream().collect(Collectors.toList());
+  }
+
+/*  public List<SupplierEntity> findAllBySupplier() {
+
+    return repository.findAll();
+  }*/
 
   @Transactional
   public SupplierEntity updateSupplier(final SupplierEntity supplier) {
@@ -56,10 +73,10 @@ public class SupplierService {
     entity.setDateRegistration(entity.getDateRegistration());
     entity.setFantasyName(entity.getFantasyName());
     entity.setMunicipalRegistration(entity.getMunicipalRegistration());
-    
+
     return repository.save(supplier);
   }
-  
+
   public void deleteSupplier(Long supplierId) {
     try {
       repository.deleteById(supplierId);
@@ -69,10 +86,5 @@ public class SupplierService {
     } catch (DataIntegrityViolationException e) {
       throw new EntityInUseException(String.format(MSG_SUPPLIER_IN_USE, supplierId));
     }
-  }
-
-  public List<SupplierEntity> findAllBySupplier() {
-
-    return repository.findAll();
   }
 }
